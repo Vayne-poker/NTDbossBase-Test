@@ -7,37 +7,41 @@
 <title>牌手基地公告</title>
 
 <style>
+	:root {
+  --neon-green: #39ff14;
+  --deep-green: #0f1f14;
+  --gold: #f5c542;
+}
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background: radial-gradient(circle at top,#111827,#0b0f14);
-  color: #d1d5db;
+  background:
+    radial-gradient(circle at top,
+      #13261a,
+      #0b140e 60%,
+      #060b08);
 }
 
 h1 {
-  text-align: center;
-  color: #00ff88;
-  margin-bottom: 25px;
+  color: var(--gold);
+  text-shadow:
+    0 0 8px rgba(245,197,66,0.7),
+    0 0 20px rgba(245,197,66,0.4);
 }
 
 /* 折疊按鈕 */
 .collapsible {
-  background: linear-gradient(90deg,#111827,#1f2937);
-  color: #00ff88;
-  cursor: pointer;
-  padding: 14px;
-  width: 100%;
-  border: 1px solid #1f2937;
-  border-radius: 8px;
-  text-align: left;
-  font-size: 16px;
-  margin-top: 15px;
-  transition: 0.3s;
+  background: linear-gradient(90deg,#0f1f14,#162a1c);
+  color: var(--neon-green);
+  border: 2px solid var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green);
+  box-shadow: 0 0 10px rgba(57,255,20,0.3);
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .collapsible:hover {
-  box-shadow: 0 0 10px rgba(0,255,136,0.3);
+  box-shadow:
+    0 0 12px var(--neon-green),
+    0 0 25px rgba(57,255,20,0.4);
 }
 
 /* 折疊內容 */
@@ -62,20 +66,20 @@ h1 {
 }
 
 .platform-item {
-  display: flex;
-  gap: 20px;
-  background: linear-gradient(145deg,#151922,#10131a);
-  border: 1px solid #1f2937;
-  border-left: 4px solid #00ff88;
-  border-radius: 10px;
-  padding: 18px;
-  margin-bottom: 18px;
+  background: linear-gradient(145deg,#0f1f14,#13261a);
+  border: 2px solid var(--neon-green);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 15px rgba(57,255,20,0.15),
+    0 0 10px rgba(57,255,20,0.25);
   transition: 0.3s;
 }
 
 .platform-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 15px rgba(0,255,136,0.2);
+  transform: scale(1.02);
+  box-shadow:
+    0 0 20px var(--neon-green),
+    0 0 40px rgba(57,255,20,0.3);
 }
 
 .platform-logo {
