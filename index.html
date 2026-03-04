@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v4.9 Poker Base Dashboard</title>
+<title>牌手基地公告 | v5.1 Poker Base Dashboard</title>
 
 <style>
     :root {
@@ -110,12 +110,19 @@
     .platform-logo { width: 85px; height: 85px; object-fit: contain; background: #000; padding: 8px; border-radius: 10px; }
     .club-card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(245,197,66,0.3); margin-top: 10px; }
     .club-card strong { color: var(--gold); display: block; margin-bottom: 5px; }
-    .club-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 15px;
-        margin-top: 15px;
-    }
+ .club-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.club-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
     /* --- 4. 底部設計 --- */
     .footer { text-align: center; margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #1f2937; padding-top: 40px; }
     .footer-title { font-size: 2.5em; color: var(--gold); font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 15px rgba(245,197,66,0.5); }
@@ -218,7 +225,7 @@
                         <a href="https://x-poker.net/#/" target="_blank">下載連結</a>
                     </div>
                 </div>
-                <div class="club-grid">
+                <div class="club-grid-2">
                     <div class="club-card"><strong>天祥雙子 (1:8)</strong>俱樂部ID：999306<br>推薦人ID：3496108</div>
                     <div class="club-card"><strong>泰好贏 TwXThai (1:1)</strong>俱樂部ID：2421367<br>推薦人ID：3583536</div>
                     <div class="club-card"><strong>亞特馬來 (1:1)</strong>俱樂部ID：686175<br>推薦人ID：3496108</div>
@@ -233,7 +240,7 @@
                         <a href="https://www.clubgg.com/" target="_blank">下載連結</a> (推薦碼: 4005-6868)
                     </div>
                 </div>
-                <div class="club-grid">
+                <div class="club-grid-3">
                     <div class="club-card"><strong>「快樂呱Tiny」(1:1)</strong>ID：954109</div>
                     <div class="club-card"><strong>「快樂呱Massiv」(1:26)</strong>ID：619975</div>
                     <div class="club-card"><strong>「時光雞Time」(1:27)</strong>ID：970779</div>
