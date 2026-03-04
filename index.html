@@ -1,95 +1,97 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v5.2 旗艦微調版</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>牌手基地公告 </title>
+    <style>
+        :root {
+            --neon-green: #39ff14;
+            --poker-red: #ff3a3a;
+            --gold: #f5c542;
+        }
 
-<style>
-    :root {
-        --neon-green: #39ff14;
-        --poker-red: #ff3a3a;
-        --gold: #f5c542;
-        --metal-dark: #0d120f;
-    }
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            margin: 0; padding: 20px;
+            background: radial-gradient(circle at center, #111b14 0%, #050806 100%);
+            background-attachment: fixed;
+            color: #d1d5db;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
 
-    body {
-        font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-        margin: 0; padding: 20px;
-        background: radial-gradient(circle at center, #111b14 0%, #050806 100%);
-        background-attachment: fixed;
-        color: #d1d5db; line-height: 1.7;
-        overflow-x: hidden;
-    }
+        /* --- 1. 花色位置上移 & 常駐呼吸 (解決重疊) --- */
+        .corner-suit {
+            position: fixed;
+            font-size: 30vw;
+            opacity: 0.12; /* 原本就看得見 */
+            z-index: -1;   /* 絕對置底，解決重疊感 */
+            pointer-events: none;
+            filter: blur(5px);
+            transition: all 1s ease-in-out;
+        }
 
-    /* --- 1. 花色微調：上移至 5% & 常駐 5% 透明度 --- */
-    .corner-suit {
-        position: fixed;
-        font-size: 30vw;
-        opacity: 0.05; /* 淡淡地看見，不起眼但存在 */
-        z-index: -1; 
-        pointer-events: none;
-        filter: blur(8px);
-        transition: opacity 1s;
-    }
-    /* 黑桃/愛心再往上 */
-    .top-left { top: 5%; left: 3%; color: var(--neon-green); animation: suitGlowGreen 8s infinite; }
-    .top-right { top: 5%; right: 3%; color: var(--poker-red); animation: suitGlowRed 8s infinite 2s; }
-    .bottom-left { bottom: 3%; left: 3%; color: var(--neon-green); animation: suitGlowGreen 8s infinite 4s; }
-    .bottom-right { bottom: 3%; right: 3%; color: var(--poker-red); animation: suitGlowRed 8s infinite 6s; }
+        /* 呼吸動畫：從 0.12 到 0.6 */
+        @keyframes glowGreen { 0%, 100% { opacity: 0.12; filter: blur(5px); } 50% { opacity: 0.6; filter: blur(0px) drop-shadow(0 0 25px var(--neon-green)); } }
+        @keyframes glowRed { 0%, 100% { opacity: 0.12; filter: blur(5px); } 50% { opacity: 0.6; filter: blur(0px) drop-shadow(0 0 25px var(--poker-red)); } }
 
-    @keyframes suitGlowGreen { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.4; filter: blur(3px) drop-shadow(0 0 30px var(--neon-green)); } }
-    @keyframes suitGlowRed { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.4; filter: blur(3px) drop-shadow(0 0 30px var(--poker-red)); } }
+        /* 位置微調：上移至 12% */
+        .top-left { top: 12%; left: 3%; color: var(--neon-green); animation: glowGreen 6s infinite 0s; }
+        .top-right { top: 12%; right: 3%; color: var(--poker-red); animation: glowRed 6s infinite 3s; }
+        .bottom-left { bottom: 5%; left: 3%; color: var(--neon-green); animation: glowGreen 6s infinite 0s; }
+        .bottom-right { bottom: 5%; right: 3%; color: var(--poker-red); animation: glowRed 6s infinite 3s; }
 
-    .main-wrapper { max-width: 1000px; margin: 0 auto; position: relative; z-index: 10; }
+        /* --- 2. 內容容器 (稍微收窄避免重疊) --- */
+        .main-wrapper { 
+            max-width: 850px; /* 縮窄一點點讓背景花色露出來 */
+            margin: 0 auto; 
+            position: relative; 
+            z-index: 10; 
+        }
 
-    h1 {
-        text-align: center; color: var(--gold); margin-bottom: 25px;
-        text-shadow: 0 0 12px rgba(245,197,66,0.4); font-size: 2.8em;
-    }
+        h1 {
+            text-align: center; color: var(--gold); font-size: 2.8em;
+            text-shadow: 0 0 20px rgba(245,197,66,0.6); margin: 35px 0;
+        }
 
-    /* --- 2. 按鈕區塊微調：更圓潤的矩形 (18px) --- */
-    .collapsible {
-        background: linear-gradient(135deg, #111827 0%, #1a2a1f 100%);
-        color: var(--neon-green); cursor: pointer; padding: 20px 28px;
-        width: 100%; border: 2px solid rgba(57, 255, 20, 0.4); 
-        border-radius: 18px; /* 圓角化調整 */
-        text-align: left; font-size: 20px; font-weight: bold; margin-top: 18px;
-        display: flex; justify-content: space-between; align-items: center;
-        transition: 0.3s;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    .collapsible:hover { box-shadow: 0 0 20px rgba(57,255,20,0.3); transform: translateY(-2px); border-color: var(--neon-green); }
-    .collapsible:after { content: '＋'; font-size: 1.2em; }
-    .collapsible.active:after { content: '－'; }
+        .collapsible {
+            background: linear-gradient(90deg, #111827, #1a2a1f);
+            color: var(--neon-green); cursor: pointer; padding: 18px 25px;
+            width: 100%; border: 2px solid var(--neon-green); border-radius: 10px;
+            text-align: left; font-size: 20px; font-weight: bold; margin-top: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .collapsible:hover { box-shadow: 0 0 20px var(--neon-green); transform: translateY(-2px); }
 
-    .content {
-        max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
-        background: rgba(10, 15, 13, 0.9);
-        /* 髮絲紋特效保持 */
-        background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 12px);
-        border-radius: 0 0 18px 18px; border: 1px solid rgba(57,255,20,0.3); border-top: none;
-        margin-top: -8px;
-    }
-    .content-inner { padding: 25px; }
+        .content {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+            background: #0a0f0d;
+            /* --- 3. 髮絲紋特效 --- */
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px);
+            border-radius: 0 0 10px 10px; border: 1px solid rgba(57,255,20,0.3); border-top: none;
+            margin-top: -5px;
+        }
+        .content-inner { padding: 30px; font-size: 19px; }
 
-    /* 4.9 完整內容組件樣式保持 */
-    .platform-item {
-        display: flex; gap: 20px; background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(57, 255, 20, 0.2); border-left: 5px solid var(--neon-green);
-        border-radius: 12px; padding: 20px; margin-bottom: 20px;
-    }
-    .platform-logo { width: 85px; height: 85px; object-fit: contain; background: #000; padding: 8px; border-radius: 10px; }
-    .club-card { margin-top: 12px; padding: 14px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
-    .club-card strong { color: var(--gold); display: block; margin-bottom: 5px; }
+        /* 卡片與列表 (維持 4.6 高質感) */
+        .platform-item {
+            background: rgba(255,255,255,0.04); border-left: 5px solid var(--neon-green);
+            padding: 20px; border-radius: 10px; margin-bottom: 20px;
+        }
+        .club-card {
+            background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;
+            border: 1px solid rgba(245,197,66,0.2); margin-top: 10px;
+        }
+        .club-card strong { color: var(--gold); }
 
-    pre { background: #000; padding: 15px; border-radius: 8px; color: var(--neon-green); overflow: auto; border: 1px solid #1a2a1f; }
-    a { color: #fff; text-decoration: underline; }
-    a:hover { color: var(--neon-green); }
-
-    .footer { text-align: center; margin-top: 60px; padding: 40px; border-top: 1px dashed rgba(57,255,20,0.3); }
-    .footer-logo { width: 65px; height: auto; border-radius: 50%; box-shadow: 0 0 10px var(--gold); vertical-align: middle; }
-</style>
+        pre { background: #000; padding: 15px; color: var(--neon-green); border-radius: 8px; border: 1px solid #1a2a1f; }
+        
+        /* 底部 Logo 對稱 */
+        .footer { text-align: center; margin-top: 80px; padding-bottom: 60px; }
+        .footer-logo { width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 0 15px var(--gold); vertical-align: middle; }
+    </style>
 </head>
 
 <body>
@@ -100,8 +102,8 @@
 <div class="corner-suit bottom-right">♦</div>
 
 <div class="main-wrapper">
-    <div style="text-align:center;margin-bottom:20px;">
-        <img src="images/base.png" style="max-width:240px; filter: drop-shadow(0 0 10px var(--neon-green));">
+    <div style="text-align:center;">
+        <img src="images/base.png" style="max-width:280px; filter: drop-shadow(0 0 15px var(--neon-green));">
     </div>
 
     <h1>✨『牌手基地考核新制度』啟動</h1>
@@ -113,75 +115,35 @@
                 <li>兩個月開啟一次考核機制</li>
                 <li>一次考核為期一個月</li>
                 <li>考核沒過依然可報名往後梯次</li>
-                <li>第四梯次報名時間：3/3~3/8</li>
-                <li>第四梯次考核時間：12/1~12/28</li>
             </ul>
-        </div>
-    </div>
-
-    <button class="collapsible">📝 考核步驟</button>
-    <div class="content">
-        <div class="content-inner">
-            <p><b>1. 帳號綁定</b>：參照下表合作平台完成帳號註冊。</p>
-            <p><b>2. 資訊確認</b>：找到管理員 <b>@Vayne</b> 提供遊戲ID。</p>
-            <p><b>3. 登記資料</b>：私訊各區負責人回報：</p>
-            <pre>北/中：James (pan1409G) | 南：磊 (0982685646) / Mark (fmlove0116) | 東：宜蘭(liks9121)</pre>
         </div>
     </div>
 
     <button class="collapsible">💻 目前合作平台</button>
     <div class="content">
         <div class="content-inner">
-            <ul style="list-style:none; padding:0;">
-                <li class="platform-item">
-                    <img src="images/ipoker.jpg" class="platform-logo">
-                    <div>
-                        <div style="color:var(--neon-green); font-weight:bold;">♣ iPoker ♣</div>
-                        <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank">[下載連結]</a> 推荐碼：NTDboss
-                    </div>
-                </li>
-                <li class="platform-item" style="flex-direction: column;">
-                    <div style="display:flex; gap:20px;">
-                        <img src="images/Xpoker.jpg" class="platform-logo">
-                        <div style="color:var(--neon-green); font-weight:bold;">♠ XPoker ♠</div>
-                    </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:10px;">
-                        <div class="club-card"><strong>天祥雙子</strong>ID：999306</div>
-                        <div class="club-card"><strong>泰好贏</strong>ID：2421367</div>
-                        <div class="club-card"><strong>亞特馬來</strong>ID：686175</div>
-                        <div class="club-card"><strong>花順</strong>ID：277186</div>
-                    </div>
-                </li>
-                </ul>
-        </div>
-    </div>
-
-    <button class="collapsible">💰 出入金方式</button>
-    <div class="content">
-        <div class="content-inner">
-            <ul>
-                <li>Ipoker 出入金：<a href="https://lin.ee/oTJ3B7Y" target="_blank">連結</a></li>
-                <li>WPTG 出入金：<a href="https://line.me/R/ti/p/@540ouqui" target="_blank">連結</a></li>
-                <li>XP：進群私訊 @星星</li>
-            </ul>
+            <div class="platform-item">
+                <strong>♠ XPoker ♠</strong>
+                <div class="club-card"><strong>天祥雙子</strong> ID: 999306</div>
+            </div>
         </div>
     </div>
 
     <div class="footer">
-        <h2 style="font-size:2em; color:var(--gold);">牌手基地保有最終解釋權</h2>
-        <div style="display:flex; align-items:center; justify-content:center; gap:20px;">
+        <div style="font-size: 2em; color: var(--gold); font-weight: bold; margin-bottom: 20px;">牌手基地保有最終解釋權</div>
+        <p>
             <img src="images/NTDboss.jpg" class="footer-logo">
-            <span style="font-weight:bold;">NTDboss POKER COMMUNITY</span>
+            <span style="margin: 0 20px;">PROFESSIONAL POKER COMMUNITY</span>
             <img src="images/NTDboss.jpg" class="footer-logo">
-        </div>
+        </p>
     </div>
 </div>
 
 <script>
-    document.querySelectorAll('.collapsible').forEach(btn => {
-        btn.onclick = function() {
+    document.querySelectorAll('.collapsible').forEach(button => {
+        button.onclick = function() {
             this.classList.toggle('active');
-            var content = this.nextElementSibling;
+            const content = this.nextElementSibling;
             content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
         };
     });
