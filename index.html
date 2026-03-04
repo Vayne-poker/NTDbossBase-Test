@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | Poker Base Final</title>
+<title>牌手基地公告 | Poker Base Dashboard</title>
 
 <style>
     :root {
@@ -21,47 +21,32 @@
         overflow-x: hidden;
     }
 
-    /* --- 1. 強化版籌碼雨效果 --- */
-    .chip-shower {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        pointer-events: none; z-index: 1;
+    /* --- 1. 四角花色輪流閃爍 --- */
+    .corner-suit {
+        position: fixed;
+        font-size: 80px;
+        opacity: 0.1;
+        z-index: 0;
+        filter: blur(1px);
+        transition: opacity 1s, filter 1s;
     }
-    .poker-chip {
-        position: absolute; top: -100px;
-        width: 40px; height: 40px;
-        background: radial-gradient(circle, #222, #000);
-        border: 4px dashed var(--neon-green);
-        border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-weight: bold; font-size: 20px;
-        box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
-        animation: chipFall linear infinite;
-    }
-    @keyframes chipFall {
-        0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-        10% { opacity: 0.6; }
-        90% { opacity: 0.6; }
-        100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    
+    .top-left { top: 20px; left: 20px; color: var(--neon-green); animation: suitBlink 8s infinite 0s; }
+    .top-right { top: 20px; right: 20px; color: var(--poker-red); animation: suitBlink 8s infinite 2s; }
+    .bottom-left { bottom: 20px; left: 20px; color: var(--neon-green); animation: suitBlink 8s infinite 4s; }
+    .bottom-right { bottom: 20px; right: 20px; color: var(--poker-red); animation: suitBlink 8s infinite 6s; }
+
+    @keyframes suitBlink {
+        0%, 100% { opacity: 0.05; filter: drop-shadow(0 0 0px transparent); }
+        25% { opacity: 0.6; filter: drop-shadow(0 0 20px currentColor); }
+        50% { opacity: 0.05; }
     }
 
-    /* --- 2. 四大巨型花色輪流閃爍 --- */
-    .giant-suit-bg {
-        position: fixed; top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 40vw; opacity: 0;
-        pointer-events: none; z-index: 0;
-    }
-    .suit-1 { color: var(--neon-green); animation: rotateSuit 16s infinite 0s; }
-    .suit-2 { color: var(--poker-red); animation: rotateSuit 16s infinite 4s; }
-    .suit-3 { color: var(--neon-green); animation: rotateSuit 16s infinite 8s; }
-    .suit-4 { color: var(--poker-red); animation: rotateSuit 16s infinite 12s; }
-
-    @keyframes rotateSuit {
-        0%, 20%, 100% { opacity: 0; filter: blur(20px); }
-        5%, 15% { opacity: 0.15; filter: blur(0px); }
+    @media (max-width: 768px) {
+        .corner-suit { font-size: 40px; opacity: 0.2; } /* 手機版縮小 */
     }
 
-    /* --- 3. 內容排版 --- */
+    /* --- 2. 內容排版 --- */
     .main-wrapper { position: relative; z-index: 10; max-width: 900px; margin: 0 auto; }
 
     h1 {
@@ -77,48 +62,48 @@
         display: flex; justify-content: space-between; align-items: center;
         transition: 0.3s; box-shadow: 0 0 15px rgba(57,255,20,0.2);
     }
-    .collapsible:hover { box-shadow: 0 0 30px var(--neon-green); transform: scale(1.02); }
+    .collapsible:hover { box-shadow: 0 0 30px var(--neon-green); transform: scale(1.01); }
 
     .content {
         max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
         background: rgba(10, 15, 20, 0.95); backdrop-filter: blur(10px);
         border-radius: 0 0 12px 12px; border: 1px solid var(--neon-green); border-top: none;
+        margin-top: -5px;
     }
-    .content-inner { padding: 25px; font-size: 19px; }
+    .content-inner { padding: 25px; font-size: 19px; line-height: 1.8; }
 
     .platform-item {
         background: rgba(255,255,255,0.05); border-left: 5px solid var(--neon-green);
-        padding: 20px; border-radius: 10px; margin-bottom: 15px;
+        padding: 20px; border-radius: 10px; margin-bottom: 20px;
     }
 
     .club-card {
-        background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;
+        background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px;
         border: 1px solid rgba(245,197,66,0.3); margin-top: 10px;
     }
+    .club-card strong { color: var(--gold); display: block; margin-bottom: 5px; }
 
-    /* --- 4. 底部設計修正 --- */
-    .footer {
-        text-align: center; margin-top: 100px; padding-bottom: 50px;
-    }
+    /* --- 3. 底部設計 --- */
+    .footer { text-align: center; margin-top: 80px; padding-bottom: 50px; }
     .footer-main {
         display: flex; align-items: center; justify-content: center; gap: 20px;
         margin-top: 20px;
     }
-    .footer-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 15px var(--gold); }
-    .footer-text { font-size: 24px; color: var(--gold); font-weight: bold; letter-spacing: 1px; }
+    .footer-logo { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--gold); }
+    .footer-text { font-size: 24px; color: var(--gold); font-weight: bold; }
 
-    pre { background: #000; padding: 15px; color: var(--neon-green); border-radius: 8px; font-size: 16px; overflow-x: auto; }
+    pre { background: #000; padding: 15px; color: var(--neon-green); border-radius: 8px; font-size: 17px; border: 1px solid #1a2a1f; }
+    a { color: var(--neon-green); text-decoration: none; font-weight: bold; }
+    a:hover { text-decoration: underline; }
 </style>
 </head>
 
 <body>
 
-<div class="chip-shower" id="chipContainer"></div>
-
-<div class="giant-suit-bg suit-1">♠</div>
-<div class="giant-suit-bg suit-2">♥</div>
-<div class="giant-suit-bg suit-3">♣</div>
-<div class="giant-suit-bg suit-4">♦</div>
+<div class="corner-suit top-left">♠</div>
+<div class="corner-suit top-right">♥</div>
+<div class="corner-suit bottom-left">♣</div>
+<div class="corner-suit bottom-right">♦</div>
 
 <div class="main-wrapper">
     <div style="text-align:center;">
@@ -131,9 +116,10 @@
     <div class="content">
         <div class="content-inner">
             <ul>
-                <li>第四梯次報名時間：3/3 ~ 3/8</li>
-                <li>考核時間：12/1 ~ 12/28</li>
-                <li>兩月一次考核機制，未過可持續參與。</li>
+                <li>兩個月開啟一次考核機制，一次考核為期一個月。</li>
+                <li>考核沒過依然可報名往後梯次。</li>
+                <li><b>第四梯次報名時間：</b>3/3 ~ 3/8</li>
+                <li><b>第四梯次考核時間：</b>12/1 ~ 12/28</li>
             </ul>
         </div>
     </div>
@@ -141,49 +127,83 @@
     <button class="collapsible">📝 考核步驟</button>
     <div class="content">
         <div class="content-inner">
-            <p>1. 綁定合作平台帳號</p>
-            <p>2. 提供 ID 給管理員 @Vayne 核對老闆代碼</p>
-            <p>3. 聯繫地區負責人登記 (務必回報)：</p>
-            <pre>北中：James (pan1409G) | 南：磊 (0982685646) / Mark (fmlove0116) | 東：(liks9121)</pre>
+            <p>1. 參照 "目前合作平台" 綁定相關帳號。</p>
+            <p>2. 找到管理員 <b>@Vayne</b> 並提供遊戲ID，確認平台是否綁定牌手基地（需有綁定老闆邀請碼才會計入考核）。</p>
+            <p>3. 找到該區負責人登記資料（務必回報資料，否則不計入）：</p>
+            <pre>
+北：James     lineID：pan1409G
+中：James     lineID：pan1409G
+南：磊        lineID：0982685646
+    Mark      lineID：fmlove0116
+東(宜蘭)：    lineID：liks9121</pre>
+            <p>4. 開啟考核。</p>
         </div>
     </div>
 
-    <button class="collapsible">💻 目前合作平台與 ID 資訊</button>
+    <button class="collapsible">💻 目前合作平台與完整 ID</button>
     <div class="content">
         <div class="content-inner">
             <div class="platform-item">
-                <b>♠ XPoker 俱樂部群</b>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
-                    <div class="club-card">天祥 (1:8) ID: 999306 / 3496108</div>
-                    <div class="club-card">泰好贏 (1:1) ID: 2421367 / 3583536</div>
-                    <div class="club-card">亞特 (1:1) ID: 686175 / 3496108</div>
-                    <div class="club-card">花順 (1:1) ID: 277186 / 3032889</div>
-                </div>
+                <div style="color:var(--neon-green); font-weight:bold; font-size:22px;">♣ iPoker</div>
+                <p>推荐碼：NTDboss | <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank">下載連結</a></p>
             </div>
+            
             <div class="platform-item">
-                <b>♠ ClubGG 俱樂部群 (推薦 ID 皆為 4005-6868)</b>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
-                    <div class="club-card">Tiny ID: 954109</div>
-                    <div class="club-card">Massiv ID: 619975</div>
-                    <div class="club-card">Time ID: 970779</div>
+                <div style="color:var(--neon-green); font-weight:bold; font-size:22px;">♠ XPoker</div>
+                <p><a href="https://x-poker.net/#/" target="_blank">下載連結</a></p>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:10px;">
+                    <div class="club-card"><strong>天祥雙子 (1:8)</strong>俱樂部ID：999306<br>推薦人ID：3496108</div>
+                    <div class="club-card"><strong>泰好贏 TwXThai (1:1)</strong>俱樂部ID：2421367<br>推薦人ID：3583536</div>
+                    <div class="club-card"><strong>亞特馬來 (1:1)</strong>俱樂部ID：686175<br>推薦人ID：3496108</div>
+                    <div class="club-card"><strong>花順 (1:1)</strong>俱樂部ID：277186<br>推薦人ID：3032889</div>
                 </div>
             </div>
-            <p>其他平台：iPoker (NTDboss) / WPTG (A0A697) / N8 (NTDboss) / QQ (MGA852)</p>
+
+            <div class="platform-item">
+                <div style="color:var(--neon-green); font-weight:bold; font-size:22px;">♠ ClubGG</div>
+                <p><a href="https://www.clubgg.com/" target="_blank">下載連結</a> (推薦人ID皆為 4005-6868)</p>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:10px;">
+                    <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>俱樂部ID：954109</div>
+                    <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>俱樂部ID：619975</div>
+                    <div class="club-card"><strong>時光雞Time (1:27)</strong>俱樂部ID：970779</div>
+                </div>
+            </div>
+
+            <p>其他平台：WPT Global (A0A697) / Natural8 (NTDboss) / QQ Poker (MGA852)</p>
+        </div>
+    </div>
+
+    <button class="collapsible">💰 出入金方式</button>
+    <div class="content">
+        <div class="content-inner">
+            <ul>
+                <li>Ipoker 出入金：<a href="https://lin.ee/oTJ3B7Y" target="_blank">點此連結</a></li>
+                <li>WPTG 出入金：<a href="https://line.me/R/ti/p/@540ouqui" target="_blank">點此連結</a></li>
+                <li>正規出入金 (BitoPro)：<a href="https://www.bitopro.com/users/sign_up?referrer=2500555974" target="_blank">註冊連結</a></li>
+                <li>XPoker：進群後私訊 @星星</li>
+            </ul>
         </div>
     </div>
 
     <button class="collapsible">✨ 正式牌手福利</button>
     <div class="content">
         <div class="content-inner">
-            <img src="images/福利.webp" style="width:100%; border-radius:12px; border:1px solid var(--neon-green);">
-            <p>福利包括：資金支援、教學資源、比賽佔成、外國好局、金色布標資格。</p>
+            <div style="text-align:center; margin-bottom:20px;">
+                <img src="images/福利.webp" style="width:100%; border-radius:12px; border:1px solid var(--neon-green);">
+            </div>
+            <ul>
+                <li>提供資金支援、教學資源</li>
+                <li>比賽佔成、贊助比賽費用</li>
+                <li>獲得『基地Pro金色布標』資格</li>
+            </ul>
         </div>
     </div>
 
     <button class="collapsible">♠♥◆♣ 牌手群現有福利</button>
     <div class="content">
         <div class="content-inner">
-            <p>大家的 HRC 申請：<a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank" style="color:var(--neon-green)">點此連結</a></p>
+            <p><b>大家的 HRC</b>：<a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank">申請表單連結</a></p>
+            <p>(需為牌手基地成員，每人每天限申請 2 個 Spot)</p>
         </div>
     </div>
 
@@ -198,23 +218,6 @@
 </div>
 
 <script>
-    // 強化版籌碼下落
-    const container = document.getElementById('chipContainer');
-    const chipSuits = ['♠', '♥', '♦', '♣'];
-    function spawnChip() {
-        const chip = document.createElement('div');
-        chip.className = 'poker-chip';
-        chip.innerText = chipSuits[Math.floor(Math.random() * chipSuits.length)];
-        chip.style.left = Math.random() * 100 + 'vw';
-        const duration = Math.random() * 3 + 4;
-        chip.style.animationDuration = duration + 's';
-        if (chip.innerText === '♥' || chip.innerText === '♦') chip.style.borderColor = 'var(--poker-red)';
-        container.appendChild(chip);
-        setTimeout(() => chip.remove(), duration * 1000);
-    }
-    setInterval(spawnChip, 350);
-
-    // 折疊功能
     document.querySelectorAll('.collapsible').forEach(button => {
         button.onclick = function() {
             this.classList.toggle('active');
