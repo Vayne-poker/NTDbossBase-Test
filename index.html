@@ -17,7 +17,8 @@ body {
     radial-gradient(circle at top,
       #13261a,
       #0b140e 60%,
-      #060b08);
+      #060b08)
+	color: #e5e7eb;
 }
 
 h1 {
@@ -39,9 +40,8 @@ h1 {
 }
 
 .collapsible:hover {
-  box-shadow:
-    0 0 12px var(--neon-green),
-    0 0 25px rgba(57,255,20,0.4);
+box-shadow:
+  0 0 8px var(--neon-green);
 }
 
 /* 折疊內容 */
@@ -49,9 +49,10 @@ h1 {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;
-  background: #151922;
-  border-radius: 8px;
-  margin-top: 8px;
+  background: #0f1f14;;   /* 比現在亮 */
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 1px solid rgba(57,255,20,0.15);
 }
 
 .content-inner {
@@ -105,7 +106,7 @@ h1 {
 .platform-link {
   display: inline-block;
   margin: 6px 0;
-  color: #00ffaa;
+  color: var(--neon-green);
   text-decoration: none;
   font-weight: bold;
 }
