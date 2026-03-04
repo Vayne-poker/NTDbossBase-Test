@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v5.2 Poker Base Dashboard</title>
+<title>牌手基地公告 | v5.3 Poker Base Dashboard</title>
 
 <style>
     :root {
@@ -21,12 +21,12 @@
         overflow-x: hidden;
     }
 
-    /* --- 1. 四角花色：嚴格執行 -5% 攻頂 & 置底 --- */
+    /* --- 1. 四角花色：嚴格執行 -5% 攻頂、加大且不擋字 --- */
     .corner-suit {
         position: fixed;
         font-size: 30vw;
         opacity: 0.08;
-        z-index: -1;     /* 關鍵：解決重疊感，放在文字後方 */
+        z-index: -1;     /* 關鍵：置於內容後方，解決重疊感 */
         pointer-events: none;
         filter: blur(6px);
     }
@@ -42,12 +42,25 @@
         50% { opacity: 0.08; }
     }
 
-    /* --- 2. 按鈕區塊：18px 圓角矩形矩陣 --- */
+    /* --- 2. 內容排版與圓角矩形設計 --- */
+    .main-wrapper { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; padding-bottom: 40px; }
+
+    @media (min-width: 1024px) {
+        body { font-size: 19px; }
+        h1 { font-size: 3.5em !important; }
+        .collapsible { font-size: 22px !important; }
+    }
+
+    h1 {
+        text-align: center; color: var(--gold); font-size: 2.8em;
+        text-shadow: 0 0 20px rgba(245,197,66,0.6); margin: 30px 0;
+    }
+
     .collapsible {
         background: linear-gradient(90deg, #111827, #1a2a1f);
         color: var(--neon-green); cursor: pointer; padding: 20px;
         width: 100%; border: 1px solid rgba(57,255,20,0.35); 
-        border-radius: 18px; /* 這裡實現你想要的圓角化矩形 */
+        border-radius: 18px; /* 老哥手動調的圓角矩形 */
         text-align: left; font-size: 18px; font-weight: bold; margin-top: 15px;
         display: flex; justify-content: space-between; align-items: center;
         transition: 0.3s;
@@ -55,51 +68,61 @@
     .collapsible:hover { box-shadow: 0 0 12px rgba(57,255,20,0.4); transform: scale(1.01); }
     .collapsible:after { content: '＋'; }
     .collapsible.active:after { content: '－'; }
-    .collapsible.active { border-radius: 18px 18px 0 0; }
 
     .content {
         max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
         background: rgba(10, 15, 20, 0.95); backdrop-filter: blur(10px);
-        border-radius: 0 0 18px 18px; border: 1px solid var(--neon-green); border-top: none;
+        border-radius: 0 0 18px 18px; /* 底部同步圓角 */
+        border: 1px solid var(--neon-green); border-top: none;
         margin-top: -5px;
     }
-    .content-inner { 
-        padding: 25px; 
-        background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 10px);
-    }
+    .content-inner { padding: 25px; line-height: 1.8; }
 
-    /* --- 3. 恢復 Grid 排版樣式 (這一段剛才漏了) --- */
-    .club-grid-3 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 自動適應 */
-        gap: 15px; margin-top: 15px;
-    }
-
-    .club-grid-2 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 15px; margin-top: 15px;
-    }
-
+    /* --- 3. 恢復所有 Grid 排版與內容樣式 --- */
     .platform-item {
         background: rgba(255,255,255,0.05); border-left: 5px solid var(--neon-green);
         padding: 20px; border-radius: 10px; margin-bottom: 20px;
         display: flex; gap: 20px;
     }
-
-    .club-card { 
-        background: rgba(255,255,255,0.03); padding: 15px; 
-        border-radius: 8px; border: 1px solid rgba(245,197,66,0.3); 
-    }
+    .platform-logo { width: 85px; height: 85px; object-fit: contain; background: #000; padding: 8px; border-radius: 10px; }
     
-    /* 考核步驟樣式保持 */
+    .club-card { 
+        background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; 
+        border: 1px solid rgba(245,197,66,0.3); margin-top: 10px; 
+    }
+    .club-card strong { color: var(--gold); display: block; margin-bottom: 5px; }
+
+    .club-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .club-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 15px;
+    }
+
     .step-list { display: flex; flex-direction: column; gap: 15px; }
     .step-box {
         background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.3);
-        padding: 15px 20px; border-radius: 8px; border-left: 6px solid var(--neon-green);
+        padding: 15px 20px; border-radius: 8px; position: relative;
+        border-left: 6px solid var(--neon-green);
     }
-    
-    .main-wrapper { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; padding-bottom: 40px; }
+    .step-num { color: var(--neon-green); font-weight: bold; font-size: 1.2em; margin-right: 10px; }
+    .step-arrow { text-align: center; color: var(--neon-green); font-size: 20px; margin: -5px 0; opacity: 0.5; }
+
+    .footer { text-align: center; margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #1f2937; padding-top: 40px; }
+    .footer-title { font-size: 2.5em; color: var(--gold); font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 15px rgba(245,197,66,0.5); }
+    .footer-flex { display: flex; align-items: center; justify-content: center; gap: 25px; }
+    .footer-logo { width: 70px; height: 70px; border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
+
+    pre { background: #000; padding: 15px; color: var(--neon-green); border-radius: 8px; font-size: 16px; border: 1px solid #1a2a1f; overflow-x: auto; }
+    a { color: var(--neon-green); text-decoration: none; font-weight: bold; border-bottom: 1px solid transparent; }
+    a:hover { border-bottom: 1px solid var(--neon-green); }
 </style>
 
 <body>
@@ -304,3 +327,5 @@
 
 </body>
 </html>
+
+
