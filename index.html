@@ -123,6 +123,30 @@
     pre { background: #000; padding: 15px; color: var(--neon-green); border-radius: 8px; font-size: 16px; border: 1px solid #1a2a1f; overflow-x: auto; }
     a { color: var(--neon-green); text-decoration: none; font-weight: bold; border-bottom: 1px solid transparent; }
     a:hover { border-bottom: 1px solid var(--neon-green); }
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+}
+
+.contact-label {
+    min-width: 100px; /* 關鍵：固定名字區域寬度 */
+    display: inline-block;
+}
+
+.contact-id {
+    font-family: monospace; /* 等寬字體讓 ID 更易讀 */
+    color: var(--neon-green);
+}}
 </style>
 
 <body>
@@ -153,28 +177,30 @@
         </div>
     </div>
 
-    <button class="collapsible">📝 考核步驟</button>
-    <div class="content">
-        <div class="content-inner">
-            <div class="step-list">
-                <div class="step-box"><span class="step-num">01</span> 參照 "目前合作平台" 綁定相關帳號</div>
-                <div class="step-arrow">▼</div>
-                <div class="step-box"><span class="step-num">02</span> <a href="https://line.me/ti/g/DwTLUjG4qS" target="_blank">進群</a>後，找到管理員 <b>@Vayne</b> 並提供遊戲ID，確認平台是否綁定牌手基地（需有綁定老闆邀請碼才會計入）</div>
-                <div class="step-arrow">▼</div>
-                <div class="step-box">
-                    <span class="step-num">03</span> 找到該區負責人登記資料 (務必回報)：
-                    <pre>
-北：James     lineID：pan1409g
-中：James     lineID：pan1409g
-南：磊        lineID：0982685646
-    Mark      lineID：fmlove0116
-東(宜蘭)：    lineID：liks9121</pre>
+<button class="collapsible">📝 考核步驟</button>
+<div class="content">
+    <div class="content-inner">
+        <div class="step-list">
+            <div class="step-box"><span class="step-num">01</span> 參照 "目前合作平台" 綁定相關帳號</div>
+            <div class="step-arrow">▼</div>
+            
+            <div class="step-box"><span class="step-num">02</span> <a href="https://line.me/ti/g/DwTLUjG4qS" target="_blank">進群</a>後，找到管理員 <b>@Vayne</b> 並提供遊戲ID，確認平台是否綁定牌手基地（需有綁定老闆邀請碼才會計入）</div>
+            <div class="step-arrow">▼</div>
+            
+            <div class="step-box">
+                <span class="step-num">03</span> 找到該區負責人登記資料 (務必回報)：
+                <div class="contact-list">
+                    <div class="contact-row"><span class="contact-label">北：James</span><span class="contact-id">lineID：pan1409g</span></div>
+                    <div class="contact-row"><span class="contact-label">中：James</span><span class="contact-id">lineID：pan1409g</span></div>
+                    <div class="contact-row"><span class="contact-label">南：磊</span><span class="contact-id">lineID：0982685646</span></div>
+                    <div class="contact-row"><span class="contact-label">　　Mark</span><span class="contact-id">lineID：fmlove0116</span></div>
+                    <div class="contact-row"><span class="contact-label">東：</span><span class="contact-id">lineID：liks9121</span></div>
                 </div>
-                <div class="step-arrow">▼</div>
-                <div class="step-box"><span class="step-num">04</span> 開啟考核</div>
-            </div>
-        </div>
-    </div>
+            </div> <div class="step-arrow">▼</div>
+            <div class="step-box"><span class="step-num">04</span> 開啟考核</div>
+        </div> </div>
+</div>
+
 
     <button class="collapsible">💻 目前合作平台</button>
     <div class="content">
