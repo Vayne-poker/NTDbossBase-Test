@@ -3,68 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>牌手基地公告 | v5.0 旗艦排版</title>
+    <title>牌手基地公告 | v5.1 圓角卡片版</title>
     <style>
         :root {
             --neon-green: #39ff14;
             --poker-red: #ff3a3a;
             --gold: #f5c542;
+            --card-bg: rgba(20, 30, 25, 0.85);
         }
 
         body {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
             margin: 0; padding: 20px;
-            background: radial-gradient(circle at center, #111b14 0%, #050806 100%);
-            background-attachment: fixed;
+            background: #050806;
             color: #d1d5db; overflow-x: hidden; line-height: 1.7;
         }
 
-        /* --- 1. 花色位置上移 & 常駐呼吸 (解決重疊) --- */
+        /* --- 1. 花色位置再往上 & 常駐淡淡看見 --- */
         .corner-suit {
-            position: fixed; font-size: 30vw; opacity: 0.12; z-index: -1;
-            pointer-events: none; filter: blur(5px); transition: all 1s ease-in-out;
+            position: fixed; font-size: 30vw; 
+            opacity: 0.05; /* 淡淡看見，不起眼的程度 */
+            z-index: -1; pointer-events: none; 
+            filter: blur(8px); transition: all 1s ease-in-out;
         }
-        @keyframes glowGreen { 0%, 100% { opacity: 0.12; filter: blur(5px); } 50% { opacity: 0.6; filter: blur(0px) drop-shadow(0 0 25px var(--neon-green)); } }
-        @keyframes glowRed { 0%, 100% { opacity: 0.12; filter: blur(5px); } 50% { opacity: 0.6; filter: blur(0px) drop-shadow(0 0 25px var(--poker-red)); } }
+        @keyframes glowGreen { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.4; filter: blur(2px) drop-shadow(0 0 20px var(--neon-green)); } }
+        @keyframes glowRed { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.4; filter: blur(2px) drop-shadow(0 0 20px var(--poker-red)); } }
 
-        .top-left { top: 12%; left: 3%; color: var(--neon-green); animation: glowGreen 6s infinite 0s; }
-        .top-right { top: 12%; right: 3%; color: var(--poker-red); animation: glowRed 6s infinite 3s; }
-        .bottom-left { bottom: 5%; left: 3%; color: var(--neon-green); animation: glowGreen 6s infinite 0s; }
-        .bottom-right { bottom: 5%; right: 3%; color: var(--poker-red); animation: glowRed 6s infinite 3s; }
+        /* 黑桃愛心再往上 */
+        .top-left { top: 5%; left: 2%; color: var(--neon-green); animation: glowGreen 8s infinite 0s; }
+        .top-right { top: 5%; right: 2%; color: var(--poker-red); animation: glowRed 8s infinite 4s; }
+        .bottom-left { bottom: 2%; left: 2%; color: var(--neon-green); animation: glowGreen 8s infinite 2s; }
+        .bottom-right { bottom: 2%; right: 2%; color: var(--poker-red); animation: glowRed 8s infinite 6s; }
 
-        /* --- 2. 內容容器 --- */
         .main-wrapper { max-width: 900px; margin: 0 auto; position: relative; z-index: 10; }
 
-        h1 { text-align: center; color: var(--gold); font-size: 2.8em; text-shadow: 0 0 20px rgba(245,197,66,0.6); margin: 35px 0; }
-
+        /* --- 2. 按鈕區塊圓角矩形化 --- */
         .collapsible {
-            background: linear-gradient(90deg, #111827, #1a2a1f);
-            color: var(--neon-green); cursor: pointer; padding: 18px 25px;
-            width: 100%; border: 2px solid var(--neon-green); border-radius: 10px;
-            text-align: left; font-size: 20px; font-weight: bold; margin-top: 15px;
-            display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
+            background: linear-gradient(135deg, #1a2a1f 0%, #0d120f 100%);
+            /* 髮絲紋特效 */
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 10px);
+            color: var(--neon-green); cursor: pointer; 
+            padding: 22px 30px; width: 100%; 
+            border: 1px solid rgba(57, 255, 20, 0.3); 
+            border-radius: 15px; /* 圓角矩形化 */
+            text-align: left; font-size: 22px; font-weight: bold; 
+            margin-top: 20px; display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .collapsible:hover { box-shadow: 0 0 20px var(--neon-green); transform: translateY(-2px); }
+        .collapsible:hover { border-color: var(--neon-green); box-shadow: 0 0 20px rgba(57,255,20,0.2); transform: translateY(-3px); }
+        .collapsible.active { border-radius: 15px 15px 0 0; border-bottom: none; }
 
         .content {
             max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
-            background: #0a0f0d;
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px);
-            border-radius: 0 0 10px 10px; border: 1px solid rgba(57,255,20,0.3); border-top: none; margin-top: -5px;
+            background: var(--card-bg);
+            border: 1px solid rgba(57,255,20,0.3); border-top: none;
+            border-radius: 0 0 15px 15px; /* 底部也圓角 */
+            backdrop-filter: blur(10px);
         }
         .content-inner { padding: 30px; font-size: 19px; }
 
-        /* --- 3. 兩欄式精排卡片 --- */
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
-        .info-card { background: rgba(255,255,255,0.04); border-left: 4px solid var(--neon-green); padding: 15px; border-radius: 8px; }
+        /* 內容物格線排版 */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
+        .info-card { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
         .info-card strong { color: var(--gold); display: block; margin-bottom: 5px; }
 
-        pre { background: #000; padding: 15px; color: var(--neon-green); border-radius: 8px; border: 1px solid #1a2a1f; white-space: pre-wrap; word-wrap: break-word; }
-        a { color: white; text-decoration: underline; }
-        a:hover { color: var(--neon-green); }
-
-        .footer { text-align: center; margin-top: 80px; padding-bottom: 60px; border-top: 1px dashed rgba(57,255,20,0.3); padding-top: 40px; }
-        .footer-logo { width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 0 15px var(--gold); vertical-align: middle; }
+        .footer { text-align: center; margin-top: 100px; padding-bottom: 60px; }
+        .footer-logo { width: 60px; border-radius: 50%; box-shadow: 0 0 15px var(--gold); vertical-align: middle; }
+        
+        h1 { text-align: center; color: var(--gold); font-size: 2.8em; text-shadow: 0 0 15px rgba(245,197,66,0.5); }
+        pre { background: #000; padding: 15px; color: var(--neon-green); border-radius: 10px; border: 1px solid #1a2a1f; }
     </style>
 </head>
 
@@ -77,19 +84,17 @@
 
 <div class="main-wrapper">
     <div style="text-align:center;">
-        <img src="images/base.png" style="max-width:280px; filter: drop-shadow(0 0 15px var(--neon-green));">
+        <img src="images/base.png" style="max-width:260px; filter: drop-shadow(0 0 10px var(--neon-green));">
     </div>
 
-    <h1>✨『牌手基地考核新制度』啟動</h1>
+    <h1>✨ 牌手基地考核 4.0</h1>
 
-    <button class="collapsible">🍀 考核牌手 4.0</button>
+    <button class="collapsible">🍀 考核說明</button>
     <div class="content">
         <div class="content-inner">
             <ul>
                 <li>兩個月開啟一次考核機制，為期一個月。</li>
-                <li>考核沒過依然可報名往後梯次。</li>
-                <li><b>第四梯次報名：</b>3/3 ~ 3/8。</li>
-                <li><b>第四梯次考核：</b>12/1 ~ 12/28。</li>
+                <li>報名時間：3/3 ~ 3/8 | 考核時間：12/1 ~ 12/28。</li>
             </ul>
         </div>
     </div>
@@ -98,54 +103,31 @@
     <div class="content">
         <div class="content-inner">
             <div class="grid-layout">
-                <div class="info-card"><strong>STEP 1 帳號綁定</strong>參照平台表完成註冊。</div>
-                <div class="info-card"><strong>STEP 2 ID確認</strong>私訊管理員 @Vayne 提供遊戲ID。</div>
-                <div class="info-card" style="grid-column: span 2;">
-                    <strong>STEP 3 登記資料 (必回報)</strong>
-                    <pre>北/中：James (pan1409G) | 南：磊 (0982685646) / Mark (fmlove0116) | 東：宜蘭(liks9121)</pre>
+                <div class="info-card"><strong>01. 綁定帳號</strong>參照下方平台完成註冊。</div>
+                <div class="info-card"><strong>02. ID確認</strong>私訊管理員 @Vayne 提供遊戲ID。</div>
+                <div class="info-card" style="grid-column: 1 / -1;">
+                    <strong>03. 登記資料</strong>
+                    <pre>北中：pan1409G | 南：0982685646 / fmlove0116 | 東：liks9121</pre>
                 </div>
             </div>
         </div>
     </div>
 
-    <button class="collapsible">💻 目前合作平台</button>
-    <div class="content">
-        <div class="content-inner">
-            <p><b>♠ XPoker ♠</b></p>
-            <div class="grid-layout">
-                <div class="info-card"><strong>天祥雙子 (1:8)</strong>ID：999306 / 推薦：3496108</div>
-                <div class="info-card"><strong>泰好贏 (1:1)</strong>ID：2421367 / 推薦：3583536</div>
-                <div class="info-card"><strong>亞特馬來 (1:1)</strong>ID：686175 / 推薦：3496108</div>
-                <div class="info-card"><strong>花順 (1:1)</strong>ID：277186 / 推薦：3032889</div>
-            </div>
-            <p style="margin-top:20px;"><b>♠ ClubGG ♠</b> (推薦碼: 4005-6868)</p>
-            <div class="grid-layout">
-                <div class="info-card"><strong>快樂呱Tiny (1:1)</strong>ID：954109</div>
-                <div class="info-card"><strong>快樂呱Massiv (1:26)</strong>ID：619975</div>
-                <div class="info-card"><strong>時光雞Time (1:27)</strong>ID：970779</div>
-            </div>
-        </div>
-    </div>
-
-    <button class="collapsible">💰 出入金方式</button>
+    <button class="collapsible">💻 合作平台</button>
     <div class="content">
         <div class="content-inner">
             <div class="grid-layout">
-                <div class="info-card"><strong>Ipoker</strong><a href="https://lin.ee/oTJ3B7Y" target="_blank">點我前往</a></div>
-                <div class="info-card"><strong>WPTG</strong><a href="https://line.me/R/ti/p/@540ouqui" target="_blank">點我前往</a></div>
-                <div class="info-card"><strong>正規出入金 (BitoPro)</strong><a href="https://www.bitopro.com/users/sign_up?referrer=2500555974" target="_blank">點我前往</a></div>
-                <div class="info-card"><strong>XP</strong><a href="https://line.me/ti/g/DwTLUjG4qS" target="_blank">進群私訊 @星星</a></div>
+                <div class="info-card"><strong>XPoker</strong>ID: 999306 / 2421367 / 686175 / 277186</div>
+                <div class="info-card"><strong>ClubGG</strong>ID: 954109 / 619975 / 970779</div>
             </div>
         </div>
     </div>
 
     <div class="footer">
-        <div style="font-size: 2.2em; color: var(--gold); font-weight: bold; margin-bottom: 25px;">牌手基地保有最終解釋權</div>
-        <p>
-            <img src="images/NTDboss.jpg" class="footer-logo">
-            <span style="margin: 0 20px; font-weight: bold; color: #fff;">PROFESSIONAL POKER COMMUNITY</span>
-            <img src="images/NTDboss.jpg" class="footer-logo">
-        </p>
+        <div style="font-size: 2em; color: var(--gold); font-weight: bold; margin-bottom: 25px;">牌手基地保有最終解釋權</div>
+        <img src="images/NTDboss.jpg" class="footer-logo">
+        <span style="margin: 0 15px; color: #fff; font-weight: bold;">PROFESSIONAL POKER COMMUNITY</span>
+        <img src="images/NTDboss.jpg" class="footer-logo">
     </div>
 </div>
 
