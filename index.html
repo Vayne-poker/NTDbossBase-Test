@@ -24,26 +24,33 @@
     /* --- 1. 四角花色：加大且往中心靠攏 --- */
     .corner-suit {
         position: fixed;
-        font-size: 30vw; /* 恢復 4.4 的震撼大小 */
-        opacity: 0;
+        font-size: 30vw;
+        opacity: 0.08;   /* 原本可見 */
         z-index: 0;
         pointer-events: none;
-        filter: blur(5px);
+        filter: blur(6px);
     }
     
-    .top-left { top: 5%; left: 2%; color: var(--neon-green); animation: suitBlink 8s infinite 0s; }
-    .top-right { top: 5%; right: 2%; color: var(--poker-red); animation: suitBlink 8s infinite 2s; }
-    .bottom-left { bottom: 5%; left: 2%; color: var(--neon-green); animation: suitBlink 8s infinite 4s; }
-    .bottom-right { bottom: 5%; right: 2%; color: var(--poker-red); animation: suitBlink 8s infinite 6s; }
+    .top-left { top: -8%; left: -5%; color: var(--neon-green); animation: suitBlink 8s infinite 0s; }
+    .top-right { top: -8%; right: -5%; color: var(--poker-red); animation: suitBlink 8s infinite 2s; }
+    .bottom-left { bottom: -8%; left: -5%; color: var(--neon-green); animation: suitBlink 8s infinite 4s; }
+    .bottom-right { bottom: -8%; right: -5%; color: var(--poker-red); animation: suitBlink 8s infinite 6s; }
 
     @keyframes suitBlink {
-    0%, 100% { opacity: 0; transform: scale(0.95); }
-    25% { 
-        opacity: 0.22;
-        transform: scale(1);
-        filter: blur(2px);
+    0%, 100% {
+        opacity: 0.08;
+        transform: scale(0.97);
     }
-    50% { opacity: 0; }
+
+    25% {
+        opacity: 0.30;
+        transform: scale(1);
+        filter: blur(3px);
+    }
+
+    50% {
+        opacity: 0.08;
+    }
 }
     
 
