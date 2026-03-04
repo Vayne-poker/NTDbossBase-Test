@@ -4,7 +4,7 @@
 <link rel="preload" as="image" href="images/福利.webp">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | Poker Base</title>
+<title>牌手基地公告 | Poker Base v4.3</title>
 
 <style>
     :root {
@@ -25,7 +25,7 @@
         overflow-x: hidden;
     }
 
-    /* 科技掃描線 */
+    /* 掃描線背景 */
     body::before {
         content: "";
         position: fixed;
@@ -36,124 +36,92 @@
         pointer-events: none;
     }
 
-    /* [修正重點] 左右兩側固定花色條：確保不被按鈕遮住 */
+    /* [特效加強] 左右花色呼吸閃爍動態 */
+    @keyframes pokerBlink {
+        0%, 100% { opacity: 0.15; filter: drop-shadow(0 0 0px var(--neon-green)); }
+        50% { opacity: 0.6; filter: drop-shadow(0 0 10px var(--neon-green)); }
+    }
+    @keyframes pokerRedBlink {
+        0%, 100% { opacity: 0.15; filter: drop-shadow(0 0 0px var(--poker-red)); }
+        50% { opacity: 0.6; filter: drop-shadow(0 0 10px var(--poker-red)); }
+    }
+
     .poker-side-decor {
         position: fixed;
-        top: 0;
-        height: 100%;
-        width: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        font-size: 24px;
-        color: var(--neon-green);
-        opacity: 0.3;
-        z-index: 1;
-        text-shadow: 0 0 10px var(--neon-green);
+        top: 0; height: 100%; width: 50px;
+        display: flex; flex-direction: column;
+        justify-content: space-around; align-items: center;
+        font-size: 26px; z-index: 1;
     }
-    .side-left { left: 10px; }
-    .side-right { right: 10px; color: var(--poker-red); text-shadow: 0 0 10px var(--poker-red); }
+    .side-left { left: 5px; color: var(--neon-green); animation: pokerBlink 3s infinite; }
+    .side-right { right: 5px; color: var(--poker-red); animation: pokerRedBlink 3.5s infinite; }
 
-    @media (max-width: 768px) {
-        .poker-side-decor { display: none; } /* 手機版隱藏避免太擠 */
-    }
+    @media (max-width: 768px) { .poker-side-decor { display: none; } }
 
-    /* 電腦版大字體優化 */
+    /* 電腦版字體大小 */
     @media (min-width: 1024px) {
         body { font-size: 20px; }
         .main-wrapper { max-width: 1000px; margin: 0 auto; padding: 20px; }
         h1 { font-size: 3.2em !important; }
         .collapsible { font-size: 22px !important; }
-        .platform-title { font-size: 24px !important; }
     }
 
     .main-wrapper { position: relative; z-index: 10; }
 
     h1 {
-        text-align: center;
-        color: var(--gold);
-        margin-bottom: 30px;
-        text-shadow: 0 0 15px rgba(245,197,66,0.5);
+        text-align: center; color: var(--gold);
+        margin-bottom: 30px; text-shadow: 0 0 15px rgba(245,197,66,0.5);
     }
 
-    /* 4.1 版深受好評的呼吸感按鈕 */
+    /* 呼吸感按鈕 */
     .collapsible {
         background: linear-gradient(90deg, #111827, #1a2a1f);
         color: var(--neon-green);
-        cursor: pointer;
-        padding: 18px 25px;
-        width: 100%;
-        border: 2px solid var(--neon-green);
-        border-radius: 10px;
-        text-align: left;
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 15px;
-        transition: 0.3s;
+        cursor: pointer; padding: 18px 25px; width: 100%;
+        border: 2px solid var(--neon-green); border-radius: 10px;
+        text-align: left; font-size: 19px; font-weight: bold;
+        margin-top: 15px; transition: 0.3s;
         box-shadow: 0 0 8px rgba(57,255,20,0.2);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: flex; justify-content: space-between; align-items: center;
     }
 
-    .collapsible:hover {
-        box-shadow: 0 0 20px var(--neon-green);
-        transform: scale(1.01);
-    }
-
-    .collapsible:after { content: '♠'; opacity: 0.5; font-size: 1.2em; }
+    .collapsible:hover { box-shadow: 0 0 20px var(--neon-green); transform: scale(1.01); }
+    .collapsible:after { content: '♠'; opacity: 0.5; }
     .collapsible.active:after { content: '♣'; opacity: 1; color: var(--gold); }
 
     .content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-        background: rgba(21, 25, 34, 0.85);
-        backdrop-filter: blur(5px);
-        border-radius: 0 0 10px 10px;
-        border: 1px solid rgba(57,255,20,0.2);
-        border-top: none;
-        margin-top: -5px;
+        max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+        background: rgba(21, 25, 34, 0.85); backdrop-filter: blur(5px);
+        border-radius: 0 0 10px 10px; border: 1px solid rgba(57,255,20,0.2);
+        border-top: none; margin-top: -5px;
     }
 
     .content-inner { padding: 30px; }
 
+    /* [新效果] 步驟子窗口設計 */
+    .step-window {
+        background: rgba(57, 255, 20, 0.05);
+        border: 1px solid rgba(57, 255, 20, 0.2);
+        border-left: 4px solid var(--neon-green);
+        padding: 15px; margin-bottom: 15px; border-radius: 4px;
+    }
+    .step-num { color: var(--neon-green); font-weight: bold; margin-right: 10px; }
+
     .platform-item {
-        display: flex;
-        gap: 20px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(57, 255, 20, 0.3);
-        border-left: 5px solid var(--neon-green);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 20px;
+        display: flex; gap: 20px; background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(57, 255, 20, 0.3); border-left: 5px solid var(--neon-green);
+        border-radius: 12px; padding: 20px; margin-bottom: 20px;
     }
 
-    .platform-logo {
-        width: 85px; height: 85px; object-fit: contain;
-        background: #000; padding: 8px; border-radius: 10px;
-    }
-
-    .platform-title { font-size: 20px; color: var(--neon-green); font-weight: bold; }
-
-    .platform-link {
-        display: inline-block; margin: 8px 0;
-        color: #fff; background: rgba(57, 255, 20, 0.1);
-        border: 1px solid var(--neon-green);
-        padding: 4px 12px; border-radius: 5px; text-decoration: none;
-    }
-
+    .platform-logo { width: 85px; height: 85px; object-fit: contain; background: #000; padding: 8px; border-radius: 10px; }
+    
     .club-card {
         margin-top: 12px; padding: 14px; border-radius: 10px;
         background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .club-card strong { color: var(--gold); display: block; }
 
-    pre {
-        background: #000; padding: 15px; border-radius: 8px;
-        color: var(--neon-green); border: 1px solid #1a2a1f;
-    }
+    pre { background: #000; padding: 15px; border-radius: 8px; color: var(--neon-green); border: 1px solid #1a2a1f; }
 
     .footer { text-align: center; margin-top: 60px; padding: 40px; border-top: 1px solid #1f2937; }
 </style>
@@ -178,7 +146,7 @@
     <button class="collapsible">🍀 考核牌手4.0</button>
     <div class="content">
         <div class="content-inner">
-            <ul>
+            <ul style="list-style-type: '♦ ';">
                 <li>兩個月開啟一次考核機制</li>
                 <li>一次考核為期一個月</li>
                 <li>考核沒過依然可報名往後梯次</li>
@@ -191,90 +159,70 @@
     <button class="collapsible">📝 考核步驟</button>
     <div class="content">
         <div class="content-inner">
-            <ol>
-                <li>參照 "目前合作平台" 綁定相關帳號</li>
-                <li>找到管理員 @Vayne 並提供遊戲ID<br>
-                    <b>平台需有綁定老闆邀請碼才會計入考核</b></li>
-                <li>找到該區負責人登記資料<br>
-                    <pre>
+            <div class="step-window">
+                <span class="step-num">STEP 01.</span>參照 "目前合作平台" 綁定相關帳號
+            </div>
+            <div class="step-window">
+                <span class="step-num">STEP 02.</span>找到管理員 @Vayne 提供遊戲ID<br>
+                <small>確認考核平台是否綁定牌手基地，<b>需有綁定老闆邀請碼才會計入</b></small>
+            </div>
+            <div class="step-window">
+                <span class="step-num">STEP 03.</span>找到該區負責人登記資料 (務必回報)<br>
+                <pre>
 北：James     lineID：pan1409G
 中：James     lineID：pan1409G
 南：磊        lineID：0982685646
     Mark      lineID：fmlove0116
 東(宜蘭)：    lineID：liks9121</pre>
-                    <b>務必要和各區負責人回報資料，否則不會計入考核</b>
-                </li>
-                <li>開啟考核</li>
-            </ol>
+            </div>
+            <div class="step-window" style="border-left-color: var(--gold);">
+                <span class="step-num" style="color:var(--gold);">STEP 04.</span>正式開啟考核任務
+            </div>
         </div>
     </div>
 
     <button class="collapsible">💻 目前合作平台</button>
     <div class="content">
         <div class="content-inner">
-            <ul class="platform-list" style="list-style:none; padding:0;">
-                <li class="platform-item">
-                    <img src="images/ipoker.jpg" class="platform-logo">
-                    <div class="platform-info">
-                        <div class="platform-title">♣ iPoker ♣</div>
-                        <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a>
-                        <div>推荐碼：NTDboss</div>
-                    </div>
-                </li>
-                <li class="platform-item">
-                    <img src="images/WPT.jpg" class="platform-logo">
-                    <div class="platform-info">
-                        <div class="platform-title">♦ WPT Global ♦</div>
-                        <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a>
-                        <div>推荐碼：A0A697</div>
-                    </div>
-                </li>
-                <li class="platform-item">
-                    <img src="images/N8.jpg" class="platform-logo">
-                    <div class="platform-info">
-                        <div class="platform-title">♠ Natural8 ♠</div>
-                        <a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a>
-                        <div>推荐碼：NTDboss</div>
-                    </div>
-                </li>
-                <li class="platform-item">
-                    <img src="images/QQ.jpg" class="platform-logo">
-                    <div class="platform-info">
-                        <div class="platform-title">♠ QQ Poker ♠</div>
-                        <a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a>
-                        <div>推荐碼：MGA852</div>
-                    </div>
-                </li>
-                <li class="platform-item" style="flex-direction: column;">
-                    <div style="display:flex; gap:20px;">
-                        <img src="images/Xpoker.jpg" class="platform-logo">
-                        <div class="platform-info">
-                            <div class="platform-title">♠ XPoker ♠</div>
-                            <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-top:15px;">
-                        <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID：999306 / 推薦：3496108</div>
-                        <div class="club-card"><strong>泰好贏 TwXThai (1:1)</strong>ID：2421367 / 推薦：3583536</div>
-                        <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID：686175 / 推薦：3496108</div>
-                        <div class="club-card"><strong>花順 (1:1)</strong>ID：277186 / 推薦：3032889</div>
-                    </div>
-                </li>
-                <li class="platform-item" style="flex-direction: column;">
-                    <div style="display:flex; gap:20px;">
-                        <img src="images/ClubGG.png" class="platform-logo">
-                        <div class="platform-info">
-                            <div class="platform-title">♠ ClubGG ♠</div>
-                            <a href="https://www.clubgg.com/" target="_blank" class="platform-link">下載連結</a>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-top:15px;">
-                        <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID：954109 / 推薦：4005-6868</div>
-                        <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID：619975 / 推薦：4005-6868</div>
-                        <div class="club-card"><strong>時光雞Time (1:27)</strong>ID：970779 / 推薦：4005-6868</div>
-                    </div>
-                </li>
-            </ul>
+            <li class="platform-item">
+                <img src="images/ipoker.jpg" class="platform-logo">
+                <div class="platform-info">
+                    <div class="platform-title" style="color:var(--neon-green); font-weight:bold;">♣ iPoker ♣</div>
+                    <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" style="color:white; text-decoration: underline;">下載連結</a>
+                    <div>推荐碼：NTDboss</div>
+                </div>
+            </li>
+            <li class="platform-item">
+                <img src="images/WPT.jpg" class="platform-logo">
+                <div class="platform-info">
+                    <div class="platform-title" style="color:var(--neon-green); font-weight:bold;">♦ WPT Global ♦</div>
+                    <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" style="color:white; text-decoration: underline;">下載連結</a>
+                    <div>推荐碼：A0A697</div>
+                </div>
+            </li>
+            <li class="platform-item" style="flex-direction: column;">
+                <div style="display:flex; gap:20px;">
+                    <img src="images/Xpoker.jpg" class="platform-logo">
+                    <div class="platform-title">♠ XPoker ♠</div>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-top:15px;">
+                    <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID：999306 / 推薦：3496108</div>
+                    <div class="club-card"><strong>泰好贏 TwXThai (1:1)</strong>ID：2421367 / 推薦：3583536</div>
+                    <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID：686175 / 推薦：3496108</div>
+                    <div class="club-card"><strong>花順 (1:1)</strong>ID：277186 / 推薦：3032889</div>
+                </div>
+            </li>
+            <li class="platform-item" style="flex-direction: column;">
+                <div style="display:flex; gap:20px;">
+                    <img src="images/ClubGG.png" class="platform-logo">
+                    <div class="platform-title">♠ ClubGG ♠</div>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-top:15px;">
+                    <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID：954109 / 推薦：4005-6868</div>
+                    <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID：619975 / 推薦：4005-6868</div>
+                    <div class="club-card"><strong>時光雞Time (1:27)</strong>ID：970779 / 推薦：4005-6868</div>
+                </div>
+            </li>
         </div>
     </div>
 
@@ -282,8 +230,8 @@
     <div class="content">
         <div class="content-inner">
             <p style="color:var(--gold); font-weight:bold;">不建議已有帳號重複申辦其他帳號</p>
-            <p><b>1. 已有綁定其他戰隊</b><br>所有平台無法申請轉戰隊，也不要重新註冊帳號；可以優先考慮其他合作平台。</p>
-            <p><b>2. 退水相關</b><br>XP 考核期間不退水。</p>
+            <p><b>1. 已有綁定其他戰隊</b>：無法申請轉戰隊，請聯繫負責人協助。</p>
+            <p><b>2. 退水相關</b>：XP 考核期間不退水。</p>
         </div>
     </div>
 
@@ -303,9 +251,9 @@
     <div class="content">
         <div class="content-inner">
             <ul>
-                <li>每週分享 3 手以上手牌至群組討論</li>
-                <li>手數：25000手 (急速桌50000手) / 線下錦標賽 20 場</li>
-                <li>積極度、活動貼文參與度</li>
+                <li>每週分享 3 手以上手牌</li>
+                <li>線上：25000手 (急速50000手) / 線下：20場錦標賽</li>
+                <li>積極度、活動參與度、回報戰績</li>
             </ul>
         </div>
     </div>
@@ -314,10 +262,10 @@
     <div class="content">
         <div class="content-inner">
             <div style="text-align:center; margin-bottom:20px;">
-                <img src="images/福利.webp" style="width:100%; max-width:900px; border-radius:12px; border: 1px solid var(--neon-green);">
+                <img src="images/福利.webp" style="width:100%; border-radius:12px; border: 1px solid var(--neon-green);">
             </div>
             <ul>
-                <li>資金支援、教學資源、比賽佔成、基地Pro金色布標</li>
+                <li>資金支援、教學資源、比賽佔成、外國好局、老闆贊助比賽、金色布標。</li>
             </ul>
         </div>
     </div>
@@ -325,16 +273,16 @@
     <button class="collapsible">♠♥◆♣ 牌手群現有福利 ♠♥◆♣</button>
     <div class="content">
         <div class="content-inner">
-            <p><b>大家的 HRC</b>：<a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank" style="color:var(--neon-green)">HRC 連結</a></p>
+            <p><b>大家的 HRC</b>：<a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank" style="color:var(--neon-green)">申請連結</a> (每人每天2個Spot)</p>
         </div>
     </div>
 
     <div class="footer">
         <h2 style="font-size:2em; color:var(--gold);">牌手基地保有最終解釋權</h2>
         <div style="display:flex; justify-content:center; align-items:center; gap:15px; margin-top:20px;">
-            <img src="uploaded:NTDboss.jpg" style="width:70px; border-radius: 50%; border: 2px solid var(--gold);">
-            <span>PROFESSIONAL POKER BASE</span>
-            <img src="uploaded:NTDboss.jpg" style="width:70px; border-radius: 50%; border: 2px solid var(--gold);">
+            <img src="images/NTDboss.jpg" style="width:70px; border-radius: 50%; border: 2px solid var(--gold);">
+            <span>專業・誠信・共贏</span>
+            <img src="images/NTDboss.jpg" style="width:70px; border-radius: 50%; border: 2px solid var(--gold);">
         </div>
     </div>
 </div>
