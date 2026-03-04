@@ -7,7 +7,7 @@
 
 <style>
     :root {
-        --neon-green: #39ff14;
+        --neon-green: #2bdc73;
         --poker-red: #ff3a3a;
         --gold: #f5c542;
     }
@@ -31,16 +31,22 @@
         filter: blur(5px);
     }
     
-    .top-left { top: 10%; left: 5%; color: var(--neon-green); animation: suitBlink 8s infinite 0s; }
-    .top-right { top: 10%; right: 5%; color: var(--poker-red); animation: suitBlink 8s infinite 2s; }
-    .bottom-left { bottom: 10%; left: 5%; color: var(--neon-green); animation: suitBlink 8s infinite 4s; }
-    .bottom-right { bottom: 10%; right: 5%; color: var(--poker-red); animation: suitBlink 8s infinite 6s; }
+    .top-left { top: 5%; left: 2%; color: var(--neon-green); animation: suitBlink 8s infinite 0s; }
+    .top-right { top: 5%; right: 2%; color: var(--poker-red); animation: suitBlink 8s infinite 2s; }
+    .bottom-left { bottom: 5%; left: 2%; color: var(--neon-green); animation: suitBlink 8s infinite 4s; }
+    .bottom-right { bottom: 5%; right: 2%; color: var(--poker-red); animation: suitBlink 8s infinite 6s; }
 
     @keyframes suitBlink {
-        0%, 100% { opacity: 0; transform: scale(0.9); }
-        25% { opacity: 0.15; transform: scale(1); filter: blur(0px) drop-shadow(0 0 20px currentColor); }
-        50% { opacity: 0; }
+    0%, 100% { opacity: 0; transform: scale(0.95); }
+    25% { 
+        opacity: 0.22;
+        transform: scale(1);
+        filter: blur(2px);
     }
+    50% { opacity: 0; }
+}
+    
+
 
     /* --- 2. 考核步驟流程化設計 --- */
     .step-list { display: flex; flex-direction: column; gap: 15px; }
@@ -56,7 +62,7 @@
     .step-arrow { text-align: center; color: var(--neon-green); font-size: 20px; margin: -5px 0; opacity: 0.5; }
 
     /* --- 3. 內容排版 --- */
-    .main-wrapper { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; }
+    .main-wrapper { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto;padding-bottom: 40px; }
 
     @media (min-width: 1024px) {
         body { font-size: 19px; }
@@ -72,12 +78,12 @@
     .collapsible {
         background: linear-gradient(90deg, #111827, #1a2a1f);
         color: var(--neon-green); cursor: pointer; padding: 20px;
-        width: 100%; border: 2px solid var(--neon-green); border-radius: 12px;
+        width: 100%; border: 1px solid rgba(57,255,20,0.35); border-radius: 12px;
         text-align: left; font-size: 18px; font-weight: bold; margin-top: 15px;
         display: flex; justify-content: space-between; align-items: center;
         transition: 0.3s;
     }
-    .collapsible:hover { box-shadow: 0 0 20px var(--neon-green); transform: scale(1.01); }
+    .collapsible:hover { box-shadow: 0 0 12px rgba(57,255,20,0.4); transform: scale(1.01); }
     .collapsible:after { content: '＋'; }
     .collapsible.active:after { content: '－'; }
 
@@ -118,6 +124,7 @@
 <div class="corner-suit bottom-right">♦</div>
 
 <div class="main-wrapper">
+    
     <div style="text-align:center; margin-bottom:10px;">
         <img src="images/base.png" style="max-width:280px; filter: drop-shadow(0 0 15px var(--neon-green));">
     </div>
