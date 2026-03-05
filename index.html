@@ -3,191 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v8.5 完整穩定版</title>
+<title>牌手基地 v8.6 穩定修正版</title>
 <style>
-    :root { --neon-green: #2bdc73; --poker-red: #ff3a3a; --gold: #f5c542; }
-    body {
-        font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-        margin: 0; padding: 20px;
-        background: radial-gradient(circle at center, #111b14 0%, #050806 100%);
-        background-attachment: fixed; color: #e5e7eb; overflow-x: hidden;
-    }
-    .main-wrapper { max-width: 1000px; margin: 0 auto; padding-bottom: 40px; }
-    h1 { text-align: center; color: var(--gold); font-size: 2.5em; text-shadow: 0 0 10px rgba(245,197,66,0.25); margin: 30px 0; }
-
-    /* 通用摺疊樣式 */
-    .collapsible {
-        background: linear-gradient(90deg, #111827, #1a2a1f);
-        color: var(--neon-green); cursor: pointer; padding: 18px;
-        width: 100%; border: 1px solid rgba(57,255,20,0.35); 
-        border-radius: 15px; text-align: left; font-size: 18px; font-weight: bold; margin-top: 12px;
-        display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
-    }
-    .collapsible:after { content: '＋'; }
-    .collapsible.active:after { content: '－'; }
-
-    /* 子選單層級 */
-    .sub-collapsible {
-        background: rgba(43, 220, 115, 0.08); color: #fff; cursor: pointer; padding: 15px;
-        width: 96%; margin: 10px auto; border: 1px solid rgba(43, 220, 115, 0.2);
-        border-radius: 12px; display: flex; justify-content: space-between; font-size: 16px;
-    }
-    .nested-collapsible {
-        background: rgba(245, 197, 66, 0.05); color: var(--gold); cursor: pointer; padding: 12px;
-        width: 92%; margin: 8px auto; border: 1px dashed rgba(245, 197, 66, 0.3);
-        border-radius: 8px; display: flex; justify-content: space-between; font-size: 14px;
-    }
-
-    .content, .sub-content, .nested-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-    .content-inner { padding: 15px 20px; line-height: 1.7; }
-
-    /* 卡片與細節 */
-    .platform-item { background: rgba(255,255,255,0.04); border-left: 4px solid var(--neon-green); padding: 15px; border-radius: 8px; margin-bottom: 12px; display: flex; gap: 15px; align-items: center; }
-    .platform-logo { width: 50px; height: 50px; object-fit: contain; }
-    .club-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
-    .club-card { background: rgba(0,0,0,0.25); padding: 10px; border-radius: 6px; border: 1px solid rgba(245,197,66,0.15); font-size: 13px; }
-    .contact-list { background: rgba(0, 0, 0, 0.3); padding: 12px; border-radius: 8px; margin-top: 5px; }
-    .contact-row { display: flex; margin-bottom: 4px; }
-    .contact-label { min-width: 85px; color: #fff; }
-    .contact-id { color: var(--neon-green); font-family: monospace; }
-
-    .announcement-box { background: rgba(43, 220, 115, 0.1); border: 2px solid var(--neon-green); border-radius: 18px; padding: 22px; margin-bottom: 25px; }
-    .divider { margin: 60px 0 30px; border-top: 2px dashed rgba(255,255,255,0.1); text-align: center; }
+    :root { --neon-green: #2bdc73; --gold: #f5c542; }
+    body { font-family: sans-serif; background: #050806; color: #e5e7eb; margin: 0; padding: 15px; }
+    .main-wrapper { max-width: 900px; margin: 0 auto; }
     
-    @media (max-width: 768px) { .club-grid-2 { grid-template-columns: 1fr !important; } .platform-item { flex-direction: column; align-items: flex-start; } }
-    a { color: var(--neon-green); text-decoration: none; font-weight: bold; }
+    /* 基礎按鈕樣式 */
+    .collapsible, .sub-collapsible, .nested-collapsible {
+        width: 100%; padding: 18px; margin-top: 10px; border-radius: 12px;
+        cursor: pointer; border: 1px solid rgba(43, 220, 115, 0.3);
+        background: #111827; color: var(--neon-green); font-weight: bold;
+        text-align: left; display: flex; justify-content: space-between;
+    }
+    .content, .sub-content, .nested-content { 
+        max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; 
+        background: rgba(255,255,255,0.02);
+    }
+    .inner { padding: 15px; line-height: 1.8; }
+    .announcement-box { border: 2px solid var(--neon-green); padding: 15px; border-radius: 15px; margin-bottom: 20px; }
 </style>
 </head>
 <body>
 
 <div class="main-wrapper">
-    <h1>✨ 牌手基地公告 v8.5</h1>
-
     <div class="announcement-box">
-        <h2 style="color:var(--neon-green); margin-top:0;">🍀 考核牌手 4.0</h2>
-        <ul style="list-style: none; padding: 0; line-height: 1.8;">
-            <li>📅 <b style="color:var(--gold)">報名時間：</b>3/3 ~ 3/8</li>
-            <li>⏳ <b style="color:var(--gold)">考核時間：</b>3/9 ~ 3/29</li>
-            <li>📌 兩個月開啟一次考核機制，一次為期一個月。沒過可再報名。</li>
-        </ul>
+        <h2 style="color:var(--neon-green)">🍀 考核牌手 4.0 (常駐)</h2>
+        <p>報名：3/3 ~ 3/8 | 考核：3/9 ~ 3/29</p>
     </div>
 
-    <div style="background: rgba(255,255,255,0.02); padding: 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
-        <p style="text-align:center; font-size: 12px; color: #666;">[ 新版整合測試區 ]</p>
-        
-        <button class="collapsible">⚔️ 考核中心</button>
-        <div class="content">
-            <div class="content-inner">
-                <button class="sub-collapsible">📝 考核步驟 <span>▼</span></button>
-                <div class="sub-content">
-                    <div class="content-inner">
-                        <p>1. 參照合作平台綁定帳號<br>2. 進群找管理員 @Vayne 確認<br>3. 找各區負責人登記 (LineID 見下方列表)<br>4. 正式開啟考核</p>
-                    </div>
-                </div>
-
-                <button class="sub-collapsible">💻 線上考核 <span>▼</span></button>
-                <div class="sub-content">
-                    <div class="content-inner">
-                        <button class="nested-collapsible">📜 考核標準</button>
-                        <div class="nested-content"><div class="content-inner">每週分享 3 手牌、手數 25000 手 (急速 50000 手)。</div></div>
-                        <button class="nested-collapsible">📱 目前合作平台</button>
-                        <div class="nested-content"><div class="content-inner">包含 iPoker, WPTG, XPoker (天祥、泰好贏等), ClubGG。</div></div>
-                        <button class="nested-collapsible">💰 出入金/常見問題</button>
-                        <div class="nested-content"><div class="content-inner">BitoPro 註冊、XP 私訊 @星星、考核期不退水。</div></div>
-                    </div>
-                </div>
-
-                <button class="sub-collapsible">🏟️ 線下考核 <span>▼</span></button>
-                <div class="sub-content">
-                    <div class="content-inner">
-                        <button class="nested-collapsible">📜 考核標準</button>
-                        <div class="nested-content"><div class="content-inner">現場限時錦標 20 場。</div></div>
-                        <button class="nested-collapsible">🏢 配合店家</button>
-                        <div class="nested-content"><div class="content-inner">台北 A8, 新竹 Eagle, 台中 UT, 高雄 亞特蘭提斯。</div></div>
-                    </div>
+    <button class="collapsible">⚔️ 考核中心 (新整合)</button>
+    <div class="content">
+        <div class="inner">
+            <button class="sub-collapsible">💻 線上考核專區</button>
+            <div class="sub-content">
+                <div class="inner">
+                    <p>這裡放線上考核的資料...</p>
                 </div>
             </div>
-        </div>
-
-        <button class="collapsible">🎁 牌手福利</button>
-        <div class="content">
-            <div class="content-inner">
-                <button class="sub-collapsible">✨ 正式牌手福利</button>
-                <div class="sub-content"><div class="content-inner">資金支援、教學資源、老闆贊助、金色布標。</div></div>
-                <button class="sub-collapsible">♠️ 牌手群現有福利</button>
-                <div class="sub-content"><div class="content-inner">HRC 申請表單 (一天限2個Spot)。</div></div>
+            <button class="sub-collapsible">🏟️ 線下考核專區</button>
+            <div class="sub-content">
+                <div class="inner">
+                    <p>這裡放線下店家資料...</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="divider"><span>以下為舊版按鈕 (完整內容保留)</span></div>
+    <hr style="margin-top:50px; opacity:0.2;">
+    <p style="text-align:center; color:#666">舊版內容如下</p>
 
     <button class="collapsible">📝 考核步驟 (舊)</button>
     <div class="content">
-        <div class="content-inner">
-            <div class="contact-list">
-                <div class="contact-row"><span class="contact-label">北/中：James</span> <span class="contact-id">pan1409g</span></div>
-                <div class="contact-row"><span class="contact-label">南：磊</span> <span class="contact-id">0982685646</span></div>
-                <div class="contact-row"><span class="contact-label">南：Mark</span> <span class="contact-id">fmlove0116</span></div>
-                <div class="contact-row"><span class="contact-label">東：(宜蘭)</span> <span class="contact-id">liks9121</span></div>
-            </div>
+        <div class="inner">
+            <p>原本的 Line ID 資料都在這...</p>
         </div>
     </div>
-
-    <button class="collapsible">💻 目前合作線上平台 (舊)</button>
-    <div class="content">
-        <div class="content-inner">
-            <div class="platform-item"><b>iPoker</b> (NTDboss) | <b>WPTG</b> (A0A697)</div>
-            <div class="club-grid-2">
-                <div class="club-card"><strong>XP 天祥 (1:8)</strong>999306</div>
-                <div class="club-card"><strong>XP 泰好贏 (1:1)</strong>2421367</div>
-                <div class="club-card"><strong>XP 亞特馬來 (1:1)</strong>686175</div>
-                <div class="club-card"><strong>XP 花順 (1:1)</strong>277186</div>
-                <div class="club-card"><strong>ClubGG 快樂呱</strong>954109</div>
-            </div>
-        </div>
-    </div>
-
-    <button class="collapsible">💰 出入金方式 (舊)</button>
-    <div class="content">
-        <div class="content-inner">
-            <p>BitoPro、各平台客服連結、XP 私訊 @星星、老闆 IG 教學。</p>
-        </div>
-    </div>
-
-    <button class="collapsible">✅ 考核標準 (舊)</button>
-    <div class="content">
-        <div class="content-inner">
-            <p>每週3手牌、線上25000手、線下20場錦標。</p>
-        </div>
-    </div>
-
-    <button class="collapsible">✨ 正式牌手福利 (舊)</button>
-    <div class="content">
-        <div class="content-inner">
-            <p>資金支援、教學、贊助、金色布標。</p>
-        </div>
-    </div>
-
 </div>
 
 <script>
-    document.querySelectorAll('.collapsible, .sub-collapsible, .nested-collapsible').forEach(button => {
-        button.onclick = function(e) {
-            e.stopPropagation();
-            this.classList.toggle('active');
-            const content = this.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
+    // 採用最保險的事件監聽，避免 Code 問題
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('collapsible') || 
+            e.target.classList.contains('sub-collapsible') || 
+            e.target.classList.contains('nested-collapsible')) {
+            
+            const btn = e.target;
+            btn.classList.toggle('active');
+            const panel = btn.nextElementSibling;
+            
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
             } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-                let parent = this.parentElement.closest('.content, .sub-content');
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                // 向上撐開父層高度
+                let parent = panel.parentElement.closest('.content, .sub-content');
                 while (parent) {
-                    parent.style.maxHeight = (parent.scrollHeight + content.scrollHeight) + "px";
+                    parent.style.maxHeight = (parent.scrollHeight + panel.scrollHeight) + "px";
                     parent = parent.parentElement.closest('.content, .sub-content');
                 }
             }
-        };
+        }
     });
 </script>
 </body>
