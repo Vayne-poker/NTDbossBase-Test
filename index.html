@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v5.5 Poker Base Dashboard</title>
+<title>牌手基地公告 | v5.6 Poker Base Dashboard</title>
 
 <style>
     :root {
@@ -37,10 +37,10 @@
     .bottom-right { bottom: 1%; right: 2%; color: var(--poker-red); animation: suitBlink 8s infinite 6s; }
 
     @keyframes suitBlink {
-        0%, 100% { opacity: 0.08; transform: scale(0.97); }
-        25% { opacity: 0.30; transform: scale(1); filter: blur(3px); }
-        50% { opacity: 0.08; }
+    0%,100% { opacity: 0.12; }
+    50% { opacity: 0.22; }
     }
+    
 
     /* --- 2. 內容排版與圓角矩形設計 --- */
     .main-wrapper { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; padding-bottom: 40px; }
@@ -60,7 +60,16 @@
         gap: 10px;
     }
     
-    .platform-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+.platform-item {
+    background: rgba(255,255,255,0.04);
+    border-left: 4px solid rgba(57,255,20,0.4);
+    transition: 0.3s ease;
+}
+
+.platform-item:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-3px);
+}
     .platform-logo { width: 60px; height: 60px; }
     
     .collapsible { padding: 15px; font-size: 17px; }
@@ -75,7 +84,8 @@
 
     h1 {
         text-align: center; color: var(--gold); font-size: 2.8em;
-        text-shadow: 0 0 20px rgba(245,197,66,0.6); margin: 30px 0;
+        text-shadow: 0 0 10px rgba(245,197,66,0.25);
+        letter-spacing: 1px;
     }
 
     .collapsible {
@@ -109,8 +119,14 @@
     .platform-logo { width: 85px; height: 85px; object-fit: contain; background: #000; padding: 8px; border-radius: 10px; }
     
     .club-card { 
-        background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; 
-        border: 1px solid rgba(245,197,66,0.3); margin-top: 10px; 
+        background: rgba(255,255,255,0.03); 
+        padding: 15px; 
+        border-radius: 8px; 
+        border: 1px solid rgba(245,197,66,0.3); 
+        margin-top: 10px;
+
+        line-height: 1.9;
+        letter-spacing: 0.5px;
     }
     .club-card strong { color: var(--gold); display: block; margin-bottom: 5px; }
 
@@ -130,7 +146,7 @@
 
     .step-list { display: flex; flex-direction: column; gap: 15px; }
     .step-box {
-        background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.3);
+        background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57,255,20,0.2);
         padding: 15px 20px; border-radius: 8px; position: relative;
         border-left: 6px solid var(--neon-green);
     }
