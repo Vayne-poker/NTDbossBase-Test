@@ -45,11 +45,33 @@
     /* --- 2. 內容排版與圓角矩形設計 --- */
     .main-wrapper { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; padding-bottom: 40px; }
 
-    @media (min-width: 1024px) {
-        body { font-size: 19px; }
-        h1 { font-size: 3.5em !important; }
-        .collapsible { font-size: 22px !important; }
+    @media (max-width: 768px) {
+    body { padding: 10px; }
+    h1 { font-size: 2.2em !important; }
+    
+    /* 負責人對齊優化：不再死守寬度 */
+    .contact-label { min-width: 65px; font-size: 15px; }
+    .contact-id { font-size: 14px; word-break: break-all; }
+    .contact-list { padding: 12px; }
+
+    /* Grid 強制換行：解決手機看卡片很醜的問題 */
+    .club-grid-2, .club-grid-3 {
+        grid-template-columns: 1fr !important; /* 手機上一律一列一個 */
+        gap: 10px;
     }
+    
+    .platform-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .platform-logo { width: 60px; height: 60px; }
+    
+    .collapsible { padding: 15px; font-size: 17px; }
+}
+
+/* 確保大螢幕維持原樣 */
+@media (min-width: 1024px) {
+    body { font-size: 19px; }
+    h1 { font-size: 3.5em !important; }
+    .collapsible { font-size: 22px !important; }
+}
 
     h1 {
         text-align: center; color: var(--gold); font-size: 2.8em;
