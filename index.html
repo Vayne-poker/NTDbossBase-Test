@@ -3,9 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v8.8-FORCE (強制更新版)</title>
+<title>牌手基地公告 | v9.0 終極穩定版</title>
+<style>
+    :root { --neon-green: #2bdc73; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #050806; }
+    body { font-family: "PingFang TC", sans-serif; background: var(--bg-dark); color: #e5e7eb; margin: 0; padding: 15px; }
+    .main-wrapper { max-width: 900px; margin: 0 auto; padding-bottom: 60px; }
+    
+    /* --- 1. 考核 4.0 常駐顯示區 (不折疊) --- */
+    .hero-box {
+        border: 2px solid var(--neon-green);
+        background: rgba(43, 220, 115, 0.05);
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 20px rgba(43, 220, 115, 0.15);
+    }
+    .hero-title { color: var(--neon-green); font-size: 24px; font-weight: bold; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; }
+    .hero-content { line-height: 1.8; font-size: 16px; }
+
+    /* --- 2. 摺疊按鈕通用樣式 --- */
+    .collapsible, .sub-btn, .nested-btn {
+        width: 100%; padding: 18px; margin-top: 12px; border-radius: 12px; cursor: pointer;
+        display: flex; justify-content: space-between; align-items: center; font-weight: bold; transition: 0.3s;
+    }
+    /* 第一層：主按鈕 */
+    .collapsible { background: linear-gradient(90deg, #111827, #1a2a1f); border: 1px solid var(--neon-green); color: var(--neon-green); font-size: 18px; }
+    /* 第二層：子按鈕 */
+    .sub-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; width: 96%; margin-left: auto; margin-right: auto; }
+    /* 第三層：子子按鈕 */
+    .nested-btn { background: rgba(245, 197, 66, 0.05); border: 1px dashed var(--gold); color: var(--gold); width: 92%; margin-left: auto; margin-right: auto; font-size: 14px; }
+
+    .content, .sub-content, .nested-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .inner { padding: 15px 5%; line-height: 1.7; }
+    
+    /* 資料卡片 */
+    .data-card { background: rgba(255,255,255,0.03); border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid var(--neon-green); }
+    .highlight { color: var(--neon-green); font-family: monospace; }
+</style>
 </head>
 <body>
-    <h1 style="background: red; color: white; padding: 10px;">如果看到這行，代表更新成功了！</h1>
-    </body>
+
+<div class="main-wrapper">
+    <h1 style="text-align:center; color:var(--gold); font-size: 2.2em; margin: 30px 0;">✨ 牌手基地公告 v9.0</h1>
+
+    <div class="hero-box">
+        <div class="hero-title">🍀 考核牌手 4.0</div>
+        <div class="hero-content">
+            <b>📅 報名時間：</b><span style="color:var(--gold)">3/3 ~ 3/8</span><br>
+            <b>⏳ 考核時間：</b><span style="color:var(--gold)">3/9 ~ 3/29</span><br>
+            <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.8;">※ 兩個月開啟一次考核機制，為期一個月。若未通過可等下次報名。</p>
+        </div>
+    </div>
+
+    <button class="collapsible">⚔️ 考核中心</button>
+    <div class="content">
+        <div class="inner">
+            <button class="sub-btn">📝 考核步驟</button>
+            <div class="sub-content">
+                <div class="inner">1. 綁定帳號 > 2. 進群確認 > 3. 找負責人登記 > 4. 開始考核。</div>
+            </div>
+
+            <button class="sub-btn">💻 線上考核</button>
+            <div class="sub-content">
+                <div class="inner">
+                    <button class="nested-btn">📜 考核標準</button>
+                    <div class="nested-content"><div class="inner">每週分享3手牌、25000手起。</div></div>
+
+                    <button class="nested-btn">📱 目前合作平台</button>
+                    <div class="nested-content">
+                        <div class="inner">
+                            <div class="data-card"><b>XP 天祥 (1:8)</b> ID: <span class="highlight">999306</span></div>
+                            <div class="data-card"><b>XP 泰好贏 (1:1)</b> ID: <span class="highlight">2421367</span></div>
+                            <div class="data-card"><b>ClubGG 快樂呱</b> ID: <span class="highlight">954109</span></div>
+                        </div>
+                    </div>
+
+                    <button class="nested-btn">💰 出入金方式</button>
+                    <div class="nested-content"><div class="inner">BitoPro 註冊、XP 私訊 @星星。</div></div>
+
+                    <button class="nested-btn">❓ 常見問題 (線上)</button>
+                    <div class="nested-content"><div class="inner">考核期不退水、手數計算說明等。</div></div>
+                </div>
+            </div>
+
+            <button class="sub-btn">🏟️ 線下考核</button>
+            <div class="sub-content">
+                <div class="inner">
+                    <button class="nested-btn">📜 考核標準</button>
+                    <div class="nested-content"><div class="inner">現場限時錦標 20 場。</div></div>
+                    <button class="nested-btn">🏢 配合店家</button>
+                    <div class="nested-content"><div class="inner">A8, Eagle, UT, 亞特蘭提斯。</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="collapsible">🎁 牌手福利</button>
+    <div class="content">
+        <div class="inner">
+            <button class="sub-btn">✨ 正式牌手福利</button>
+            <div class="sub-content"><div class="inner">資金支援、金色布標、老闆贊助。</div></div>
+            <button class="sub-btn">♠️ 牌手群現有福利</button>
+            <div class="sub-content"><div class="inner">HRC 申請、教學資源。</div></div>
+        </div>
+    </div>
+
+    <div style="margin-top:60px; text-align:center; opacity:0.3; font-size:12px;">
+        <hr> [ 舊版資料保留於代碼下方 ]
+    </div>
+</div>
+
+<script>
+    // 萬能摺疊邏輯：支援無限層級撐開
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('button');
+        if (!btn || (!btn.classList.contains('collapsible') && !btn.classList.contains('sub-btn') && !btn.classList.contains('nested-btn'))) return;
+
+        btn.classList.toggle('active');
+        const panel = btn.nextElementSibling;
+        
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            // 關鍵：遞迴撐開所有父層
+            let parent = panel.parentElement.closest('.content, .sub-content');
+            while (parent) {
+                parent.style.maxHeight = (parent.scrollHeight + panel.scrollHeight) + "px";
+                parent = parent.parentElement.closest('.content, .sub-content');
+            }
+        }
+    });
+</script>
+</body>
 </html>
