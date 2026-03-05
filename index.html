@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v6.0 Poker Base Dashboard</title>
+<title>牌手基地公告 | v7.0 Poker Base Dashboard</title>
 
 <style>
     :root {
@@ -199,6 +199,29 @@
     font-family: monospace; /* 等寬字體讓 ID 更易讀 */
     color: var(--neon-green);
 }}
+.sub-collapsible {
+    background: rgba(43, 220, 115, 0.1);
+    color: #fff;
+    cursor: pointer;
+    padding: 15px;
+    width: 95%; /* 稍微縮進 */
+    margin: 10px auto;
+    border: 1px solid rgba(43, 220, 115, 0.2);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.sub-collapsible:hover {
+    background: rgba(43, 220, 115, 0.2);
+}
+.sub-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-left: 20px; /* 內容也縮進，視覺更清楚 */
+}
 </style>
 
 <body>
@@ -209,11 +232,80 @@
 <div class="corner-suit bottom-right">♦</div>
 
 <div class="main-wrapper">
+    <div class="announcement-box">
+        <h2>🍀 考核牌手 4.0</h2>
+        <ul style="list-style: none; padding: 0; line-height: 2;">
+            <li>📅 <b style="color:var(--gold)">報名時間：</b>3/3 ~ 3/8</li>
+            <li>⏳ <b style="color:var(--gold)">考核時間：</b>3/9 ~ 3/29</li>
+            <li>📌 兩個月開啟一次考核機制，一次為期一個月。</li>
+            <li>💡 考核沒過依然可報名往後梯次。</li>
+        </ul>
+    </div>
     
-    <div style="text-align:center; margin-bottom:10px;">
-        <img src="images/base.png" style="max-width:280px; filter: drop-shadow(0 0 15px var(--neon-green));">
+<button class="collapsible">⚔️ 考核中心</button>
+    <div class="content">
+        <div class="content-inner">
+            
+            <button class="sub-collapsible">📝 考核步驟</button>
+            <div class="sub-content">
+                <div class="content-inner">
+                    <div class="step-box"><b>01.</b> 參照合作平台綁定帳號</div>
+                    <div class="step-box"><b>02.</b> <a href="https://line.me/ti/g/DwTLUjG4qS">進群</a>找管理員 @Vayne 確認綁定</div>
+                    <div class="step-box"><b>03.</b> 找該區負責人登記 (見下方 FAQ 或聯絡)</div>
+                    <div class="step-box"><b>04.</b> 開啟考核</div>
+                </div>
+            </div>
+
+            <button class="sub-collapsible">💻 線上考核</button>
+            <div class="sub-content">
+                <div class="content-inner">
+                    <button class="nested-collapsible">📜 考核標準 <span>▼</span></button>
+                    <div class="nested-content"><div class="content-inner">每週分享 3 手牌、手數 25000 手 (急速 50000 手)。</div></div>
+
+                    <button class="nested-collapsible">📱 目前合作平台 <span>▼</span></button>
+                    <div class="nested-content">
+                        <div class="content-inner">
+                            <div class="platform-item"><b>iPoker</b> (NTDboss)</div>
+                            <div class="platform-item"><b>WPTG</b> (A0A697)</div>
+                            <div class="club-grid-2">
+                                <div class="club-card">XPoker 天祥雙子</div>
+                                <div class="club-card">XPoker 泰好贏</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="nested-collapsible">💰 出入金方式 <span>▼</span></button>
+                    <div class="nested-content"><div class="content-inner">BitoPro 註冊、各平台客服連結。</div></div>
+
+                    <button class="nested-collapsible">❓ 常見問題 <span>▼</span></button>
+                    <div class="nested-content"><div class="content-inner">已有帳號重複申辦、退水相關說明。</div></div>
+                </div>
+            </div>
+
+            <button class="sub-collapsible">🏟️ 線下考核</button>
+            <div class="sub-content">
+                <div class="content-inner">
+                    <button class="nested-collapsible">📜 考核標準 <span>▼</span></button>
+                    <div class="nested-content"><div class="content-inner">現場限時錦標 20 場、拍碼單交給負責人。</div></div>
+                    <button class="nested-collapsible">🏢 配合店家 <span>▼</span></button>
+                    <div class="nested-content"><div class="content-inner">台北 A8, 新竹 Eagle, 台中 UT/Elite, 高雄 亞特蘭提斯。</div></div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
+    <button class="collapsible">🎁 牌手福利</button>
+    <div class="content">
+        <div class="content-inner">
+            <button class="sub-collapsible">✨ 正式牌手福利</button>
+            <div class="sub-content"><div class="content-inner">資金支援、教學資源、老闆全額贊助、Pro 金色布標。</div></div>
+            <button class="sub-collapsible">♠️ 牌手群現有福利</button>
+            <div class="sub-content"><div class="content-inner">大家的 HRC 申請表單 (一天限2個Spot)。</div></div>
+        </div>
+    </div>
+</div>
+    
     <h1>✨『牌手基地考核新制度』啟動</h1>
 
     <button class="collapsible">🍀 考核牌手 4.0</button>
@@ -228,6 +320,23 @@
             </ul>
         </div>
     </div>
+    
+<button class="collapsible">🎯 牌手考核計畫 (含福利)</button>
+<div class="content">
+    <div class="content-inner">
+        <div class="sub-collapsible">💻 線上考核指南 <span>＋</span></div>
+        <div class="sub-content">
+            <div class="step-box">...原本的步驟 01~04...</div>
+            <p>※ 合作平台與出入金請見下方選單</p>
+        </div>
+
+        <div class="sub-collapsible">🏟️ 線下實戰考核 <span>＋</span></div>
+        <div class="sub-content">
+            <p><b>配合店家：</b>台北 A8、新竹 Eagle...</p>
+            <p><b>考核標準：</b>20場現場錦標、拍碼單回報...</p>
+        </div>
+    </div>
+</div>
 
 <button class="collapsible">📝 考核步驟</button>
 <div class="content">
@@ -393,11 +502,22 @@
 </div>
 
 <script>
-    document.querySelectorAll('.collapsible').forEach(button => {
-        button.onclick = function() {
+    document.querySelectorAll('.collapsible, .sub-collapsible').forEach(button => {
+        button.onclick = function(e) {
+            e.stopPropagation(); // 防止點擊子按鈕時觸發父選單關閉
             this.classList.toggle('active');
             const content = this.nextElementSibling;
-            content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
+        
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                // 如果是子按鈕，要順便撐開父層的高度
+                if (this.classList.contains('sub-collapsible')) {
+                    const parentContent = this.closest('.content');
+                    parentContent.style.maxHeight = (parentContent.scrollHeight + content.scrollHeight) + "px";
+                }
+            }
         };
     });
 </script>
