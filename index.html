@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v32.12 </title>
+<title>牌手基地公告 | v32.13 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -83,7 +83,13 @@
     .store-grid { grid-template-columns: 1fr; }}
     
     .region-box{ margin-top:10px; background:#020617; padding:12px; border-radius:8px; }
-    .region-row{ display:grid; grid-template-columns:110px 140px 1fr; padding:6px 0; align-items:center; }
+    /* 電腦版保持三欄，比例優化 */
+    .region-row {display: grid;grid-template-columns: 80px 100px 1fr; /* 縮小前兩欄寬度，把空間留給 ID */padding: 8px 0;align-items: center;border-bottom: 1px solid rgba(255, 255, 255, 0.05);}
+    /* 📱 手機版 (寬度小於 600px) 自動變兩層 */
+    @media (max-width: 600px) {
+    .region-row {grid-template-columns: 80px 1fr; /* 地區跟名字一列 */gap: 5px;padding: 12px 0;}
+    .region-line { grid-column: 1 / -1; /* Line ID 自己佔據下面整行 */color: var(--neon-green);background: rgba(0, 255, 136, 0.05);padding: 4px 8px;border-radius: 4px;font-size: 14px;margin-top: 4px;}
+    }    
     .region-area{ color:#9ca3af; }
     .region-name{ color:#e5e7eb; font-weight:600; }
     .region-line{ color:#93c5fd; }
