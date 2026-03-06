@@ -123,7 +123,7 @@ h1{ text-align:center; color:var(--gold); font-size:2.8em; text-shadow:0 0 10px 
         </div>
     </div>
 
-    <button class="collapsible">🎁 牌手福利</button>
+<button class="collapsible">🎁 牌手福利</button>
     <div class="content">
         <div class="content-inner">
             <button class="sub-btn">✨ 正式牌手福利</button>
@@ -132,43 +132,42 @@ h1{ text-align:center; color:var(--gold); font-size:2.8em; text-shadow:0 0 10px 
                     <div class="club-card" style="border-left: 5px solid var(--gold);">
                         <strong style="font-size:1.2em;">💎 專屬支持：</strong>
                         <ul>
-                            <li><b>資金支援：</b>提供考核通過牌手升級資金，減輕壓力。</li>
-                            <li><b>金色布標：</b>獲得戰隊專屬金色實體布標，象徵榮耀。</li>
-                            <li><b>贊助計畫：</b>戰隊贊助線下賽事門票及相關差旅補助。</li>
-                            <li><b>教學資源：</b>解鎖進階 GTO 策略課程與一對一覆盤。</li>
+                            <li><b>資金支援：</b>提供考核通過牌手升級資金。</li>
+                            <li><b>金色布標：</b>獲得戰隊專屬金色實體布標。</li>
                         </ul>
                     </div>
                 </div>
             </div>
-
             <button class="sub-btn">♠️ 牌手群現有福利</button>
             <div class="sub-content">
                 <div class="content-inner">
-                    <div class="club-card">
-                        <strong>📊 HRC 申請規則：</strong>
-                        <p>為提升群內技術討論品質，提供 HRC 遠端代跑服務：</p>
-                        <ul>
-                            <li>一天限制最多 <span style="color:var(--poker-red)">2 個 Spot</span>。</li>
-                            <li>申請者需完整提供牌局歷史 (HH) 與相關變數。</li>
-                            <li>需於群內公開分享跑出來的結果，促進交流。</li>
-                        </ul>
-                    </div>
-                    <div class="club-card" style="margin-top:15px;">
-                        <strong>📚 現有資源：</strong>
-                        <p>群記事本內含：基礎培訓講義、常見反擊策略、各平台出入金詳細教學。</p>
-                    </div>
+                    <div class="club-card"><strong>📊 HRC 申請：</strong>一天限 2 個 Spot。</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div style="text-align:center; margin-top:80px; padding-top:40px; border-top:1px solid #1f2937;">
-        <img src="images/footer-logo.png" class="footer-logo" alt="Logo"><br>
-        <span style="font-size:2em; color:var(--gold); font-weight:bold;">牌手基地</span>
-    </div>
-</div>
+    <div class="footer">
+        <div class="footer-title">牌手基地</div>
+        
+        <div class="footer-flex">
+            <img src="images/footer-logo.png" class="footer-logo" alt="Base Logo">
+        </div>
 
-<script>
+        <div style="margin-top:40px; text-align:left;">
+            <pre>
+[ 聲明 ]
+本基地保留對所有考核規則、
+福利發放及牌手資格之最終解釋權。
+            </pre>
+        </div>
+
+        <p style="margin-top:30px; opacity:0.5; font-size:14px;">
+            © 2026 Poker Base. All Rights Reserved.
+        </p>
+    </div>
+</div> <script>
+    // 確保摺疊邏輯正常，不影響底部顯示
     document.addEventListener('click', function(e) {
         const btn = e.target.closest('button');
         if (!btn || !btn.matches('.collapsible, .sub-btn, .nested-btn')) return;
