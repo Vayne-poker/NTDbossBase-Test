@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v18.0 完整原稿版</title>
+<title>牌手基地公告 | v18.0 終極完整版</title>
 
 <style>
     :root { 
@@ -20,7 +20,7 @@
         color: #d1d5db; line-height: 1.6;
     }
 
-    /* --- ✨ 四花色呼吸燈背景 --- */
+    /* --- ✨ V18 靈魂：四花色呼吸燈背景 --- */
     .suit-bg { position: fixed; font-size: 20vw; opacity: 0.05; z-index: -1; pointer-events: none; }
     .s-tl { top: 5%; left: 5%; color: var(--neon-green); animation: breathe 6s infinite ease-in-out; }
     .s-tr { top: 5%; right: 5%; color: var(--poker-red); animation: breathe 6s infinite ease-in-out 1.5s; }
@@ -59,7 +59,20 @@
     }
     .content-inner { padding: 20px; }
 
-    /* --- 平台樣式統一 --- */
+    /* --- 🔑 FAQ 字卡摺疊美工 --- */
+    .faq-card {
+        background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px; margin-bottom: 10px; overflow: hidden;
+    }
+    .faq-header {
+        background: none; border: none; width: 100%; text-align: left;
+        padding: 14px 18px; cursor: pointer; color: var(--gold);
+        font-size: 1.05rem; font-weight: bold; display: flex; justify-content: space-between;
+    }
+    .faq-ans { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-text { padding: 0 18px 14px 18px; color: #d1d5db; line-height: 1.6; }
+
+    /* --- 平台樣式 --- */
     .platform-item {
         display: flex; gap: 20px; background: rgba(255,255,255,0.05); border-left: 4px solid var(--neon-green);
         border-radius: 10px; padding: 18px; margin-bottom: 18px; align-items: center;
@@ -105,7 +118,6 @@
     <button class="collapsible">⚔️ 考核中心</button>
     <div class="content">
         <div class="content-inner">
-            
             <button class="sub-btn">📝 考核步驟</button>
             <div class="sub-content">
                 <div class="content-inner">
@@ -125,17 +137,7 @@
             <div class="sub-content">
                 <div class="content-inner">
                     <button class="nested-btn">📜 考核標準</button>
-                    <div class="nested-content">
-                        <div class="content-inner">
-                            <ul>
-                                <li>每週分享 3 手以上手牌至群組</li>
-                                <li>與其他牌手討論手牌</li>
-                                <li>線上：手數超過 25000 手 / 急速桌 50000 手</li>
-                                <li>線上：每日 session 結束後，於記事本回報當日戰績</li>
-                                <li>積極度、活動、貼文參與度、牌手規劃會談（該區負責人）</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="nested-content"><div class="content-inner"><ul><li>每週分享 3 手以上手牌至群組</li><li>與其他牌手討論手牌</li><li>線上：手數超過 25000 手 / 急速桌 50000 手</li><li>線上：每日 session 結束後，於記事本回報當日戰績</li><li>積極度、活動、貼文參與度、牌手規劃會談（該區負責人）</li></ul></div></div>
 
                     <button class="nested-btn">📱 目前合作平台</button>
                     <div class="nested-content">
@@ -144,55 +146,25 @@
                             <div class="platform-item"><img src="images/WPT.jpg" class="platform-logo"><div><div class="platform-title">♦ WPT Global ♦</div><a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a><br>推薦碼：A0A697</div></div>
                             <div class="platform-item"><img src="images/N8.jpg" class="platform-logo"><div><div class="platform-title">♠ Natural8 ♠</div><a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
                             <div class="platform-item"><img src="images/QQ.jpg" class="platform-logo"><div><div class="platform-title">♠ QQ Poker ♠</div><a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>推薦碼：MGA852</div></div>
-
-                            <div class="platform-item">
-                                <img src="images/Xpoker.jpg" class="platform-logo">
-                                <div style="flex:1;">
-                                    <div class="platform-title">♠ XPoker</div>
-                                    <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a>
-                                    <div style="margin-top:10px; display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                                        <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
-                                        <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div>
-                                        <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div>
-                                        <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="platform-item">
-                                <img src="images/ClubGG.png" class="platform-logo">
-                                <div style="flex:1;">
-                                    <div class="platform-title">♠️ ClubGG ♠️</div>
-                                    <a href="https://www.clubgg.com/" target="_blank" class="platform-link">下載連結</a>
-                                    <div style="margin-top:10px;">
-                                        <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
-                                        <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div>
-                                        <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="platform-item"><img src="images/Xpoker.jpg" class="platform-logo"><div><div class="platform-title">♠ XPoker</div><div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;"><div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306</div><div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367</div></div></div></div>
                         </div>
                     </div>
 
                     <button class="nested-btn">💰 出入金方式</button>
-                    <div class="nested-content">
-                        <div class="content-inner">
-                            <ul>
-                                <li>Ipoker 出入金：<a href="https://lin.ee/oTJ3B7Y" target="_blank">連結</a></li>
-                                <li>WPTG 出入金：<a href="https://line.me/R/ti/p/@540ouqui" target="_blank">連結</a></li>
-                                <li>正規出入金：<a href="https://www.bitopro.com/users/sign_up?referrer=2500555974" target="_blank">連結</a><br>老闆親自教學：<a href="https://www.instagram.com/reel/DGVOYR2T7O9/?igsh=MThtNm9mdWEwYmxiag==" target="_blank">連結</a></li>
-                                <li>XP：<a href="https://line.me/ti/g/DwTLUjG4qS" target="_blank">進群</a>後私訊 @星星</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="nested-content"><div class="content-inner"><ul><li>Ipoker 出入金：<a href="https://lin.ee/oTJ3B7Y" target="_blank">連結</a></li><li>WPTG 出入金：<a href="https://line.me/R/ti/p/@540ouqui" target="_blank">連結</a></li><li>正規出入金：<a href="https://www.bitopro.com/users/sign_up?referrer=2500555974" target="_blank">連結</a><br>老闆親自教學：<a href="https://www.instagram.com/reel/DGVOYR2T7O9/" target="_blank">連結</a></li></ul></div></div>
 
                     <button class="nested-btn">❓ 常見問題</button>
                     <div class="nested-content">
                         <div class="content-inner">
-                            <p style="color: #ffaa00;">⚠️ 不建議已有帳號重複申辦其他帳號</p>
-                            <div class="club-card"><strong>1. 已有綁定其他戰隊</strong>所有平台無法申請轉戰隊，不要重新註冊帳號；可以優先考慮其他合作平台，或聯繫各區負責人協助。</div>
-                            <div class="club-card"><strong>2. 未綁定其他戰隊，但已註冊過帳號</strong>請私訊客服，看是否能協助加入戰隊。</div>
-                            <div class="club-card"><strong>3. 退水相關</strong>XP 考核期間不退水。</div>
+                            <p style="color: #ffaa00; font-weight: bold; margin-bottom: 10px;">⚠️ 不建議已有帳號重複申辦其他帳號</p>
+                            <div class="faq-card">
+                                <button class="faq-header">1. 已有綁定其他戰隊 <span>＋</span></button>
+                                <div class="faq-ans"><div class="faq-text">所有平台無法申請轉戰隊，不要重新註冊帳號；可以優先考慮其他合作平台。</div></div>
+                            </div>
+                            <div class="faq-card">
+                                <button class="faq-header">2. 未綁定其他戰隊，但已註冊 <span>＋</span></button>
+                                <div class="faq-ans"><div class="faq-text">請私訊客服，看是否能協助加入戰隊。</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -202,28 +174,9 @@
             <div class="sub-content">
                 <div class="content-inner">
                     <button class="nested-btn">📜 考核標準</button>
-                    <div class="nested-content">
-                        <div class="content-inner">
-                            <ul>
-                                <li><b>線下：現場限時錦標（20 場，配合店家）</b></li>
-                                <li>各縣市提供 3–5 場指定場次</li>
-                                <li>指定場次需與當地負責人或指定正式牌手對戰</li>
-                                <li>線下：上桌報買入，下桌拍碼單，交給各自所屬負責人</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="nested-content"><div class="content-inner"><ul><li><b>線下：現場限時錦標（20 場，配合店家）</b></li><li>指定場次需與當地負責人或指定正式牌手對戰</li></ul></div></div>
                     <button class="nested-btn">🤝 配合店家</button>
-                    <div class="nested-content">
-                        <div class="content-inner">
-                            <ul>
-                                <li>台北: A8,Dream Room,三重ABC</li>
-                                <li>新竹: Eagle</li>
-                                <li>台中: UT,IPC,Elite,CityPoker,CheckRaise</li>
-                                <li>高雄: 亞特蘭提斯,Eagle</li>
-                                <li>其他店家陸續在接洽中</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="nested-content"><div class="content-inner"><ul><li>台北: A8, Dream Room, 三重ABC</li><li>台中: UT, IPC, Elite, CityPoker</li></ul></div></div>
                 </div>
             </div>
         </div>
@@ -238,11 +191,11 @@
                     <img src="images/福利.webp" style="width:100%; border-radius:12px; margin-bottom:15px;">
                     <ul>
                         <li>提供資金支援、教學資源</li>
-                        <li>比賽佔成（@welson 面談）</li>
-                        <li>外國好局資源（@1+ 詢問）</li>
+                        <li>比賽佔成（<b>@welson</b> 面談）</li>
+                        <li>外國好局資源（<b>@1+</b> 詢問）</li>
                         <li>專屬線上活動、線下不定期聚會</li>
-                        <li>贊助比賽：老闆挑選高 CP 值比賽，全額贊助費用。</li>
-                        <li>『基地Pro金色布標』資格：正式牌手資格標誌。</li>
+                        <li><b>贊助比賽</b>：老闆挑選高 CP 值比賽，全額贊助費用。</li>
+                        <li><b>『基地Pro金色布標』資格</b>：正式牌手資格標誌。</li>
                     </ul>
                 </div>
             </div>
@@ -261,14 +214,7 @@
     <button class="collapsible">⚠️ 正式牌手檢驗</button>
     <div class="content">
         <div class="content-inner">
-            <p>
-                正式牌手通過後，仍然有機會被拔除資格。<br>
-                但凡在下一次考核開始之前<br>
-                有任何損毀、破壞基地名譽且不和諧舉動<br>
-                積極度下降幾乎為0<br>
-                例如線上、現場比賽、限時錦標…等<br>
-                無持續進行，將會被約談並有機會移除資格。
-            </p>
+            <p>正式牌手通過後，仍然有機會被拔除資格。但凡在下一次考核開始之前，有任何損毀、破壞基地名譽且不和諧舉動、積極度下降幾乎為0（例如線上、現場、限時錦標無持續進行），將會被約談並有機會移除資格。</p>
         </div>
     </div>
 
@@ -284,18 +230,23 @@
 
 <script>
     document.addEventListener('click', function(e) {
-        const btn = e.target.closest('.collapsible, .sub-btn, .nested-btn');
+        const btn = e.target.closest('.collapsible, .sub-btn, .nested-btn, .faq-header');
         if (!btn) return;
         btn.classList.toggle('active');
         const panel = btn.nextElementSibling;
+        const span = btn.querySelector('span');
+
         if (panel.style.maxHeight) {
             panel.style.maxHeight = null;
+            if(span) span.innerText = "＋";
         } else {
             panel.style.maxHeight = panel.scrollHeight + "px";
-            let parent = panel.parentElement.closest('.content, .sub-content');
+            if(span) span.innerText = "－";
+            // 遞迴展開父層高度，防止內容被遮擋
+            let parent = btn.parentElement.closest('.content, .sub-content, .nested-content');
             while (parent) {
                 parent.style.maxHeight = (parent.scrollHeight + panel.scrollHeight) + "px";
-                parent = parent.parentElement.closest('.content, .sub-content');
+                parent = parent.parentElement.closest('.content, .sub-content, .nested-content');
             }
         }
     });
