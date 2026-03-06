@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v35.0 </title>
+<title>牌手基地公告 | v35.1 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -14,61 +14,45 @@
         --gold: #f5c542; 
         --bg-dark: #0b0f14;
     }
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        /* 改用深灰色網格，低調專業 */
-        background-image: 
-            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-        background-size: 40px 40px;
-        z-index: -2;
-        pointer-events: none;
-    }
-
-
-    .s-tl { 
-        top: 20px; left: 20px; 
-        color: var(--neon-green); 
-        filter: drop-shadow(0 0 20px var(--neon-green)); 
-        animation: breathe 8s infinite ease-in-out; 
-    }
-    .s-tr { 
-        top: 20px; right: 20px; 
-        color: var(--poker-red); /* 紅心回歸紅色 */
-        filter: drop-shadow(0 0 20px var(--poker-red)); 
-        animation: breathe 8s infinite ease-in-out 2s; 
-    }
-    .s-bl { 
-        bottom: 20px; left: 20px; 
-        color: var(--poker-red); /* 磚塊回歸紅色 */
-        filter: drop-shadow(0 0 20px var(--poker-red)); 
-        animation: breathe 8s infinite ease-in-out 4s; 
-    }
-    .s-br { 
-        bottom: 20px; right: 20px; 
-        color: var(--neon-green); 
-        filter: drop-shadow(0 0 25px var(--neon-green)); 
-        /* 特規調整：幸運草符號通常偏外，往左上修正位移 */
-        transform: translate(-5%, -5%); 
-        animation: breathe 8s infinite ease-in-out 6s; 
+    body {
+        background: radial-gradient(circle at center, #161d26 0%, #0b0f14 100%);
+        color: #e5e7eb;
+        margin: 0;
+        padding: 40px 20px;
+        min-height: 100vh;
+        font-family: -apple-system, system-ui, sans-serif;
     }
 
     /* 確保所有背景符號基準點一致 */
     .suit-bg {
         position: fixed;
         font-size: 25vw;
-        opacity: 0.1;
+        opacity: 0.08; /* 調低透明度，讓背景更有層次不搶戲 */
         z-index: -1;
         pointer-events: none;
-        line-height: 1; /* 防止行高撐開位置 */
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25vw;
+        height: 25vw;
     }
-    /* 移除旋轉的呼吸動畫 */
+    /* 四角精準定位 */
+    .s-tl { top: 0; left: 0; color: var(--neon-green); filter: drop-shadow(0 0 30px var(--neon-green)); animation: breathe 8s infinite ease-in-out; }
+    .s-tr { top: 0; right: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 2s; }
+    .s-bl { bottom: 0; left: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 4s; }
+    
+    /* 幸運草特規：手動強制修正 Unicode 偏移量 */
+    .s-br { 
+        bottom: -2vw; right: -1vw; /* 稍微往邊角壓，抵銷它的自帶空白 */
+        color: var(--neon-green); 
+        filter: drop-shadow(0 0 35px var(--neon-green)); 
+        animation: breathe 8s infinite ease-in-out 6s; 
+    }
+
     @keyframes breathe { 
-        0%, 100% { opacity: 0.04; transform: scale(1); } 
-        50% { opacity: 0.1; transform: scale(1.05); } 
+        0%, 100% { opacity: 0.05; transform: scale(1); } 
+        50% { opacity: 0.12; transform: scale(1.08); } 
     }
     .main-wrapper { max-width: 900px; margin: 0 auto; }
 
