@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v36.0 </title>
+<title>牌手基地公告 | v36.1 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -140,7 +140,14 @@
         max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
         background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; margin-top: -5px;
     }
-    .content-inner { padding: 20px; }
+    /* --- 3. 出入金連結高亮 (解決 image_2/5 隱形問題) --- */
+    .content-inner a {
+        color: var(--neon-green) !important;
+        text-decoration: underline;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .content-inner a:hover { filter: brightness(1.2) drop-shadow(0 0 5px var(--neon-green)); }
 
     .shop-group {
         background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25);
@@ -166,47 +173,36 @@
     .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px; }
     .store-names { font-size: 16px; color: #e5e7eb; line-height: 1.6; }
 
-/* --- 👥 區域負責人樣式 (電腦版優化) --- */
-    .region-box { 
-        margin-top: 10px; 
-        background: rgba(2, 6, 23, 0.6); /* 稍微帶點透明感，更有科技感 */
-        padding: 15px; 
-        border-radius: 8px; 
-    }
-    
+/* 3. 負責人 Line ID 優化：美觀、靠左、不暗沉 (解決 image_3 問題) */
     .region-row { 
         display: grid; 
-        /* 第一欄加寬到 120px 確保 東區(宜蘭) 不換行 */
-        grid-template-columns: 120px 100px 1fr; 
+        grid-template-columns: 125px 105px 1fr; /* 寬度給足 */
         padding: 12px 0; 
-        align-items: center; 
+        align-items: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
     }
-    
-    .region-row:last-child { border-bottom: none; }
-    
-    .region-area { 
-        color: #9ca3af; 
-        white-space: nowrap; /* 強制不換行 */
-    }
-    
-    .region-name { 
-        color: #e5e7eb; 
-        font-weight: 600; 
-    }
-    
     .region-line { 
-        color: var(--neon-green); /* 統一代碼中的綠色變數 */
-        font-family: monospace;   /* ID 類建議用等寬字體，較好辨識 */
-        text-align: right;        /* LINE ID 靠右對齊比較整齊 */
+        color: var(--neon-green); /* 調亮 ID */
+        text-align: left !important; /* 強制靠左 */
+        font-family: 'Courier New', monospace; /* 等寬字體更專業 */
+        font-size: 15px;
     }
+
+    /* 4. [美觀] 負責人底色調亮一點，看起來不暗沉 */
+    .region-box { background: rgba(31, 41, 55, 0.7) !important; padding: 15px; }
     /* --- ❓ FAQ、警告與頁尾 --- */
     .faq-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
     .faq-header { width: 100%; background: none; border: none; padding: 15px 18px; color: var(--gold); font-size: 16px; font-weight: bold; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
     .faq-header:after { content: '▾'; transition: 0.3s; color: var(--neon-green); }
     .faq-header.faq-active:after { transform: rotate(180deg); }
-    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    .faq-body-inner { padding: 0 18px 15px 18px; color: #d1d5db; }
+    /* 2. 出入金 FAQ 連結高亮 & 點亮 (解決 image_2 隱形問題) */
+    .faq-body a { 
+        color: var(--neon-green) !important; 
+        text-decoration: underline !important; 
+        font-weight: bold;
+        text-shadow: 0 0 8px rgba(0, 255, 136, 0.6); /* 點亮效果 */
+    }
+    .faq-body a:hover { filter: brightness(1.2); }
     
     .warning-card { background: rgba(255, 58, 58, 0.05); border: 1px solid rgba(255, 58, 58, 0.3); border-left: 4px solid var(--poker-red); padding: 18px; border-radius: 10px; }
     .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
