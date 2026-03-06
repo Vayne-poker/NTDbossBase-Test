@@ -1,148 +1,420 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+<link rel="preload" as="image" href="images/福利.webp">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地 V22.0 - 內容鎖定精修版</title>
+<title>牌手基地公告</title>
+
 <style>
-    :root { --neon-green: #00ff88; --gold: #f5c542; --bg-dark: #0b0f14; }
-    body { font-family: Arial, sans-serif; margin: 0; padding: 15px; background: var(--bg-dark); color: #d1d5db; overflow-x: hidden; }
-    .main-wrapper { max-width: 950px; margin: 0 auto; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: radial-gradient(circle at top,#111827,#0b0f14);
+  color: #d1d5db;
+}
 
-    /* 頂層大按鈕 (V20.0 結構) */
-    .collapsible {
-        background: rgba(255, 255, 255, 0.03); color: var(--neon-green);
-        cursor: pointer; padding: 18px 25px; width: 100%; border: 1px solid #1f2937;
-        border-radius: 12px; text-align: left; font-size: 20px; font-weight: bold;
-        margin-top: 15px; display: flex; justify-content: space-between; align-items: center;
-    }
-    .active:after { content: '－' !important; }
-    .collapsible:after, .nested-btn:after { content: '＋'; font-size: 22px; }
+h1 {
+  text-align: center;
+  color: #00ff88;
+  margin-bottom: 25px;
+}
 
-    .content, .nested-content {
-        max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
-        background: rgba(255, 255, 255, 0.01);
-    }
+/* 折疊按鈕 */
+.collapsible {
+  background: linear-gradient(90deg,#111827,#1f2937);
+  color: #00ff88;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    /* 平台區塊 (V20.0 內容) */
-    .platform-item { background: rgba(255,255,255,0.05); border-left: 4px solid var(--neon-green); border-radius: 10px; padding: 15px; margin-bottom: 18px; }
-    .club-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
-    .club-card {
-        background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 16px; border-radius: 10px; flex: 1 1 calc(50% - 12px); box-sizing: border-box;
-    }
-    .club-card strong { color: var(--gold); display: block; font-size: 1.2rem; margin-bottom: 8px; white-space: nowrap; }
-    .club-card div { font-size: 1rem; line-height: 1.5; color: #d1d5db; }
-    @media (min-width: 800px) { .gg-grid .club-card { flex: 1 1 calc(33.333% - 12px); } }
+.collapsible:hover {
+  box-shadow: 0 0 10px rgba(0,255,136,0.3);
+}
 
-    /* --- V18.0 常見問題字卡美術 (雙層摺疊) --- */
-    .faq-card {
-        background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px; margin-bottom: 12px; overflow: hidden;
-    }
-    .faq-btn {
-        background: none; border: none; width: 100%; text-align: left;
-        padding: 16px 20px; cursor: pointer; color: var(--gold);
-        font-size: 1.1rem; font-weight: bold; display: flex; justify-content: space-between;
-    }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-    .faq-text { padding: 0 20px 16px 20px; line-height: 1.6; color: #d1d5db; }
+.collapsible:after { content: '＋'; }
+.active:after { content: '－'; }
 
-    .nested-btn {
-        background: rgba(255, 255, 255, 0.02); color: var(--neon-green);
-        cursor: pointer; padding: 14px 20px; width: 100%; border: 1px solid #1f2937;
-        border-radius: 10px; text-align: left; font-size: 18px; margin-top: 10px;
-        display: flex; justify-content: space-between; align-items: center;
-    }
+/* 折疊內容 */
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  background: #151922;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.content-inner {
+  padding: 20px;
+}
+
+/* --- V18.0 FAQ 字卡美術樣式 --- */
+.faq-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.faq-btn {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 16px 20px;
+  cursor: pointer;
+  color: #f5c542; /* 金色標題 */
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+.faq-btn:after { content: '＋'; }
+.faq-btn.active:after { content: '－'; }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.faq-text {
+  padding: 0 20px 16px 20px;
+  line-height: 1.6;
+  color: #d1d5db;
+}
+
+/* 平台卡片 */
+.platform-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.platform-item {
+  display: flex;
+  gap: 20px;
+  background: linear-gradient(145deg,#151922,#10131a);
+  border: 1px solid #1f2937;
+  border-left: 4px solid #00ff88;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 18px;
+  transition: 0.3s;
+}
+
+.platform-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(0,255,136,0.2);
+}
+
+.platform-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  background: #111;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.platform-info {
+  flex: 1;
+}
+
+.platform-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #00ff88;
+  margin-bottom: 6px;
+}
+
+.platform-link {
+  display: inline-block;
+  margin: 6px 0;
+  color: #00ffaa;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.platform-link:hover {
+  text-decoration: underline;
+}
+
+.club-card {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.6;
+}
+
+.club-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #f5c542;
+}
+
+ul, ol { padding-left: 20px; }
+a { color: #00ffaa; }
+pre { background:#0b0f14; padding:10px; border-radius:6px; color:#9ca3af; overflow:auto; }
+
 </style>
 </head>
+
 <body>
 
-<div class="main-wrapper">
-    <div style="text-align:center;"><img src="images/base.png" style="max-width:180px;"></div>
+<div style="text-align:center;margin-bottom:20px;">
+  <img src="images/base.png" style="max-width:220px;">
+</div>
 
-    <button class="collapsible">⚔️ 考核中心</button>
-    <div class="content">
-        <div style="padding: 15px;">
-            
-            <button class="nested-btn">📊 目前合作平台</button>
-            <div class="nested-content">
-                <div style="padding: 10px;">
-                    <div class="platform-item">
-                        <b style="color:var(--neon-green); font-size:1.2rem;">♠ XPoker</b>
-                        <a href="https://x-poker.net/#/" target="_blank" style="color:var(--neon-green); margin-left:10px;">下載連結</a>
-                        <div class="club-grid">
-                            <div class="club-card"><strong>天祥雙子 (1:8)</strong><div>俱樂部ID：999306</div><div>推薦人ID：3496108</div></div>
-                            <div class="club-card"><strong>泰好贏 (1:1)</strong><div>俱樂部ID：2421367</div><div>推薦人ID：3583536</div></div>
-                            <div class="club-card"><strong>亞特馬來 (1:1)</strong><div>俱樂部ID：686175</div><div>推薦人ID：3496108</div></div>
-                            <div class="club-card"><strong>花順 (1:1)</strong><div>俱樂部ID：277186</div><div>推薦人ID：3032889</div></div>
-                        </div>
-                    </div>
-                    <div class="platform-item">
-                        <b style="color:var(--neon-green); font-size:1.2rem;">♠ ClubGG</b>
-                        <a href="https://www.clubgg.com/" target="_blank" style="color:var(--neon-green); margin-left:10px;">下載連結</a>
-                        <div class="club-grid gg-grid">
-                            <div class="club-card"><strong>快樂呱Tiny (1:1)</strong><div>俱樂部ID：954109</div><div>推薦人ID：4005-6868</div></div>
-                            <div class="club-card"><strong>快樂呱Massiv (1:26)</strong><div>俱樂部ID：619975</div><div>推薦人ID：4005-6868</div></div>
-                            <div class="club-card"><strong>時光雞Time (1:27)</strong><div>俱樂部ID：970779</div><div>推薦人ID：4005-6868</div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<h1>✨『牌手基地考核新制度』啟動</h1>
 
-            <button class="nested-btn">❓ 常見問題</button>
-            <div class="nested-content">
-                <div style="padding: 15px;">
-                    <p style="color: #ffaa00; font-weight: bold; margin-bottom: 15px;">⚠️ 不建議已有帳號重複申辦其他帳號</p>
-                    
-                    <div class="faq-card">
-                        <button class="faq-btn">1. 已有綁定其它戰隊</button>
-                        <div class="faq-answer"><div class="faq-text">所有平台無法申請轉戰隊，不要重新註冊帳號；可以優先考慮其他合作平台，或聯繫各區負責人協助處理。</div></div>
-                    </div>
+<button class="collapsible">🍀 考核牌手4.0</button>
+<div class="content">
+  <div class="content-inner">
+  <ul>
+    <li>兩個月開啟一次考核機制</li>
+    <li>一次考核為期一個月</li>
+    <li>考核沒過依然可報名往後梯次</li>
+    <li>第四梯次報名時間：3/3~3/8</li>
+    <li>第四梯次考核時間：3/9~3/29</li>
+  </ul>
+</div>
+</div>
 
-                    <div class="faq-card">
-                        <button class="faq-btn">2. 未綁定其它戰隊，但已註冊過帳號</button>
-                        <div class="faq-answer"><div class="faq-text">請私訊客服，看是否能協助加入戰隊。</div></div>
-                    </div>
+<button class="collapsible">📝 考核步驟</button>
+<div class="content">
+  <div class="content-inner">
+  <ol>
+    <li>參照 "目前合作平台" 綁定相關帳號</li>
+    <li>找到管理員 @Vayne 並提供遊戲ID<br>
+        確認考核平台是否綁定牌手基地<br>
+        <b>平台需有綁定老闆邀請碼才會計入考核</b></li>
+    <li>找到該區負責人登記資料<br>
+<pre>
+北：James     lineID：pan1409g
+中：James     lineID：pan1409g
+南：磊        lineID：0982685646
+	Mark     lineID：fmlove0116
+東(宜蘭)：    lineID：liks9121
+</pre>
+     <b>務必要和各區負責人回報資料<br>
+        否則不會計入考核</b>
+    </li>
+    <li>開啟考核</li>
+  </ol>
+</div>
+</div>  
 
-                    <div class="faq-card">
-                        <button class="faq-btn">3. 退水相關</button>
-                        <div class="faq-answer"><div class="faq-text">XP 考核期間不退水。</div></div>
-                    </div>
-                </div>
-            </div>
+<button class="collapsible">💻 目前合作平台</button>
+<div class="content">
+  <ul class="platform-list">
+    <li class="platform-item">
+      <img src="images/ipoker.jpg" class="platform-logo" loading="lazy">
+      <div class="platform-info">
+        <div class="platform-title">♣ iPoker ♣</div>
+        <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a>
+        <div class="club-block">推薦碼：NTDboss</div>
+      </div>
+    </li>
+    <li class="platform-item">
+      <img src="images/WPT.jpg" class="platform-logo" loading="lazy">
+      <div class="platform-info">
+        <div class="platform-title">♦ WPT Global ♦</div>
+        <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a>
+        <div class="club-block">推薦碼：A0A697</div>
+      </div>
+    </li>
+    <li class="platform-item">
+      <img src="images/N8.jpg" class="platform-logo" loading="lazy">
+      <div class="platform-info">
+        <div class="platform-title">♠ Natural8 ♠</div>
+        <a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a>
+        <div class="club-block">推薦碼：NTDboss</div>
+      </div>
+    </li>
+    <li class="platform-item">
+      <img src="images/QQ.jpg" class="platform-logo" loading="lazy">
+      <div class="platform-info">
+        <div class="platform-title">♠ QQ Poker ♠</div>
+        <a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a>
+        <div class="club-block">推薦碼：MGA852</div>
+      </div>
+    </li>
+    <li class="platform-item">
+      <div class="platform-info">
+        <div class="platform-title">♠ XPoker</div>
+        <img src="images/Xpoker.jpg" class="platform-logo" loading="lazy">
+        <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a><br>
+        <div class="club-card"><strong>天祥雙子 (1:8)</strong>俱樂部ID：999306<br>推薦人ID：3496108</div>
+        <div class="club-card"><strong>泰好贏 TwXThai (1:1)</strong>俱樂部ID：2421367<br>推薦人ID：3583536</div>
+        <div class="club-card"><strong>亞特馬來 (1:1)</strong>俱樂部ID：686175<br>推薦人ID：3496108</div>
+        <div class="club-card"><strong>花順 (1:1)</strong>俱樂部ID：277186<br>推薦人ID：3032889</div>
+      </div>
+    </li>
+    <li class="platform-item">
+      <div class="platform-info">
+        <div class="platform-title">♠️ ClubGG ♠️</div>
+        <img src="images/ClubGG.png" class="platform-logo" loading="lazy">
+        <a href="https://www.clubgg.com/" target="_blank" class="platform-link">下載連結</a><br>
+        <div class="club-card"><strong>TiNY POKER「快樂呱Tiny」(1:1)</strong>俱樂部ID：954109<br>推薦人ID：4005-6868</div>
+        <div class="club-card"><strong>Massiv「快樂呱Massiv」(1:26)</strong>俱樂部ID：619975<br>推薦人ID：4005-6868</div>
+        <div class="club-card"><strong>美國TMT「時光雞Time」(1:27)</strong>俱樂部ID：970779<br>推薦人ID：4005-6868</div>
+      </div>
+    </li>
+  </ul>
+</div>
 
-            <button class="nested-btn">💰 出入金方式</button>
-            <div class="nested-content">
-                <div style="padding: 15px; font-size: 1.1rem;">
-                    • Ipoker 出入金：<a href="https://lin.ee/oTJ3B7Y" target="_blank" style="color:var(--neon-green);">連結</a><br>
-                    • WPTG 出入金：<a href="https://line.me/R/ti/p/@540ouqui" target="_blank" style="color:var(--neon-green);">連結</a><br>
-                    • 正規出入金：<a href="https://www.bitopro.com/users/sign_up?referrer=2500555974" target="_blank" style="color:var(--neon-green);">連結</a><br>
-                    • XP：進群後私訊 @星星
-                </div>
-            </div>
-        </div>
+<button class="collapsible">📌 常見問題</button>
+<div class="content">
+  <div class="content-inner">
+    <p style="color: #ffaa00; margin-bottom: 15px;">⚠️ 不建議已有帳號重複申辦其他帳號</p>
+    
+    <div class="faq-card">
+      <button class="faq-btn">1. 已有綁定其他戰隊</button>
+      <div class="faq-answer">
+        <div class="faq-text">所有平台無法申請轉戰隊，也不要重新註冊帳號；<br>可以優先考慮其他合作平台，或聯繫各區負責人協助處理。</div>
+      </div>
     </div>
+
+    <div class="faq-card">
+      <button class="faq-btn">2. 未綁定其他戰隊，但已註冊過帳號</button>
+      <div class="faq-answer">
+        <div class="faq-text">請私訊客服，看是否能協助加入戰隊。</div>
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <button class="faq-btn">3. 退水相關</button>
+      <div class="faq-answer">
+        <div class="faq-text">XP 考核期間不退水。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="collapsible">💰 出入金方式</button>
+<div class="content">
+  <div class="content-inner">
+  <ul>
+    <li>Ipoker 出入金：<a href="https://lin.ee/oTJ3B7Y" target="_blank">連結</a></li>
+    <li>WPTG 出入金：<a href="https://line.me/R/ti/p/@540ouqui" target="_blank">連結</a></li>
+    <li>正規出入金：<a href="https://www.bitopro.com/users/sign_up?referrer=2500555974" target="_blank">連結</a><br>
+        老闆親自教學：<a href="https://www.instagram.com/reel/DGVOYR2T7O9/?igsh=MThtNm9mdWEwYmxiag==" target="_blank">連結</a></li>
+    <li> XP：<a href="https://line.me/ti/g/DwTLUjG4qS" target="_blank">進群</a>後私訊 @星星 </li>
+  </ul>
+  </div>
+</div>
+
+<button class="collapsible">🏆 限時錦標賽配合店家 (目前暫無 MTT)</button>
+<div class="content">
+  <div class="content-inner">
+  <ul>
+    <li>台北: A8,Dream Room,三重ABC</li>
+    <li>新竹: Eagle</li>
+    <li>台中: UT,IPC,Elite,CityPoker,CheckRaise</li>
+    <li>高雄: 亞特蘭提斯,Eagle</li>
+    <li>其他店家陸續在接洽中</li>
+  </ul>
+</div>
+</div>
+
+<button class="collapsible">✅ 考核標準</button>
+<div class="content">
+  <div class="content-inner">
+  <ul>
+    <li>每週分享 3 手以上手牌至群組</li>
+    <li>與其他牌手討論手牌</li>
+    <li>線上：手數超過 25000 手 / 急速桌 50000 手</li>
+    <li><b>線下：現場限時錦標（20 場，配合店家）</b><br>└ 各縣市提供 3–5 場指定場次<br>└ 指定場次需與當地負責人或指定正式牌手對戰</li>
+    <li>積極度 / 活動、貼文參與度 / 牌手規劃會談（該區負責人）</li>
+    <li>線上：每日 session 結束後 └ 於記事本回報當日戰績</li>
+    <li>線下：上桌報買入，下桌拍碼單 └ 交給各自所屬負責人</li>
+  </ul>
+</div>
+</div>
+
+<button class="collapsible">✨ 正式牌手福利</button>
+<div class="content">
+  <div class="content-inner">
+    <div style="text-align:center; margin-bottom:20px;">
+      <img src="images/福利.webp" style="width:100%; max-width:900px; border-radius:12px;">
+    </div>
+    <ul>
+      <li>提供資金支援</li>
+      <li>提供教學資源</li>
+      <li>比賽佔成（@welson 面談）</li>
+      <li>外國好局資源（@1+ 詢問）</li>
+      <li>專屬線上活動</li>
+      <li>線下不定期聚會</li>
+      <li>贊助比賽<br>廖老闆會挑選高 CP 值比賽，以活動篩選人才，全額贊助比賽費用。</li>
+      <li>『基地Pro金色布標』資格<br>基地 Pro 金色布標為正式牌手資格標誌。</li>
+    </ul>
+  </div>
+</div>
+
+<button class="collapsible">⚠️ 正式牌手檢驗</button>
+<div class="content">
+  <div class="content-inner">
+  <p>正式牌手通過後，仍然有機會被拔除資格。<br>但凡在下一次考核開始之前，有任何損毀、破壞基地名譽且不和諧舉動、積極度下降幾乎為0（如線上、現場比賽、限時錦標無持續進行），將會被約談並有機會移除資格。</p>
+</div>
+</div>
+
+<button class="collapsible">♠♥◆♣ 牌手群現有福利 ♠♥◆♣</button>
+<div class="content">
+  <div class="content-inner">
+  <ul>
+    <li>大家的 HRC<br>如果有困難的翻前 spot，需要協助跑HRC，群組記事本有詳細說明。請直接參考 <a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank">HRC 連結</a><br>每人一天兩個 spot 上限，node lock 請在群組提及</li>
+  </ul>
+</div>
+</div>
+
+<div class="content-inner" style="text-align:center; border-top:1px solid #1f2937; margin-top:20px;">
+  <p>所有事項、成績公布，皆須由牌手自行與負責人確認 👍🏼<br>所有福利、成績都是自己爭取，多多跟該區負責人溝通就可以囉 🤗</p>
+</div>
+
+<div style="text-align:center; margin-top:30px; padding:20px;">
+  <h2 style="font-size:2em; color:#f5c542;">牌手基地保有最終解釋權</h2>
+  <p style="display:flex; align-items:center; justify-content:center; gap:10px;">
+    <img src="images/NTDboss.jpg" style="width:60px;">
+    所有規則與福利，以基地公告為準。
+    <img src="images/NTDboss.jpg" style="width:60px;">
+  </p>
 </div>
 
 <script>
-    document.addEventListener('click', function(e) {
-        const btn = e.target.closest('.collapsible, .nested-btn, .faq-btn');
-        if (!btn) return;
-        btn.classList.toggle('active');
-        const panel = btn.nextElementSibling;
-        if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-            // 向上修正父層高度以容納巢狀內容
-            let parent = panel.parentElement.closest('.content, .nested-content');
-            while (parent) {
-                parent.style.maxHeight = (parent.scrollHeight + panel.scrollHeight) + "px";
-                parent = parent.parentElement.closest('.content, .nested-content');
-            }
-        }
-    });
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.collapsible, .faq-btn');
+  if (!btn) return;
+  
+  btn.classList.toggle('active');
+  const content = btn.nextElementSibling;
+
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+    // 遞迴撐開父層高度
+    let parent = btn.parentElement.closest('.content, .faq-answer');
+    while (parent) {
+      parent.style.maxHeight = (parent.scrollHeight + content.scrollHeight) + "px";
+      parent = parent.parentElement.closest('.content, .faq-answer');
+    }
+  }
+});
 </script>
+
 </body>
 </html>
