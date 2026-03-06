@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v32.3 穩定版</title>
+<title>牌手基地公告 | v32.4 穩定版</title>
 
 <style>
     @keyframes glow{ 0%{ filter:drop-shadow(0 0 6px #22c55e); } 50%{ filter:drop-shadow(0 0 16px #22c55e); } 100%{ filter:drop-shadow(0 0 6px #22c55e); } }
@@ -23,7 +23,6 @@
         color: #d1d5db; line-height: 1.6;
     }
 
-    /* --- ✨ 背景裝飾 --- */
     .suit-bg { position: fixed; font-size: 20vw; opacity: 0.05; z-index: -1; pointer-events: none; }
     .s-tl { top: 5%; left: 5%; color: var(--neon-green); animation: breathe 6s infinite ease-in-out; }
     .s-tr { top: 5%; right: 5%; color: var(--poker-red); animation: breathe 6s infinite ease-in-out 1.5s; }
@@ -42,7 +41,6 @@
     .status-panel li { margin-bottom: 8px; font-size: 1.1em; display: flex; align-items: flex-start; }
     .status-panel li::before { content: "•"; color: var(--neon-green); margin-right: 12px; }
 
-    /* --- 🖱️ 摺疊控制系統 --- */
     .collapsible, .sub-btn, .nested-btn {
         background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green);
         cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937;
@@ -60,7 +58,6 @@
     }
     .content-inner { padding: 20px; }
 
-    /* --- 💎 容器樣式 --- */
     .shop-group {
         background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25);
         border-radius: 10px; padding: 14px; margin: 12px 0;
@@ -124,7 +121,6 @@
     <button class="collapsible">⚔️ 考核中心</button>
     <div class="content">
         <div class="content-inner">
-            
             <button class="sub-btn">📝 考核步驟</button>
             <div class="sub-content">
                 <div class="content-inner">
@@ -285,20 +281,15 @@
                 <li>高 CP 值比賽贊助（由基地挑選並提供全額贊助）</li>
                 <li>『基地 Pro 金色布標』：正式牌手資格象徵</li>
             </ul>
-
             <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
-
             <h3 style="color:var(--gold);">♠️ 社群牌手福利</h3>
-            <p style="color:#9ca3af; margin-bottom:12px;">加入基地牌手社群，享有以下交流資源：</p>
             <ul>
                 <li>HRC 翻前 Spot 協助（每人每日 2 個上限）</li>
                 <li>牌局討論與策略交流</li>
                 <li>不定期策略分享</li>
                 <li>HRC 申請表：<a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank" style="color:var(--neon-green)">申請連結</a></li>
             </ul>
-
             <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
-
             <h3 style="color:var(--poker-red);">⚠️ 正式牌手資格維持</h3>
             <div class="warning-card">
                 <p><b>正式牌手通過後，仍需維持基本活躍與社群規範。</b></p>
@@ -308,7 +299,6 @@
                     <li>長期未參與任何活動（線上 / 線下 / 錦標）</li>
                     <li>牌手活躍度長期接近 0</li>
                 </ul>
-                <p>若出現上述情況，基地將安排約談並視情況調整或取消正式牌手資格。</p>
             </div>
         </div>
     </div>
@@ -339,9 +329,7 @@ document.addEventListener('click', function(e) {
                 parent = parent.parentElement.closest('.content, .sub-content, .nested-content');
             }
         }
-        return;
     }
-
     const faqHeader = e.target.closest('.faq-header');
     if (faqHeader) {
         faqHeader.classList.toggle('faq-active');
