@@ -156,24 +156,42 @@
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
 /* --- 📱 平台與俱樂部樣式 (質感修復版) --- */
+/* 找到 .platform-item 覆蓋 */
     .platform-item { 
         display: flex; 
         align-items: center; 
         gap: 20px; 
         background: rgba(255, 255, 255, 0.03); 
         padding: 20px; 
-        border-radius: 12px; 
-        border: 1px solid rgba(0, 255, 136, 0.2); 
+        border-radius: 16px; 
+        border: 1px solid rgba(0, 255, 136, 0.15); 
         margin-top: 15px;
-        flex-wrap: wrap; /* 讓內部的 Grid 可以換行並撐開寬度 */
+        flex-wrap: wrap;
+        transition: all 0.3s ease;
     }
     
+    /* 懸停時容器微亮 */
+    .platform-item:hover {
+        background: rgba(0, 255, 136, 0.05);
+        border-color: rgba(0, 255, 136, 0.5);
+    }
+    
+    /* 找到 .platform-logo 覆蓋：讓 Logo 預設有邊框，懸停發光 */
     .platform-logo { 
         width: 65px; 
         height: 65px; 
         border-radius: 12px; 
         object-fit: cover; 
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s ease;
+    }
+    
+    /* 關鍵：移動到區塊時 Logo 亮起來 */
+    .platform-item:hover .platform-logo {
+        transform: scale(1.08);
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.6); /* 霓虹綠光 */
+        border-color: var(--neon-green);
     }
     
     .platform-info { 
@@ -199,29 +217,31 @@
     
     /* 質感下載按鈕 */
     .platform-link-btn {
-        background: rgba(0, 255, 136, 0.1);
-        border: 1px solid var(--neon-green);
-        color: var(--neon-green) !important;
+        background: linear-gradient(135deg, #f5c542 0%, #d4a017 100%); /* 奢華金漸層 */
+        border: none;
+        color: #0b0f14 !important; /* 金底黑字 */
         text-decoration: none !important;
-        padding: 4px 12px;
-        border-radius: 6px;
+        padding: 6px 16px;
+        border-radius: 20px;
         font-size: 12px;
-        font-weight: bold;
+        font-weight: 900;
         text-transform: uppercase;
         transition: all 0.3s ease;
-        text-shadow: none !important;
+        box-shadow: 0 4px 10px rgba(245, 197, 66, 0.3);
     }
     
     .platform-link-btn:hover {
-        background: var(--neon-green);
-        color: #000 !important;
-        box-shadow: 0 0 10px var(--neon-green);
+        background: #fff; /* 懸停變白發光 */
+        box-shadow: 0 0 15px #f5c542;
+        transform: translateY(-2px);
     }
     
     /* 推薦碼樣式稍微縮小，不搶戲 */
+    /* 找到 .promo-text 覆蓋 */
     .promo-text {
         font-size: 14px;
-        color: #9ca3af;
+        color: #94a3b8; /* 換成冷灰色，視覺更舒服 */
+        font-family: 'Courier New', monospace;
     }
     /* 核心修復：強制 Grid 撐滿 100% 寬度 */
     .club-grid { 
