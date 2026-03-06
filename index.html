@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v33.2 </title>
+<title>牌手基地公告 | v35.0 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -14,50 +14,56 @@
         --gold: #f5c542; 
         --bg-dark: #0b0f14;
     }
-    body { 
-        font-family: Arial, sans-serif; 
-        margin: 0; padding: 20px; 
-        /* 解決斷層關鍵：fixed */
-        background: radial-gradient(circle at top, #111827, #0b0f14) fixed; 
-        min-height: 100vh;
-        color: #d1d5db; line-height: 1.6;
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        /* 改用深灰色網格，低調專業 */
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: -2;
+        pointer-events: none;
     }
 
 
-    /* 1. 優化呼吸效果與模糊感 */
-/* 💎 ✨ V18-Refined：四角平衡 & 黑桃霓虹線條 --- */
-    .suit-bg { 
-        position: fixed; 
-        font-size: 26vw; /* 統一放大，大小一致 */
-        opacity: 0.12;   /* 提升顯眼度 */
-        z-index: -1; 
-        pointer-events: none; 
-    }
-    
-    /* 四角精準平衡，全霓虹綠發光 --- */
     .s-tl { 
-        top: 15px; left: 15px; /* 精準位置，不歪斜 */
-        color: var(--neon-green); /* 黑桃換綠色 */
+        top: 20px; left: 20px; 
+        color: var(--neon-green); 
         filter: drop-shadow(0 0 20px var(--neon-green)); 
         animation: breathe 8s infinite ease-in-out; 
     }
     .s-tr { 
-        top: 15px; right: 15px; /* 精準位置 */
-        color: var(--neon-green); /* ♥️ 紅心也換綠色線條 */
-        filter: drop-shadow(0 0 20px var(--neon-green)); 
+        top: 20px; right: 20px; 
+        color: var(--poker-red); /* 紅心回歸紅色 */
+        filter: drop-shadow(0 0 20px var(--poker-red)); 
         animation: breathe 8s infinite ease-in-out 2s; 
     }
     .s-bl { 
-        bottom: 15px; left: 15px; /* 精準位置 */
-        color: var(--neon-green); /* ♦️ 紅磚也換綠色線條 */
-        filter: drop-shadow(0 0 20px var(--neon-green)); 
+        bottom: 20px; left: 20px; 
+        color: var(--poker-red); /* 磚塊回歸紅色 */
+        filter: drop-shadow(0 0 20px var(--poker-red)); 
         animation: breathe 8s infinite ease-in-out 4s; 
     }
     .s-br { 
-        bottom: 15px; right: 15px; /* 精準位置 */
-        color: var(--neon-green); /* ♣梅花(手動改成🍀)也換綠色線條 */
-        filter: drop-shadow(0 0 20px var(--neon-green)); 
+        bottom: 20px; right: 20px; 
+        color: var(--neon-green); 
+        filter: drop-shadow(0 0 25px var(--neon-green)); 
+        /* 特規調整：幸運草符號通常偏外，往左上修正位移 */
+        transform: translate(-5%, -5%); 
         animation: breathe 8s infinite ease-in-out 6s; 
+    }
+
+    /* 確保所有背景符號基準點一致 */
+    .suit-bg {
+        position: fixed;
+        font-size: 25vw;
+        opacity: 0.1;
+        z-index: -1;
+        pointer-events: none;
+        line-height: 1; /* 防止行高撐開位置 */
     }
     /* 移除旋轉的呼吸動畫 */
     @keyframes breathe { 
@@ -67,13 +73,62 @@
     .main-wrapper { max-width: 900px; margin: 0 auto; }
 
     .status-panel {
-        background: rgba(0, 255, 136, 0.03); border: 2px solid var(--neon-green);
-        border-radius: 15px; padding: 25px; margin-bottom: 30px;
+        background: rgba(0, 255, 136, 0.02);
+        border: 1px solid rgba(0, 255, 136, 0.3); /* 降低原本邊框亮度 */
+        position: relative;
+        overflow: hidden;
+        /* 新增：外發光氛圍 */
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);
     }
-    .status-panel h2 { color: var(--neon-green); margin-top: 0; }
+
+    /* 增加一個微妙的流光掃過效果 */
+    .status-panel::after {
+        content: "";
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+        transform: rotate(45deg);
+        animation: sheen 6s infinite;
+    }
+
+    @keyframes sheen {
+        0% { transform: translateX(-100%) rotate(45deg); }
+        100% { transform: translateX(100%) rotate(45deg); }
+    }
+    h1 {
+        text-align: center;
+        background: linear-gradient(to bottom, #fff 20%, var(--neon-green) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+    }
+    .status-panel h2 { 
+        color: var(--neon-green); 
+        margin-top: 0; 
+        text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); /* 新增：標題發光 */
+    }
     .status-panel ul { list-style: none; padding-left: 0; }
-    .status-panel li { margin-bottom: 8px; display: flex; align-items: flex-start; }
-    .status-panel li::before { content: "•"; color: var(--neon-green); margin-right: 12px; }
+    .status-panel li { 
+        margin-bottom: 8px; 
+        display: flex; 
+        align-items: flex-start; 
+        color: #e5e7eb; /* 新增：讓文字更有質感 */
+    }
+    .status-panel li::before { 
+        content: "•"; 
+        color: var(--neon-green); 
+        margin-right: 12px; 
+    }
+
+    /* 新增：讓 li 裡面的重點數字/文字發光 */
+    .status-panel li b, .status-panel li strong {
+        color: var(--neon-green);
+        text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+        font-weight: bold;
+    }
 
     .collapsible, .sub-btn, .nested-btn {
         background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green);
@@ -176,7 +231,7 @@
         <img src="images/base.png" style="max-width:220px;">
     </div>
 
-    <h1 style="text-align:center; color:var(--neon-green);">✨『牌手基地考核新制度』啟動</h1>
+    <h1 style="text-align:center;">✨『牌手基地考核新制度』啟動</h1>
 
     <div class="status-panel">
         <div class="content-inner">
