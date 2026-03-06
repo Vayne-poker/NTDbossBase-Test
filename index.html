@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.5-4 </title>
+<title>牌手基地公告 | v37.5-5 </title>
 
 <style>
-    /* 基礎變數與動畫維持原樣 */
     :root { 
         --neon: #00ff88; --red: #ff3a3a; --gold: #f5c542; --bg: #0b0f14; 
     }
@@ -19,7 +18,7 @@
         font-family: -apple-system, system-ui, sans-serif;
     }
 
-    /* 背景與基礎框架 */
+    /* 背景大花色 */
     .suit-bg { position: fixed; font-size: 25vw; opacity: 0.08; z-index: -1; pointer-events: none; animation: breathe 8s infinite ease-in-out; }
     .s-tl { top: 8vh; left: 0; color: var(--neon); }
     .s-tr { top: 8vh; right: 0; color: var(--red); animation-delay: 2s; }
@@ -28,11 +27,47 @@
 
     .main-wrapper { max-width: 900px; margin: 0 auto; }
 
-    /* --- 合作平台樣式優化區 --- */
+    /* 頂部面板 */
+    .status-panel {
+        background: rgba(0, 255, 136, 0.02); border: 1px solid rgba(0, 255, 136, 0.3);
+        position: relative; overflow: hidden; padding: 25px; border-radius: 15px;
+    }
+    .status-panel::after {
+        content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+        transform: rotate(45deg); animation: sheen 6s infinite;
+    }
+
+    /* 列表花色：只針對特定 class 生效 */
+    .poker-list { list-style: none; padding-left: 0; }
+    .poker-list li { margin-bottom: 8px; display: flex; align-items: flex-start; position: relative; padding-left: 25px; }
+    .poker-list li::before { position: absolute; left: 0; font-size: 14px; font-weight: bold; }
+    .poker-list li:nth-child(4n+1)::before { content: "♠"; color: #fff; }
+    .poker-list li:nth-child(4n+2)::before { content: "♥"; color: #ff4d4d; }
+    .poker-list li:nth-child(4n+3)::before { content: "♣"; color: #fff; }
+    .poker-list li:nth-child(4n+4)::before { content: "♦"; color: #ff4d4d; }
+
+    /* 通用按鈕 (v37.1 質感) */
+    .collapsible, .sub-btn, .nested-btn {
+        background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon);
+        padding: 16px 20px; width: 100%; border: 1px solid #1f2937; border-radius: 10px;
+        text-align: left; font-size: 17px; font-weight: bold; margin-top: 12px;
+        display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s;
+    }
+    .collapsible:after, .sub-btn:after, .nested-btn:after { content: '▼'; font-size: 12px; transition: 0.3s; }
+    .active:after { transform: rotate(180deg); }
+
+    .content, .sub-content, .nested-content {
+        max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+        background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; margin-top: -5px;
+    }
+    .content-inner { padding: 20px; }
+
+    /* --- 合作平台樣式：修正間距與推薦碼 --- */
     .platform-item { 
         display: flex; align-items: center; gap: 25px; background: rgba(255, 255, 255, 0.03); 
         padding: 25px; border-radius: 16px; border: 1px solid rgba(0, 255, 136, 0.15); 
-        margin-top: 18px; transition: 0.3s; position: relative;
+        margin-top: 18px; transition: 0.3s; 
     }
     .platform-item:hover { border-color: var(--gold); background: rgba(245, 197, 66, 0.03); }
 
@@ -43,22 +78,15 @@
     .platform-item:hover .platform-logo { transform: scale(1.1); border-color: var(--gold); box-shadow: 0 0 20px rgba(245, 197, 66, 0.5); }
 
     .platform-info { flex-grow: 1; }
-
-    /* 標題與下方內容錯開 */
     .platform-header { 
         display: flex; justify-content: space-between; align-items: center; 
-        width: 100%; margin-bottom: 12px; /* 增加下方間距 */
+        width: 100%; margin-bottom: 12px; /* 這裡拉開標題與下方的距離 */
     }
-    .platform-title { font-weight: 800; color: var(--neon); font-size: 1.2rem; letter-spacing: 1px; }
+    .platform-title { font-weight: 800; color: var(--neon); font-size: 1.2rem; }
 
-    /* 推薦碼與按鈕的容器 */
-    .platform-meta {
-        display: flex; align-items: center; gap: 15px; flex-wrap: wrap;
-    }
-    .promo-code {
-        color: var(--gold); font-size: 14px; background: rgba(245, 197, 66, 0.1);
-        padding: 4px 10px; border-radius: 6px; border: 1px dashed rgba(245, 197, 66, 0.3);
-    }
+    /* 推薦碼與按鈕並排容器 */
+    .platform-meta { display: flex; align-items: center; gap: 15px; }
+    .promo-text { color: var(--gold); font-weight: bold; font-size: 14px; }
 
     .platform-link-btn { 
         border: 1.5px solid var(--gold); color: var(--gold) !important; padding: 7px 20px; 
@@ -67,53 +95,37 @@
     }
     .platform-link-btn:hover { background: var(--gold); color: #0b0f14 !important; box-shadow: 0 0 15px var(--gold); }
 
-    /* --- 常見問題回歸 v37.1 質感 --- */
-    .faq-card { margin-bottom: 12px; }
+    /* Club Grid 修正 */
+    .club-grid { display: grid; gap: 12px; margin-top: 15px; width: 100%; }
+    .club-grid.four { grid-template-columns: repeat(2, 1fr); }
+    .club-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .club-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 10px; }
+
+    /* --- 常見問題：修復回 v37.1 --- */
     .faq-header {
         background: linear-gradient(90deg, #111827, #1f2937) !important;
-        color: var(--gold) !important; border: 1px solid #1f2937 !important;
-        border-radius: 10px !important; padding: 16px 20px; width: 100%; text-align: left;
-        display: flex; justify-content: space-between; align-items: center; font-weight: bold; transition: 0.3s;
+        color: var(--neon) !important; 
+        border: 1px solid #1f2937 !important;
+        border-radius: 10px !important;
+        padding: 16px 20px; width: 100%; text-align: left;
+        display: flex; justify-content: space-between; align-items: center;
+        font-weight: bold; font-size: 17px; margin-top: 12px; cursor: pointer;
     }
-    .faq-header::before { content: none !important; }
-    .faq-header::after { content: '▼'; font-size: 12px; color: var(--gold); transition: 0.3s; }
-    .faq-header.active::after { transform: rotate(180deg); }
+    .faq-header::before { content: none !important; } /* 強制不准有花色 */
+    .faq-header:after { content: '▼'; font-size: 12px; transition: 0.3s; }
+    .faq-header.active:after { transform: rotate(180deg); }
 
-    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0, 0, 0, 0.15); border-radius: 0 0 10px 10px; }
-    .faq-body-inner { padding: 20px; line-height: 1.8; color: #ced4da; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-
-    /* 基礎排版 (按鈕、清單、Grid) */
-    .collapsible, .sub-btn, .nested-btn {
-        background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon);
-        padding: 16px 20px; width: 100%; border: 1px solid #1f2937; border-radius: 10px;
-        text-align: left; font-size: 17px; font-weight: bold; margin-top: 12px;
-        display: flex; justify-content: space-between; align-items: center; cursor: pointer;
-    }
-    .collapsible:after { content: '▼'; font-size: 12px; transition: 0.3s; }
-    .collapsible.active:after { transform: rotate(180deg); }
-
-    .content { max-height: 0; overflow: hidden; transition: max-height 0.4s; background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; }
-    .content-inner { padding: 20px; }
-
-    .poker-list { list-style: none; padding-left: 0; }
-    .poker-list li { margin-bottom: 8px; display: flex; align-items: flex-start; position: relative; padding-left: 25px; }
-    .poker-list li::before { position: absolute; left: 0; font-size: 14px; font-weight: bold; }
-    .poker-list li:nth-child(4n+1)::before { content: "♠"; color: #fff; }
-    .poker-list li:nth-child(4n+2)::before { content: "♥"; color: #ff4d4d; }
-    .poker-list li:nth-child(4n+3)::before { content: "♣"; color: #fff; }
-    .poker-list li:nth-child(4n+4)::before { content: "♦"; color: #ff4d4d; }
-
+    /* 店家 Grid */
     .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
     .store-tag { background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); padding: 15px; border-radius: 10px; text-align: center; }
     .store-city-label { color: var(--gold); font-weight: bold; display: block; margin-bottom: 5px; }
 
-    /* 手機版適配：這部分是關鍵 */
+    /* 手機版適配 */
     @media (max-width: 768px) {
-        .store-grid { grid-template-columns: 1fr !important; }
+        .store-grid, .club-grid.four, .club-grid.three { grid-template-columns: 1fr !important; }
         .platform-item { flex-direction: column; align-items: flex-start; padding: 20px; gap: 15px; }
-        .platform-header { flex-direction: column; align-items: flex-start; gap: 5px; }
-        .platform-meta { width: 100%; justify-content: space-between; margin-top: 5px; }
-        .platform-logo { width: 55px; height: 55px; }
+        .platform-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+        .platform-meta { width: 100%; justify-content: space-between; }
     }
 </style>
 </head>
