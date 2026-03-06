@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v33.0 </title>
+<title>牌手基地公告 | v33.1 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -17,7 +17,7 @@
     body { 
         font-family: Arial, sans-serif; 
         margin: 0; padding: 20px; 
-        /* 修改這裡：改為固定背景，並確保最小高度撐開 */
+        /* 解決斷層關鍵：fixed */
         background: radial-gradient(circle at top, #111827, #0b0f14) fixed; 
         min-height: 100vh;
         color: #d1d5db; line-height: 1.6;
@@ -25,16 +25,18 @@
 
 
     /* 1. 優化呼吸效果與模糊感 */
-    .suit-bg { position: fixed; font-size: 25vw; opacity: 0.05; z-index: -1; pointer-events: none; }
-    .s-tl { top: 5%; left: 5%; color: var(--neon-green); filter: drop-shadow(0 0 15px var(--neon-green)); animation: breathe 6s infinite ease-in-out; }
-    .s-tr { top: 5%; right: 5%; color: var(--poker-red); animation: breathe 6s infinite ease-in-out 1.5s; }
-    .s-bl { bottom: 5%; left: 5%; color: var(--poker-red); animation: breathe 6s infinite ease-in-out 3s; }
-    .s-br { bottom: 5%; right: 5%; color: var(--neon-green); /* 讓幸運草有霓虹發光感，顯眼又不刺眼 */text-shadow: 0 0 15px rgba(0, 255, 136, 0.6); animation: breathe 6s infinite ease-in-out 4.5s; }
+    .suit-bg { position: fixed; font-size: 22vw; /* 統一調整大小 */opacity: 0.06;   /* 略微提升基礎透明度 */z-index: -1; pointer-events: none;}
 
-    /* 3. 純粹的縮放與透明度呼吸感 */
+    /* 四角對稱平衡，並針對綠/紅/白光感優化 */
+    .s-tl { top: 5%; left: 5%; color: #ffffff; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); animation: breathe 6s infinite ease-in-out; }
+    .s-tr { top: 5%; right: 5%; color: var(--poker-red); filter: drop-shadow(0 0 15px var(--poker-red)); animation: breathe 6s infinite ease-in-out 1.5s; }
+    .s-bl { bottom: 5%; left: 5%; color: var(--poker-red); filter: drop-shadow(0 0 15px var(--poker-red)); animation: breathe 6s infinite ease-in-out 3s; }
+    .s-br { bottom: 5%; right: 5%; color: var(--neon-green); filter: drop-shadow(0 0 15px var(--neon-green)); animation: breathe 6s infinite ease-in-out 4.5s; }
+
+    /* 移除旋轉的呼吸動畫 */
     @keyframes breathe { 
-        0%, 100% { opacity: 0.03; transform: scale(1); } 
-        50% { opacity: 0.08; transform: scale(1.1); } 
+        0%, 100% { opacity: 0.04; transform: scale(1); } 
+        50% { opacity: 0.1; transform: scale(1.05); } 
     }
     .main-wrapper { max-width: 900px; margin: 0 auto; }
 
