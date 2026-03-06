@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v36.2 </title>
+<title>牌手基地公告 | v37.0 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -155,17 +155,88 @@
     }
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
-/* --- 📱 平台與俱樂部樣式 --- */
-    .platform-item { display:flex; align-items:center; gap:15px; background:rgba(255,255,255,0.03); padding:15px; border-radius:10px; border:1px solid rgba(245,197,66,0.25); margin-top:15px; }
-    .platform-logo { width:55px; height:55px; border-radius:10px; object-fit:cover; }
-    .platform-title { font-weight:700; color:var(--neon-green); }
-    .platform-link { color:var(--gold); text-decoration:none; font-size:14px; }
+/* --- 📱 平台與俱樂部樣式 (質感修復版) --- */
+    .platform-item { 
+        display: flex; 
+        align-items: center; 
+        gap: 20px; 
+        background: rgba(255, 255, 255, 0.03); 
+        padding: 20px; 
+        border-radius: 12px; 
+        border: 1px solid rgba(0, 255, 136, 0.2); 
+        margin-top: 15px;
+        flex-wrap: wrap; /* 讓內部的 Grid 可以換行並撐開寬度 */
+    }
     
-    .club-grid { display:grid; gap:15px; margin-top:15px; }
-    .club-grid.four { grid-template-columns:repeat(2,1fr); }
-    .club-grid.three { grid-template-columns:repeat(3,1fr); }
-    .club-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 14px; border-radius: 10px; }
-    .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; }
+    .platform-logo { 
+        width: 65px; 
+        height: 65px; 
+        border-radius: 12px; 
+        object-fit: cover; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    
+    .platform-info { 
+        flex: 1; /* 讓文字部分佔據剩餘空間 */
+        min-width: 200px; 
+    }
+    
+    .platform-title { 
+        font-weight: 800; 
+        color: var(--neon-green); 
+        font-size: 1.1rem; 
+        margin-bottom: 4px;
+    }
+    
+    .platform-link { 
+        color: var(--gold); 
+        text-decoration: underline; 
+        font-size: 14px; 
+        font-weight: bold;
+    }
+    
+    /* 核心修復：強制 Grid 撐滿 100% 寬度 */
+    .club-grid { 
+        display: grid; 
+        gap: 12px; 
+        margin-top: 15px; 
+        width: 100%; /* 關鍵：確保他不縮在左邊 */
+    }
+    
+    /* 電腦版：XP 2+2 對齊, ClubGG 3 欄平分 */
+    .club-grid.four { grid-template-columns: repeat(2, 1fr); }
+    .club-grid.three { grid-template-columns: repeat(3, 1fr); }
+    
+    .club-card { 
+        background: rgba(255, 255, 255, 0.05); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        padding: 14px; 
+        border-radius: 10px; 
+        transition: 0.3s;
+    }
+    
+    .club-card:hover {
+        border-color: var(--gold);
+        background: rgba(245, 197, 66, 0.05);
+    }
+    
+    .club-card strong { 
+        color: var(--gold); 
+        display: block; 
+        margin-bottom: 4px; 
+        font-size: 15px;
+    }
+    
+    /* 📱 手機版 RWD：防止擠壓，改為單一長條 */
+    @media (max-width: 768px) {
+        .club-grid.four, .club-grid.three { 
+            grid-template-columns: 1fr !important; 
+        }
+        .platform-item { 
+            flex-direction: column; 
+            align-items: flex-start; 
+        }
+    }
 
     /* --- 🏪 店家排版樣式 --- */
     .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
@@ -372,31 +443,66 @@
                 <button class="nested-btn">📱 目前合作平台</button>
                 <div class="nested-content">
                     <div class="content-inner">
-                        <div class="platform-item"><img src="images/ipoker.jpg" class="platform-logo"><div><div class="platform-title">♣ iPoker ♣</div><a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
-                        <div class="platform-item"><img src="images/WPT.jpg" class="platform-logo"><div><div class="platform-title">♦ WPT Global ♦</div><a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a><br>推薦碼：A0A697</div></div>
-                        <div class="platform-item"><img src="images/N8.jpg" class="platform-logo"><div><div class="platform-title">♠ Natural8 ♠</div><a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
-                        <div class="platform-item"><img src="images/QQ.jpg" class="platform-logo"><div><div class="platform-title">♠ QQ Poker ♠</div><a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>推薦碼：MGA852</div></div>
                         <div class="platform-item">
-                            <img src="images/Xpoker.jpg" class="platform-logo">
-                            <div style="flex:1;">
-                                <div class="platform-title">♠ XPoker</div>
-                                <div class="club-grid four">
-                                    <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
-                                    <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div>
-                                    <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div>
-                                    <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div>
-                                </div>
+                            <img src="images/ipoker.jpg" class="platform-logo">
+                            <div class="platform-info">
+                                <div class="platform-title">♣ iPoker ♣</div>
+                                <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a><br>
+                                推薦碼：NTDboss
                             </div>
                         </div>
+                    
+                        <div class="platform-item">
+                            <img src="images/WPT.jpg" class="platform-logo">
+                            <div class="platform-info">
+                                <div class="platform-title">♦ WPT Global ♦</div>
+                                <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a><br>
+                                推薦碼：A0A697
+                            </div>
+                        </div>
+                    
+                        <div class="platform-item">
+                            <img src="images/N8.jpg" class="platform-logo">
+                            <div class="platform-info">
+                                <div class="platform-title">♠ Natural8 ♠</div>
+                                <a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>
+                                推薦碼：NTDboss
+                            </div>
+                        </div>
+                    
+                        <div class="platform-item">
+                            <img src="images/QQ.jpg" class="platform-logo">
+                            <div class="platform-info">
+                                <div class="platform-title">♠ QQ Poker ♠</div>
+                                <a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>
+                                推薦碼：MGA852
+                            </div>
+                        </div>
+                    
+                        <div class="platform-item">
+                            <img src="images/Xpoker.jpg" class="platform-logo">
+                            <div class="platform-info">
+                                <div class="platform-title">♠ XPoker</div>
+                                <a href="https://www.x-poker.net/" target="_blank" class="platform-link">下載連結</a>
+                            </div>
+                            <div class="club-grid four">
+                                <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
+                                <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div>
+                                <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div>
+                                <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div>
+                            </div>
+                        </div>
+                    
                         <div class="platform-item">
                             <img src="images/ClubGG.png" class="platform-logo">
-                            <div style="flex:1;">
+                            <div class="platform-info">
                                 <div class="platform-title">♠️ ClubGG ♠️</div>
-                                <div class="club-grid three">
-                                    <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
-                                    <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div>
-                                    <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div>
-                                </div>
+                                <a href="https://www.clubgg.net/" target="_blank" class="platform-link">下載連結</a>
+                            </div>
+                            <div class="club-grid three">
+                                <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
+                                <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div>
+                                <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div>
                             </div>
                         </div>
                     </div>
