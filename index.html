@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v32.15 </title>
+<title>牌手基地公告 | v32.16 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -24,12 +24,27 @@
     }
 
 
-    .suit-bg { position: fixed; font-size: 20vw; opacity: 0.05; z-index: -1; pointer-events: none; }
-    .s-tl { top: 5%; left: 5%; color: var(--neon-green); animation: breathe 6s infinite ease-in-out; }
-    .s-tr { top: 5%; right: 5%; color: var(--poker-red); animation: breathe 6s infinite ease-in-out 1.5s; }
-    .s-bl { bottom: 5%; left: 5%; color: var(--poker-red); animation: breathe 6s infinite ease-in-out 3s; }
-    .s-br { bottom: 5%; right: 5%; color: var(--neon-green); animation: breathe 6s infinite ease-in-out 4.5s; }
+    /* 1. 優化呼吸效果與模糊感 */
+    .suit-bg { 
+        position: fixed; 
+        font-size: 25vw; /* 稍微放大一點點 */
+        opacity: 0.03;   /* 降更低，讓背景更深邃 */
+        z-index: -1; 
+        pointer-events: none; 
+        filter: blur(2px); /* 加入微弱模糊，增加空間深度 */
+    }
 
+    /* 2. 調整位置與顏色擴散 */
+    .s-tl { top: -5%; left: -5%; color: var(--neon-green); animation: breathe 8s infinite ease-in-out; }
+    .s-tr { top: -5%; right: -5%; color: var(--poker-red); animation: breathe 8s infinite ease-in-out 2s; }
+    .s-bl { bottom: -5%; left: -5%; color: var(--poker-red); animation: breathe 8s infinite ease-in-out 4s; }
+    .s-br { bottom: -5%; right: -5%; color: var(--neon-green); animation: breathe 8s infinite ease-in-out 6s; }
+
+    /* 3. 調整呼吸動畫，加入旋轉 */
+    @keyframes breathe { 
+        0%, 100% { opacity: 0.02; transform: scale(1) rotate(0deg); } 
+        50% { opacity: 0.06; transform: scale(1.1) rotate(5deg); } 
+    }
     .main-wrapper { max-width: 900px; margin: 0 auto; }
 
     .status-panel {
