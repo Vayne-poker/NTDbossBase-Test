@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v30.4版</title>
+<title>牌手基地公告 | v31.0版</title>
 
 <style>
     @keyframes glow{
@@ -42,8 +42,7 @@ border:1px solid rgba(245,197,66,0.25);
 margin-top:15px;
 transition:all .25s ease;
 }
-.platform-item:hover 
-.platform-title{
+.platform-item:hover .platform-title{
     font-weight:700;
     margin-bottom:4px;
     color:#22c55e;
@@ -554,39 +553,53 @@ margin-right:4px;
 </div>
 </div>
 
-            <button class="sub-btn">💻 線上考核</button>
-            <div class="sub-content">
-                <div class="content-inner">
-                     <button class="nested-btn">📜 考核標準</button>
-    <div class="nested-content">
+<button class="nested-btn">📜 考核標準</button>
+<div class="nested-content">
+<div class="content-inner">
 
-      <div class="shop-city">線下考核場次要求</div>
-      <ul>
-        <li>限時錦標賽：20 場</li>
-        <li>限時積分賽：75 hr</li>
-      </ul>
+<div class="shop-group">
+<div>
+<div class="shop-city">線上考核手數要求</div>
+<ul>
+<li>極速桌 R&C：50000 手</li>
+<li>常規桌：25000 手</li>
+</ul>
+</div>
+</div>
 
-      <div class="shop-city">考核場館</div>
-      <ul>
-        <li>見下方「合作協會」</li>
-      </ul>
+<div class="shop-group">
+<div>
+<div class="shop-city">考核平台</div>
+<ul>
+<li>Natural8</li>
+<li>WPT Global</li>
+<li>QQ Poker</li>
+<li>X-Poker</li>
+<li>ClubGG</li>
+</ul>
+</div>
+</div>
 
-      <div class="shop-city">評選標準</div>
-      <ul>
-        <li>盈虧成績（直觀數據）</li>
-        <li>基地活動參與度與積極度</li>
-        <li>對周遭夥伴的影響力</li>
-        <li>品格評估</li>
-        <li>完成並通過指定考核場次</li>
-        <li>隨機抽查報考帳號之手牌</li>
-      </ul>
-
+<div class="shop-group">
+<div>
+<div class="shop-city">評選標準</div>
+<ul>
+<li>盈虧成績（直觀數據）</li>
+<li>基地活動參與度與積極度</li>
+<li>對周遭夥伴的影響力</li>
+<li>品格評估</li>
+<li>完成並通過指定考核場次</li>
+<li>隨機抽查報考帳號之手牌</li>
+</ul>
+</div>
+</div>
       <p style="color:#facc15;margin-top:10px;">
         ⚠️ 需於基地指定合作協會方可參與考核
       </p>
+</div>
+</div>
 
-</div>
-</div>
+
 
                     <button class="nested-btn">📱 目前合作平台</button>
                     <div class="nested-content">
@@ -709,8 +722,10 @@ ID: 277186<br>
 <div class="content-inner">
 
 <button class="nested-btn">📜 考核標準</button>
-<div class="shop-group">
+<div class="nested-content">
+<div class="content-inner">
 
+<div class="shop-group">
 <div>
 <div class="shop-city">線下考核場次要求</div>
 <ul>
@@ -718,22 +733,18 @@ ID: 277186<br>
 <li>限時積分賽：75 hr</li>
 </ul>
 </div>
-
 </div>
 
 <div class="shop-group">
-
 <div>
 <div class="shop-city">考核場館</div>
 <ul>
 <li>見下方「合作協會」</li>
 </ul>
 </div>
-
 </div>
 
 <div class="shop-group">
-
 <div>
 <div class="shop-city">評選標準</div>
 <ul>
@@ -745,7 +756,6 @@ ID: 277186<br>
 <li>隨機抽查報考帳號之手牌</li>
 </ul>
 </div>
-
 </div>
 
 <p style="color:#facc15;margin-top:10px;">
@@ -901,7 +911,7 @@ document.addEventListener('click', function(e) {
             let parent = panel.parentElement.closest('.content, .sub-content, .nested-content');
 
             while (parent) {
-                parent.style.maxHeight = parent.scrollHeight + panel.scrollHeight + "px";
+                parent.style.maxHeight = parent.scrollHeight + "px";
                 parent = parent.parentElement.closest('.content, .sub-content, .nested-content');
             }
 
