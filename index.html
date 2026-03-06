@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v28.5版</title>
+<title>牌手基地公告 | v28.6版</title>
 
 <style>
     :root { 
@@ -151,7 +151,7 @@ text-decoration:underline;
     .club-grid.three{
     grid-template-columns:1fr;
     }
-
+}
     pre { background: #0b0f14; padding: 15px; border-radius: 8px; color: #9ca3af; overflow: auto; line-height: 1.4; }
     ul, ol { padding-left: 20px; }
     .footer { text-align: center; margin-top: 50px; padding: 40px; border-top: 1px solid #1f2937; }
@@ -282,17 +282,53 @@ margin-top:12px;
 color:#f87171;
 font-size:14px;
 }
+.flow-container{
+margin-top:20px;
+}
+
+.flow-card{
+background:linear-gradient(145deg,#0f172a,#020617);
+border:1px solid rgba(34,197,94,0.35);
+border-radius:12px;
+padding:18px 22px;
+margin:12px 0;
+box-shadow:0 0 12px rgba(34,197,94,0.25);
+transition:all .2s ease;
+}
+
+.flow-card:hover{
+box-shadow:0 0 18px rgba(34,197,94,0.45);
+transform:translateY(-2px);
+}
+
+.flow-title{
+color:#22c55e;
+font-weight:700;
+margin-bottom:6px;
+}
+
+.flow-text{
+color:#e5e7eb;
+}
+
+.flow-arrow{
+text-align:center;
+font-size:22px;
+color:#22c55e;
+margin:4px 0;
+opacity:0.7;
+}
 .region-box{
+margin-top:10px;
 background:#020617;
-border-radius:10px;
-padding:16px 18px;
-margin-top:12px;
+padding:12px;
+border-radius:8px;
 }
 
 .region-row{
 display:grid;
-grid-template-columns:120px 120px 1fr;
-padding:4px 0;
+grid-template-columns:110px 140px 1fr;
+padding:6px 0;
 align-items:center;
 }
 
@@ -302,6 +338,7 @@ color:#9ca3af;
 
 .region-name{
 color:#e5e7eb;
+font-weight:600;
 }
 
 .region-line{
@@ -336,28 +373,27 @@ color:#93c5fd;
     <div class="content">
         <div class="content-inner">
             <button class="sub-btn">📝 考核步驟</button>
-            <div class="exam-flow">
+<div class="flow-container">
 
-<div class="flow-step">
+<div class="flow-card">
 <div class="flow-title">1️⃣ 綁定合作平台</div>
 <div class="flow-text">
-依照「目前合作平台」下載並使用基地推薦碼綁定帳號
+參照「目前合作平台」下載 APP 並使用基地推薦碼註冊帳號。
 </div>
 </div>
 
 <div class="flow-arrow">↓</div>
 
-<div class="flow-step">
+<div class="flow-card">
 <div class="flow-title">2️⃣ 聯絡管理員</div>
 <div class="flow-text">
-聯絡管理員 <span class="highlight">@Vayne</span><br>
-提供你的遊戲 ID 進行確認
+加入 Discord 並聯絡管理員 <b>@Vayne</b> 進入基地。
 </div>
 </div>
 
 <div class="flow-arrow">↓</div>
 
-<div class="flow-step">
+<div class="flow-card">
 <div class="flow-title">3️⃣ 區域負責人登記</div>
 
 <div class="region-box">
@@ -376,14 +412,8 @@ color:#93c5fd;
 
 <div class="region-row">
 <div class="region-area">南區</div>
-<div class="region-name">磊</div>
-<div class="region-line">Line：0982685646</div>
-</div>
-
-<div class="region-row">
-<div class="region-area"></div>
-<div class="region-name">Mark</div>
-<div class="region-line">Line：fmlove0116</div>
+<div class="region-name">磊 / Mark</div>
+<div class="region-line">Line：0982685646 / fmlove0116</div>
 </div>
 
 <div class="region-row">
@@ -395,17 +425,17 @@ color:#93c5fd;
 </div>
 
 <div class="flow-note">
-務必與區域負責人回報資料，否則不會計入考核
+※ 必須先向區域負責人登記資料，否則不會進入考核。
 </div>
 
 </div>
 
 <div class="flow-arrow">↓</div>
 
-<div class="flow-step">
+<div class="flow-card">
 <div class="flow-title">4️⃣ 開始考核</div>
 <div class="flow-text">
-完成登記後即可正式開始牌手考核
+完成登記後即可開始正式牌手考核流程。
 </div>
 </div>
 
