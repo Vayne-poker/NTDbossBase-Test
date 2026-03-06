@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v32.11 </title>
+<title>牌手基地公告 | v32.12 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -73,9 +73,14 @@
     .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; }
 
     /* 🏪 店家排版優化 */
-    .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 10px; }
-    .store-tag { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.2); padding: 8px; border-radius: 6px; text-align: center; font-size: 14px; }
-    .store-city-label { color: var(--gold); font-size: 11px; display: block; margin-bottom: 2px; }
+    .store-grid {display: grid; grid-template-columns: repeat(3, 1fr); /* 嚴格設定一列三個 */gap: 15px; margin-top: 15px;}
+    .store-tag {background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); padding: 15px; border-radius: 10px; text-align: center;}
+    .store-city-label {color: var(--gold); font-size: 18px; /* 城市名字體放大 */font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px;}
+    .store-names {font-size: 16px; /* 店家名字體放大 */color: #e5e7eb; line-height: 1.6;}
+
+    /* 手機版自動改為一列一個，避免擠壓 */
+    @media (max-width: 768px) {
+    .store-grid { grid-template-columns: 1fr; }}
     
     .region-box{ margin-top:10px; background:#020617; padding:12px; border-radius:8px; }
     .region-row{ display:grid; grid-template-columns:110px 140px 1fr; padding:6px 0; align-items:center; }
@@ -298,8 +303,16 @@
                                 <span class="store-names">A8<br>Dream Room<br>三重ABC</span>
                             </div>
                             <div class="store-tag">
+                                <span class="store-city-label">桃園</span>
+                                <span class="store-names">（內容待填）</span>
+                            </div>
+                            <div class="store-tag">
                                 <span class="store-city-label">新竹</span>
                                 <span class="store-names">Eagle</span>
+                            </div>
+                            <div class="store-tag">
+                                <span class="store-city-label">宜蘭</span>
+                                <span class="store-names">（內容待填）</span>
                             </div>
                             <div class="store-tag">
                                 <span class="store-city-label">台中</span>
