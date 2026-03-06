@@ -86,10 +86,28 @@
         padding: 12px 14px; border-radius: 10px; margin-bottom: 12px;
     }
     .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; }
-
+    
     pre { background: #0b0f14; padding: 15px; border-radius: 8px; color: #9ca3af; overflow: auto; line-height: 1.4; }
     ul, ol { padding-left: 20px; }
     .footer { text-align: center; margin-top: 50px; padding: 40px; border-top: 1px solid #1f2937; }
+    .staff-grid{
+    display:grid;
+    grid-template-columns: 60px 80px 1fr;
+    gap:6px 10px;
+    margin:10px 0;
+    font-size:15px;
+    }
+    .staff-grid div:nth-child(3n+1){
+    color:var(--gold);
+    font-weight:bold;
+    }
+    .warning-card{
+    background:rgba(255,58,58,0.05);
+    border:1px solid rgba(255,58,58,0.3);
+    border-left:4px solid var(--poker-red);
+    padding:18px;
+    border-radius:10px;
+    }
 </style>
 </head>
 <body>
@@ -125,7 +143,13 @@
                         <li>參照 "目前合作平台" 綁定相關帳號</li>
                         <li>找到管理員 @Vayne 並提供遊戲ID<br>確認考核平台是否綁定牌手基地<br><b>平台需有綁定老闆邀請碼才會計入考核</b></li>
                         <li>找到該區負責人登記資料<br>
-                            <pre>北：James    lineID：pan1409g<br>中：James    lineID：pan1409g<br>南：磊        lineID：0982685646<br>    Mark     lineID：fmlove0116<br>東(宜蘭)：    lineID：liks9121</pre>
+                            <div class="staff-grid">
+                            <div>北區</div><div>James</div><div>pan1409g</div>
+                            <div>中區</div><div>James</div><div>pan1409g</div>
+                            <div>南區</div><div>磊</div><div>0982685646</div>
+                            <div></div><div>Mark</div><div>fmlove0116</div>
+                            <div>東區</div><div>煒翔</div><div>（填入LineID）</div>
+                            </div>
                             <b>務必要和各區負責人回報資料，否則不會計入考核</b>
                         </li>
                         <li>開啟考核</li>
@@ -166,7 +190,7 @@
                                 <div style="flex:1;">
                                     <div class="platform-title">♠️ ClubGG ♠️</div>
                                     <a href="https://www.clubgg.com/" target="_blank" class="platform-link">下載連結</a>
-                                    <div style="margin-top:10px;">
+                                    <div class="club-grid-3">
                                         <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
                                         <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div>
                                         <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div>
@@ -221,49 +245,88 @@
         </div>
     </div>
 
-    <button class="collapsible">🎁 牌手福利</button>
-    <div class="content">
+<button class="collapsible">⭐ 正式牌手制度</button>
+<div class="content">
+<div class="content-inner">
+
+    <button class="sub-btn">✨ 正式牌手福利</button>
+    <div class="sub-content">
         <div class="content-inner">
-            <button class="sub-btn">✨ 正式牌手福利</button>
-            <div class="sub-content">
-                <div class="content-inner">
-                    <img src="images/福利.webp" style="width:100%; border-radius:12px; margin-bottom:15px;">
-                    <ul>
-                        <li>提供資金支援、教學資源</li>
-                        <li>比賽佔成（@welson 面談）</li>
-                        <li>外國好局資源（@1+ 詢問）</li>
-                        <li>專屬線上活動、線下不定期聚會</li>
-                        <li>贊助比賽：老闆挑選高 CP 值比賽，全額贊助費用。</li>
-                        <li>『基地Pro金色布標』資格：正式牌手資格標誌。</li>
-                    </ul>
-                </div>
-            </div>
-            <button class="sub-btn">♠️ 牌手群現有福利</button>
-            <div class="sub-content">
-                <div class="content-inner">
-                    <ul>
-                        <li>大家的 HRC：翻前 spot 協助（每人每天 2 個上限）</li>
-                        <li>請參考 <a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank">HRC 連結</a></li>
-                    </ul>
-                </div>
-            </div>
+
+            <img src="images/福利.webp" style="width:100%; border-radius:12px; margin-bottom:15px;">
+
+            <ul>
+                <li>提供資金支援與系統化教學資源</li>
+                <li>比賽佔成合作（@welson 面談）</li>
+                <li>外國優質牌局資源（@1+ 詢問）</li>
+                <li>專屬線上活動與線下聚會</li>
+                <li>高 CP 值比賽贊助（由基地挑選並提供全額贊助）</li>
+                <li>『基地 Pro 金色布標』：正式牌手資格象徵</li>
+            </ul>
+
         </div>
     </div>
 
-    <button class="collapsible">⚠️ 正式牌手檢驗</button>
-    <div class="content">
+
+    <button class="sub-btn">♠️ 社群牌手福利</button>
+    <div class="sub-content">
         <div class="content-inner">
-            <p>正式牌手通過後，仍然有機會被拔除資格。<br>但凡在下一次考核開始之前，有任何損毀、破壞基地名譽且不和諧舉動、積極度下降幾乎為0，例如線上、現場比賽、限時錦標…等無持續進行，將會被約談並有機會移除資格。</p>
+
+            <p style="color:#9ca3af; margin-bottom:12px;">
+            部分牌手可加入基地牌手社群，享有以下交流資源：
+            </p>
+
+            <ul>
+                <li>HRC 翻前 Spot 協助（每人每日 2 個上限）</li>
+                <li>牌局討論與策略交流</li>
+                <li>不定期策略分享</li>
+                <li>
+                HRC 申請表：
+                <a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank">
+                申請連結
+                </a>
+                </li>
+            </ul>
+
         </div>
     </div>
 
-    <div class="footer">
-        <h2 style="color:var(--gold);">牌手基地保有最終解釋權</h2>
-        <div style="display:flex; justify-content:center; align-items:center; gap:15px; margin-top:20px;">
-            <img src="images/NTDboss.jpg" style="width:60px; border-radius:8px;">
-            <span>所有規則與福利，以基地公告為準</span>
-            <img src="images/NTDboss.jpg" style="width:60px; border-radius:8px;">
+
+    <button class="sub-btn">⚠️ 正式牌手資格維持</button>
+    <div class="sub-content">
+        <div class="content-inner">
+
+        <div class="warning-card">
+
+        <p><b>正式牌手通過後，仍需維持基本活躍與社群規範。</b></p>
+
+        <ul>
+            <li>損毀或破壞基地名譽</li>
+            <li>影響社群氛圍的不當行為</li>
+            <li>長期未參與任何活動（線上 / 線下 / 錦標）</li>
+            <li>牌手活躍度長期接近 0</li>
+        </ul>
+
+        <p>
+        若出現上述情況，基地將安排約談並視情況調整或取消正式牌手資格。
+        </p>
+
         </div>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<div class="footer">
+    <h2 style="color:var(--gold);">牌手基地保有最終解釋權</h2>
+
+    <div style="display:flex; justify-content:center; align-items:center; gap:15px; margin-top:20px;">
+        <img src="images/NTDboss.jpg" style="width:60px; border-radius:8px;">
+        <span>所有規則與福利，以基地公告為準</span>
+        <img src="images/NTDboss.jpg" style="width:60px; border-radius:8px;">
     </div>
 </div>
 
