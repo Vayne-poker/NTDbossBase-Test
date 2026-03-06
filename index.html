@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v35.8 </title>
+<title>牌手基地公告 | v35.9 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -102,47 +102,43 @@
         margin-right: 8px;
     }
 
-    /* --- 2. 全站通用清單：撲克符號循環 (黑桃->紅心->方塊->靈魂四葉草) --- */
-    .content-inner li, .status-panel li { 
+/* --- 2. 撲克符號循環：僅限於狀態面板與 FAQ 內容 --- */
+    /* 這裡加上了前綴，保證不會影響到其他地方的數字圖示 */
+    .status-panel li, .faq-body li, .nested-content li { 
         margin-bottom: 8px; 
         display: flex; 
         align-items: flex-start; 
         color: #e5e7eb;
         position: relative;
-        padding-left: 28px; /* 稍微增加左邊距，因為 Emoji 比較寬 */
+        padding-left: 28px; 
         list-style: none;
     }
 
-    .content-inner li::before, .status-panel li::before { 
+    .status-panel li::before, .faq-body li::before, .nested-content li::before { 
         position: absolute;
         left: 0;
         font-size: 14px;
         font-weight: normal;
-        line-height: 1.2; /* 確保符號垂直居中 */
     }
 
-    /* 前三個維持 Unicode 符號 */
-    li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); }
-    li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); text-shadow: 0 0 5px var(--poker-red); }
-    li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); text-shadow: 0 0 5px var(--poker-red); }
+    /* 只有在指定區域內的 li 才會跑這個循環 */
+    .status-panel li:nth-child(4n+1)::before, .faq-body li:nth-child(4n+1)::before, .nested-content li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); }
+    .status-panel li:nth-child(4n+2)::before, .faq-body li:nth-child(4n+2)::before, .nested-content li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); text-shadow: 0 0 5px var(--poker-red); }
+    .status-panel li:nth-child(4n+3)::before, .faq-body li:nth-child(4n+3)::before, .nested-content li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); text-shadow: 0 0 5px var(--poker-red); }
     
-    /* 4, 8... 行：四葉草 Emoji 特調濾鏡 */
-    li:nth-child(4n+4)::before { 
+    .status-panel li:nth-child(4n+4)::before, .faq-body li:nth-child(4n+4)::before, .nested-content li:nth-child(4n+4)::before { 
         content: "🍀"; 
-        font-size: 13px; /* 稍微調小，視覺更和諧 */
-        top: 1px;       /* 微調垂直位置 */
-        
-        /* 靈魂濾鏡：洗掉 Emoji 雜色，強制轉為單色螢光綠 */
-        filter: 
-            /* 1. 先把 Emoji 轉成深灰色基底 (洗掉彩色) */
-            grayscale(1) brightness(0.7)
-            /* 2. 把深灰色基底疊加上螢光綠色調 */
-            sepia(1) hue-rotate(70deg) saturate(10)
-            /* 3. 補上發光質感 */
-            drop-shadow(0 0 3px var(--neon-green));
-            
-        /* 針對不同瀏覽器的 Emoji 顯示差異做修正 */
-        -webkit-filter: grayscale(1) brightness(0.7) sepia(1) hue-rotate(70deg) saturate(10) drop-shadow(0 0 3px var(--neon-green));
+        font-size: 13px;
+        top: 1px;
+        filter: grayscale(1) brightness(0.7) sepia(1) hue-rotate(70deg) saturate(10) drop-shadow(0 0 3px var(--neon-green));
+    }
+
+    /* --- 3. 排除特例：讓「評選標準」維持原本的樣式 --- */
+    .circle-list li::before { 
+        content: none !important; /* 強制關閉撲克符號 */
+    }
+    .circle-list li {
+        padding-left: 0 !important; /* 把剛才加的 28px 縮回來 */
     }
 
     /* --- 3. 出入金連結高亮 (解決 image_2/5 隱形問題) --- */
@@ -192,17 +188,46 @@
     }
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
-/* --- 📱 平台與俱樂部樣式 --- */
-    .platform-item { display:flex; align-items:center; gap:15px; background:rgba(255,255,255,0.03); padding:15px; border-radius:10px; border:1px solid rgba(245,197,66,0.25); margin-top:15px; }
-    .platform-logo { width:55px; height:55px; border-radius:10px; object-fit:cover; }
-    .platform-title { font-weight:700; color:var(--neon-green); }
-    .platform-link { color:var(--gold); text-decoration:none; font-size:14px; }
+/* --- 📱 平台樣式優化：連結移至左邊不換行 --- */
+    .platform-item { 
+        display: flex; 
+        align-items: center; 
+        gap: 15px; 
+        background: rgba(255, 255, 255, 0.03); 
+        padding: 15px; 
+        border-radius: 10px; 
+        border: 1px solid rgba(245, 197, 66, 0.25); 
+        margin-top: 15px; 
+    }
+    .platform-logo { width: 55px; height: 55px; border-radius: 10px; object-fit: cover; }
     
-    .club-grid { display:grid; gap:15px; margin-top:15px; }
-    .club-grid.four { grid-template-columns:repeat(2,1fr); }
-    .club-grid.three { grid-template-columns:repeat(3,1fr); }
-    .club-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 14px; border-radius: 10px; }
-    .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; }
+    /* 這裡讓標題、連結、推薦碼排在一橫列 */
+    .platform-info { flex: 1; }
+    .platform-header-row { 
+        display: flex; 
+        align-items: center; 
+        justify-content: flex-start; /* 改為靠左排列 */
+        gap: 12px; 
+        flex-wrap: wrap; /* 手機版自動換行 */
+    }
+    .platform-title { font-weight: 700; color: var(--neon-green); font-size: 17px; }
+    .platform-link-btn { 
+        background: rgba(0, 255, 136, 0.15); 
+        color: var(--neon-green) !important; 
+        padding: 4px 10px; 
+        border-radius: 5px; 
+        font-size: 13px; 
+        text-decoration: none !important;
+        border: 1px solid var(--neon-green);
+        text-shadow: none !important;
+    }
+    .platform-code { color: var(--gold); font-size: 14px; font-family: monospace; }
+
+    .club-grid { display: grid; gap: 10px; margin-top: 12px; width: 100%; }
+    .club-grid.four { grid-template-columns: repeat(2, 1fr); }
+    .club-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .club-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 8px; font-size: 13px; }
+    .club-card strong { color: var(--gold); display: block; margin-bottom: 2px; }
 
     /* --- 🏪 店家排版樣式 --- */
     .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
@@ -344,38 +369,82 @@
                     </div>
                 </div>
 
-                <button class="nested-btn">📱 目前合作平台</button>
-                <div class="nested-content">
-                    <div class="content-inner">
-                        <div class="platform-item"><img src="images/ipoker.jpg" class="platform-logo"><div><div class="platform-title">♣ iPoker ♣</div><a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
-                        <div class="platform-item"><img src="images/WPT.jpg" class="platform-logo"><div><div class="platform-title">♦ WPT Global ♦</div><a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a><br>推薦碼：A0A697</div></div>
-                        <div class="platform-item"><img src="images/N8.jpg" class="platform-logo"><div><div class="platform-title">♠ Natural8 ♠</div><a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
-                        <div class="platform-item"><img src="images/QQ.jpg" class="platform-logo"><div><div class="platform-title">♠ QQ Poker ♠</div><a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>推薦碼：MGA852</div></div>
+<div class="content-inner">
+    <div class="platform-item">
+        <img src="images/ipoker.jpg" class="platform-logo">
+        <div class="platform-info">
+            <div class="platform-header-row">
+                <div class="platform-title">♠ iPoker</div>
+                <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link-btn">下載連結</a>
+                <span class="platform-code">推薦碼：NTDboss</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="platform-item">
+        <img src="images/WPT.jpg" class="platform-logo">
+        <div class="platform-info">
+            <div class="platform-header-row">
+                <div class="platform-title" style="color:var(--poker-red);">♥ WPT Global</div>
+                <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link-btn">下載連結</a>
+                <span class="platform-code">推薦碼：A0A697</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="platform-item">
+        <img src="images/N8.jpg" class="platform-logo">
+        <div class="platform-info">
+            <div class="platform-header-row">
+                <div class="platform-title" style="color:var(--poker-red);">♦ Natural8</div>
+                <a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link-btn">下載連結</a>
+                <span class="platform-code">推薦碼：NTDboss</span>
+            </div>
+        </div>
+    </div>
+
                         <div class="platform-item">
-                            <img src="images/Xpoker.jpg" class="platform-logo">
-                            <div style="flex:1;">
-                                <div class="platform-title">♠ XPoker</div>
-                                <div class="club-grid four">
-                                    <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
-                                    <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div>
-                                    <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div>
-                                    <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div>
+                            <img src="images/QQ.jpg" class="platform-logo">
+                            <div class="platform-info">
+                                <div class="platform-header-row">
+                                    <div class="platform-title">♣ QQ Poker</div>
+                                    <a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link-btn">下載連結</a>
+                                    <span class="platform-code">推薦碼：MGA852</span>
                                 </div>
                             </div>
                         </div>
+                    
+                        <div class="platform-item">
+                            <img src="images/Xpoker.jpg" class="platform-logo">
+                            <div class="platform-info">
+                                <div class="platform-header-row">
+                                    <div class="platform-title">🍀 X-Poker</div>
+                                    <a href="https://www.x-poker.net/" target="_blank" class="platform-link-btn">官網下載</a>
+                                </div>
+                                <div class="club-grid four">
+                                    <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦: 3496108</div>
+                                    <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦: 3583536</div>
+                                    <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦: 3496108</div>
+                                    <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦: 3032889</div>
+                                </div>
+                            </div>
+                        </div>
+                    
                         <div class="platform-item">
                             <img src="images/ClubGG.png" class="platform-logo">
-                            <div style="flex:1;">
-                                <div class="platform-title">♠️ ClubGG ♠️</div>
+                            <div class="platform-info">
+                                <div class="platform-header-row">
+                                    <div class="platform-title">🍀 ClubGG</div>
+                                    <a href="https://www.clubgg.net/" target="_blank" class="platform-link-btn">官網下載</a>
+                                </div>
                                 <div class="club-grid three">
-                                    <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
-                                    <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div>
-                                    <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div>
+                                    <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦: 4005-6868</div>
+                                    <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦: 4005-6868</div>
+                                    <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦: 4005-6868</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
                 <button class="nested-btn">💰 出入金方式</button>
                 <div class="nested-content">
