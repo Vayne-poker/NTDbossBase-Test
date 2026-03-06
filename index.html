@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | 100% 原稿精裝版</title>
+<title>牌手基地公告 | v28.1版</title>
 
 <style>
     :root { 
@@ -86,7 +86,30 @@
         padding: 12px 14px; border-radius: 10px; margin-bottom: 12px;
     }
     .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; }
-    
+    .club-grid{
+    display:grid;
+    gap:15px;
+    margin-top:15px;
+    }
+
+    /* 4個 → 2x2 */
+    .club-grid.four{
+    grid-template-columns:repeat(2,1fr);
+    }
+
+    /* 3個 → 3欄 */
+    .club-grid.three{
+    grid-template-columns:repeat(3,1fr);
+    }
+
+    /* 手機 */
+    @media (max-width:768px){
+
+    .club-grid.four,
+    .club-grid.three{
+    grid-template-columns:1fr;
+    }
+
     pre { background: #0b0f14; padding: 15px; border-radius: 8px; color: #9ca3af; overflow: auto; line-height: 1.4; }
     ul, ol { padding-left: 20px; }
     .footer { text-align: center; margin-top: 50px; padding: 40px; border-top: 1px solid #1f2937; }
@@ -108,6 +131,59 @@
     padding:18px;
     border-radius:10px;
     }
+    .team-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.team-card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(57,255,20,0.25);
+border-radius:12px;
+padding:20px;
+display:flex;
+gap:15px;
+align-items:center;
+transition:0.25s;
+}
+
+.team-card:hover{
+transform:translateY(-3px);
+box-shadow:0 0 15px rgba(57,255,20,0.25);
+}
+
+.team-avatar{
+width:70px;
+height:70px;
+border-radius:50%;
+object-fit:cover;
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+.team-info{
+display:flex;
+flex-direction:column;
+}
+
+.team-name{
+color:var(--gold);
+font-weight:bold;
+font-size:18px;
+}
+
+.team-role{
+color:#9ca3af;
+font-size:14px;
+margin-bottom:6px;
+}
+
+.team-id{
+font-family:monospace;
+color:var(--neon-green);
+font-size:14px;
+}
 </style>
 </head>
 <body>
@@ -171,32 +247,53 @@
                             <div class="platform-item"><img src="images/N8.jpg" class="platform-logo"><div><div class="platform-title">♠ Natural8 ♠</div><a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
                             <div class="platform-item"><img src="images/QQ.jpg" class="platform-logo"><div><div class="platform-title">♠ QQ Poker ♠</div><a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>推薦碼：MGA852</div></div>
 
-                            <div class="platform-item">
-                                <img src="images/Xpoker.jpg" class="platform-logo">
-                                <div style="flex:1;">
-                                    <div class="platform-title">♠ XPoker</div>
-                                    <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a>
-                                    <div style="margin-top:10px; display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                                        <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
-                                        <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div>
-                                        <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div>
-                                        <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div>
-                                    </div>
-                                </div>
-                            </div>
+<div class="platform-item">
+    <img src="images/Xpoker.jpg" class="platform-logo">
+    <div style="flex:1;">
+        <div class="platform-title">♠ XPoker</div>
+        <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a>
 
-                            <div class="platform-item">
-                                <img src="images/ClubGG.png" class="platform-logo">
-                                <div style="flex:1;">
-                                    <div class="platform-title">♠️ ClubGG ♠️</div>
-                                    <a href="https://www.clubgg.com/" target="_blank" class="platform-link">下載連結</a>
-                                    <div class="club-grid-3">
-                                        <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
-                                        <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div>
-                                        <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="club-grid-2">
+            <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
+            <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div>
+            <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div>
+            <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div>
+        </div>
+    </div>
+</div>
+<div class="platform-item">
+    <img src="images/ClubGG.png" class="platform-logo">
+
+    <div style="flex:1;">
+        <div class="platform-title">♠️ ClubGG ♠️</div>
+
+        <a href="https://www.clubgg.com/" target="_blank" class="platform-link">
+        下載連結
+        </a>
+
+        <div class="club-grid three">
+
+            <div class="club-card">
+                <strong>快樂呱Tiny (1:1)</strong>
+                ID: 954109<br>
+                推薦人: 4005-6868
+            </div>
+
+            <div class="club-card">
+                <strong>快樂呱Massiv (1:26)</strong>
+                ID: 619975<br>
+                推薦人: 4005-6868
+            </div>
+
+            <div class="club-card">
+                <strong>時光雞Time (1:27)</strong>
+                ID: 970779<br>
+                推薦人: 4005-6868
+            </div>
+
+        </div>
+    </div>
+</div>
                         </div>
                     </div>
 
