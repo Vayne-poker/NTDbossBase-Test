@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v36.1 </title>
+<title>牌手基地公告 | v36.2 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -191,19 +191,49 @@
     /* 4. [美觀] 負責人底色調亮一點，看起來不暗沉 */
     .region-box { background: rgba(31, 41, 55, 0.7) !important; padding: 15px; }
     /* --- ❓ FAQ、警告與頁尾 --- */
-    .faq-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
-    .faq-header { width: 100%; background: none; border: none; padding: 15px 18px; color: var(--gold); font-size: 16px; font-weight: bold; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-header:after { content: '▾'; transition: 0.3s; color: var(--neon-green); }
-    .faq-header.faq-active:after { transform: rotate(180deg); }
-    /* 2. 出入金 FAQ 連結高亮 & 點亮 (解決 image_2 隱形問題) */
-    .faq-body a { 
-        color: var(--neon-green) !important; 
-        text-decoration: underline !important; 
-        font-weight: bold;
-        text-shadow: 0 0 8px rgba(0, 255, 136, 0.6); /* 點亮效果 */
-    }
-    .faq-body a:hover { filter: brightness(1.2); }
-    
+.faq-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin-bottom: 12px; /* 增加卡片間距 */
+    overflow: hidden;
+}
+
+.faq-header {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 18px; /* 增加點擊區域 */
+    color: var(--gold);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.faq-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 更絲滑的動畫 */
+    background: rgba(0, 0, 0, 0.15); /* 稍微深色區隔 */
+}
+
+/* 這裡是解決擠壓的關鍵：確保內容有 padding 且不被壓縮 */
+.faq-body-inner {
+    padding: 18px; 
+    line-height: 1.7;
+    color: #d1d5db;
+    font-size: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
     .warning-card { background: rgba(255, 58, 58, 0.05); border: 1px solid rgba(255, 58, 58, 0.3); border-left: 4px solid var(--poker-red); padding: 18px; border-radius: 10px; }
     .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
     .circle-list li { counter-increment: item; margin-bottom: 6px; }
