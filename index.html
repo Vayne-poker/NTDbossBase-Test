@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.0 </title>
+<title>牌手基地公告 | v37.1 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -181,20 +181,48 @@
         min-width: 200px; 
     }
     
+    /* --- 平台標題與下載按鈕優化 --- */
+    .platform-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
     .platform-title { 
         font-weight: 800; 
         color: var(--neon-green); 
-        font-size: 1.1rem; 
-        margin-bottom: 4px;
+        font-size: 1.1rem;
+        margin: 0;
     }
     
-    .platform-link { 
-        color: var(--gold); 
-        text-decoration: underline; 
-        font-size: 14px; 
+    /* 質感下載按鈕 */
+    .platform-link-btn {
+        background: rgba(0, 255, 136, 0.1);
+        border: 1px solid var(--neon-green);
+        color: var(--neon-green) !important;
+        text-decoration: none !important;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 12px;
         font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        text-shadow: none !important;
     }
     
+    .platform-link-btn:hover {
+        background: var(--neon-green);
+        color: #000 !important;
+        box-shadow: 0 0 10px var(--neon-green);
+    }
+    
+    /* 推薦碼樣式稍微縮小，不搶戲 */
+    .promo-text {
+        font-size: 14px;
+        color: #9ca3af;
+    }
     /* 核心修復：強制 Grid 撐滿 100% 寬度 */
     .club-grid { 
         display: grid; 
@@ -446,44 +474,54 @@
                         <div class="platform-item">
                             <img src="images/ipoker.jpg" class="platform-logo">
                             <div class="platform-info">
-                                <div class="platform-title">♣ iPoker ♣</div>
-                                <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a><br>
-                                推薦碼：NTDboss
+                                <div class="platform-header">
+                                    <div class="platform-title">♠ iPoker</div>
+                                    <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link-btn">下載連結</a>
+                                </div>
+                                <div class="promo-text">推薦碼：NTDboss</div>
                             </div>
                         </div>
                     
                         <div class="platform-item">
                             <img src="images/WPT.jpg" class="platform-logo">
                             <div class="platform-info">
-                                <div class="platform-title">♦ WPT Global ♦</div>
-                                <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a><br>
-                                推薦碼：A0A697
+                                <div class="platform-header">
+                                    <div class="platform-title">♥ WPT Global</div>
+                                    <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link-btn">下載連結</a>
+                                </div>
+                                <div class="promo-text">推薦碼：A0A697</div>
                             </div>
                         </div>
                     
                         <div class="platform-item">
                             <img src="images/N8.jpg" class="platform-logo">
                             <div class="platform-info">
-                                <div class="platform-title">♠ Natural8 ♠</div>
-                                <a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>
-                                推薦碼：NTDboss
+                                <div class="platform-header">
+                                    <div class="platform-title">♦ Natural8</div>
+                                    <a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link-btn">下載連結</a>
+                                </div>
+                                <div class="promo-text">推薦碼：NTDboss</div>
                             </div>
                         </div>
                     
                         <div class="platform-item">
                             <img src="images/QQ.jpg" class="platform-logo">
                             <div class="platform-info">
-                                <div class="platform-title">♠ QQ Poker ♠</div>
-                                <a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>
-                                推薦碼：MGA852
+                                <div class="platform-header">
+                                    <div class="platform-title">♣ QQ Poker</div>
+                                    <a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link-btn">下載連結</a>
+                                </div>
+                                <div class="promo-text">推薦碼：MGA852</div>
                             </div>
                         </div>
                     
                         <div class="platform-item">
                             <img src="images/Xpoker.jpg" class="platform-logo">
                             <div class="platform-info">
-                                <div class="platform-title">♠ XPoker</div>
-                                <a href="https://www.x-poker.net/" target="_blank" class="platform-link">下載連結</a>
+                                <div class="platform-header">
+                                    <div class="platform-title">♠ XPoker</div>
+                                    <a href="https://www.x-poker.net/" target="_blank" class="platform-link-btn">下載連結</a>
+                                </div>
                             </div>
                             <div class="club-grid four">
                                 <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
@@ -496,8 +534,10 @@
                         <div class="platform-item">
                             <img src="images/ClubGG.png" class="platform-logo">
                             <div class="platform-info">
-                                <div class="platform-title">♠️ ClubGG ♠️</div>
-                                <a href="https://www.clubgg.net/" target="_blank" class="platform-link">下載連結</a>
+                                <div class="platform-header">
+                                    <div class="platform-title">♠ ClubGG</div>
+                                    <a href="https://www.clubgg.net/" target="_blank" class="platform-link-btn">下載連結</a>
+                                </div>
                             </div>
                             <div class="club-grid three">
                                 <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
