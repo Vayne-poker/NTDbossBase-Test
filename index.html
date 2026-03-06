@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v35.6 </title>
+<title>牌手基地公告 | v36.0 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -166,14 +166,40 @@
     .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px; }
     .store-names { font-size: 16px; color: #e5e7eb; line-height: 1.6; }
 
-     /* --- 👥 區域負責人樣式 (電腦版優化) --- */
-    .region-box { margin-top: 10px; background: rgba(2, 6, 23, 0.6); /* 稍微帶點透明感，更有科技感 */padding: 15px; border-radius: 8px; }
-    .region-row { display: grid; /* 第一欄加寬到 120px 確保 東區(宜蘭) 不換行 */grid-template-columns: 120px 100px 1fr; padding: 12px 0; align-items: center;border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+/* --- 👥 區域負責人樣式 (電腦版優化) --- */
+    .region-box { 
+        margin-top: 10px; 
+        background: rgba(2, 6, 23, 0.6); /* 稍微帶點透明感，更有科技感 */
+        padding: 15px; 
+        border-radius: 8px; 
+    }
+    
+    .region-row { 
+        display: grid; 
+        /* 第一欄加寬到 120px 確保 東區(宜蘭) 不換行 */
+        grid-template-columns: 120px 100px 1fr; 
+        padding: 12px 0; 
+        align-items: center; 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    }
+    
     .region-row:last-child { border-bottom: none; }
-    .region-area { color: #9ca3af; white-space: nowrap; /* 強制不換行 */}
-    .region-name { color: #e5e7eb; font-weight: 600; }
-    .region-line { color: var(--neon-green); /* 統一代碼中的綠色變數 */font-family: monospace;   /* ID 類建議用等寬字體，較好辨識 */text-align: right;        /* LINE ID 靠右對齊比較整齊 */}
-
+    
+    .region-area { 
+        color: #9ca3af; 
+        white-space: nowrap; /* 強制不換行 */
+    }
+    
+    .region-name { 
+        color: #e5e7eb; 
+        font-weight: 600; 
+    }
+    
+    .region-line { 
+        color: var(--neon-green); /* 統一代碼中的綠色變數 */
+        font-family: monospace;   /* ID 類建議用等寬字體，較好辨識 */
+        text-align: right;        /* LINE ID 靠右對齊比較整齊 */
+    }
     /* --- ❓ FAQ、警告與頁尾 --- */
     .faq-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
     .faq-header { width: 100%; background: none; border: none; padding: 15px 18px; color: var(--gold); font-size: 16px; font-weight: bold; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -188,24 +214,41 @@
     .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 4px; }
     .footer { text-align: center; margin-top: 40px; }
 
-    /* 📱 手機版 RWD 優化 (請覆蓋原本 @media 內相關部分) */
-    @media (max-width: 768px) {/* 1. 防止切到字，維持一列 */.store-grid, .club-grid.four, .club-grid.three { grid-template-columns: 1fr !important; gap: 10px; }
-         /* 2. 負責人排版優化：手機版也讓它橫向排開，不強迫換行 */
+/* 📱 手機版 RWD 優化 (請覆蓋原本 @media 內相關部分) */
+    @media (max-width: 768px) {
+        /* 1. 防止切到字，維持一列 */
+        .store-grid, .club-grid.four, .club-grid.three { 
+            grid-template-columns: 1fr !important; 
+            gap: 10px; 
+        }
+        
+        /* 2. 負責人排版優化：手機版也讓它橫向排開，不強迫換行 */
         .region-row { 
-            grid-template-columns: 95px 65px 1fr !important; /* 縮小一點點寬度 */
-            gap: 4px; 
-            padding: 10px 0;
+            grid-template-columns: 100px 70px 1fr !important; /* 手機版寬度微調 */
+            gap: 5px; 
+            padding: 10px 0; 
+            align-items: center;
         }
-        .region-area {
-            font-size: 12px;
-            letter-spacing: -0.5px; /* 稍微壓縮字距確保不換行 */
+    
+        .region-area { 
+            font-size: 13px;    /* 手機版字體縮小一點點 */
+            white-space: nowrap !important; /* 絕對不准換行 */
         }
-        .region-area {font-size: 13px;    /* 手機版字體縮小一點點 */white-space: nowrap !important; /* 絕對不准換行 */}
-        .region-name { font-size: 14px; }
-
+    
+        .region-name { 
+            font-size: 14px; 
+        }
+    
         /* 3. 重置 LINE ID 樣式：不再強制佔據整行 */
-        .region-line { grid-column: auto !important; /* 取消 1 / -1，讓它乖乖待在第三欄 */background: transparent !important; padding: 0 !important; margin-top: 0 !important; font-size: 12px;text-align: right; /* 靠右對齊會讓介面看起來更寬敞 */}}
-
+        .region-line { 
+            grid-column: auto !important; /* 取消 1 / -1，讓它乖乖待在第三欄 */
+            background: transparent !important; 
+            padding: 0 !important; 
+            margin-top: 0 !important; 
+            font-size: 12px;
+            text-align: right; /* 靠右對齊會讓介面看起來更寬敞 */
+        }
+    }
         /* 合作平台垂直排列 */
         .platform-item { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px; }
         .platform-logo { width: 45px; height: 45px; }
