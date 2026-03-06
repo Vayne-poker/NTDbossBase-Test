@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v35.3 </title>
+<title>牌手基地公告 | v35.4 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -94,23 +94,31 @@
         text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); /* 新增：標題發光 */
     }
     .status-panel ul { list-style: none; padding-left: 0; }
+    /* --- 撲克符號精確循環版 --- */
     .status-panel li { 
         margin-bottom: 8px; 
         display: flex; 
         align-items: flex-start; 
-        color: #e5e7eb; /* 新增：讓文字更有質感 */
-    }
-    .status-panel li::before { 
-    content: "♠"; /* 預設花色 */
-    color: var(--neon-green); 
-    margin-right: 12px; 
-    font-size: 14px;
+        color: #e5e7eb;
+        position: relative;
+        padding-left: 25px; /* 給符號留固定空間 */
     }
 
-    /* 讓符號跳著換，更生動 */
-    .status-panel li:nth-child(2n)::before { content: "♥"; color: var(--poker-red); }
-    .status-panel li:nth-child(3n)::before { content: "♣"; color: var(--neon-green); }
-    .status-panel li:nth-child(4n)::before { content: "♦"; color: var(--poker-red); }
+    .status-panel li::before { 
+        position: absolute;
+        left: 0;
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    /* 1, 5, 9... 行 */
+    .status-panel li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); }
+    /* 2, 6, 10... 行 */
+    .status-panel li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); }
+    /* 3, 7, 11... 行 */
+    .status-panel li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); }
+    /* 4, 8, 12... 行 */
+    .status-panel li:nth-child(4n+4)::before { content: "♣"; color: var(--neon-green); }
 
     /* 新增：讓 li 裡面的重點數字/文字發光 */
     .status-panel li b, .status-panel li strong {
@@ -186,7 +194,15 @@
     /* 📱 手機版 RWD 優化 (請覆蓋原本 @media 內相關部分) */
     @media (max-width: 768px) {/* 1. 防止切到字，維持一列 */.store-grid, .club-grid.four, .club-grid.three { grid-template-columns: 1fr !important; gap: 10px; }
          /* 2. 負責人排版優化：手機版也讓它橫向排開，不強迫換行 */
-        .region-row { grid-template-columns: 100px 70px 1fr !important; /* 手機版寬度微調 */gap: 5px; padding: 10px 0;align-items: center;}
+        .region-row { 
+            grid-template-columns: 95px 65px 1fr !important; /* 縮小一點點寬度 */
+            gap: 4px; 
+            padding: 10px 0;
+        }
+        .region-area {
+            font-size: 12px;
+            letter-spacing: -0.5px; /* 稍微壓縮字距確保不換行 */
+        }
         .region-area {font-size: 13px;    /* 手機版字體縮小一點點 */white-space: nowrap !important; /* 絕對不准換行 */}
         .region-name { font-size: 14px; }
 
