@@ -338,18 +338,19 @@ margin-top:20px;
 }
 
 .flow-card{
-background:linear-gradient(145deg,#0f172a,#020617);
-border:1px solid rgba(34,197,94,0.35);
-border-radius:12px;
-padding:18px 22px;
-margin:12px 0;
-box-shadow:0 0 12px rgba(34,197,94,0.25);
-transition:all .2s ease;
+    background:#111;
+    border-radius:12px;
+    padding:16px;
+    border:1px solid #333;
+    transition:all 0.25s ease;
 }
 
+/* hover 發光 */
 .flow-card:hover{
-box-shadow:0 0 18px rgba(34,197,94,0.45);
-transform:translateY(-2px);
+    border-color:#22c55e;
+    box-shadow:
+        0 0 10px rgba(34,197,94,0.4),
+        0 0 20px rgba(34,197,94,0.2);
 }
 
 .flow-title{
@@ -394,6 +395,22 @@ font-weight:600;
 
 .region-line{
 color:#93c5fd;
+}
+.circle-list{
+list-style:none;
+padding-left:0;
+counter-reset:item;
+}
+
+.circle-list li{
+counter-increment:item;
+margin-bottom:6px;
+}
+
+.circle-list li::before{
+content: counter(item) "️⃣ ";
+font-weight:600;
+margin-right:4px;
 }
 </style>
 </head>
@@ -505,7 +522,38 @@ color:#93c5fd;
             <div class="sub-content">
                 <div class="content-inner">
                     <button class="nested-btn">📜 考核標準</button>
-                    <div class="nested-content"><div class="content-inner"><ul><li>每週分享 3 手以上手牌至群組</li><li>與其他牌手討論手牌</li><li>線上：手數超過 25000 手 / 急速桌 50000 手</li><li>線上：每日 session 結束後，於記事本回報當日戰績</li><li>積極度、活動、貼文參與度、牌手規劃會談（該區負責人）</li></ul></div></div>
+                    <div class="nested-content">
+                    <div class="content-inner">
+
+                   <ul class="circle-list">
+
+                <li><b>線上考核手數要求</b></li>
+                <li>極速桌 R&C：50000 手</li>
+                <li>常規桌：25000 手</li>
+
+                <li style="margin-top:10px;"><b>考核平台</b></li>
+                <li>Natural8</li>
+                <li>WPT Global</li>
+                <li>QQ Poker</li>
+                <li>X-Poker</li>
+                <li>ClubGG</li>
+
+                <li style="margin-top:10px;"><b>評選標準</b></li>
+                <li>盈虧成績（直觀數據）</li>
+                <li>基地活動參與度與積極度</li>
+                <li>對周遭夥伴的影響力</li>
+                <li>品格評估</li>
+                <li>完成並通過指定考核場次</li>
+                <li>隨機抽查報考帳號之手牌</li>
+
+</ul>
+
+<p style="color:#facc15; margin-top:10px;">
+⚠️ 需綁定基地代理平台帳號方可參與考核
+</p>
+
+</div>
+</div>
 
                     <button class="nested-btn">📱 目前合作平台</button>
                     <div class="nested-content">
@@ -627,9 +675,38 @@ ID: 277186<br>
             <div class="sub-content">
                 <div class="content-inner">
                     <button class="nested-btn">📜 考核標準</button>
-                    <div class="nested-content"><div class="content-inner"><ul><li><b>線下：現場限時錦標（20 場，配合店家）</b></li><li>各縣市提供 3–5 場指定場次</li><li>指定場次需與當地負責人或指定正式牌手對戰</li><li>線下：上桌報買入，下桌拍碼單，交給各自所屬負責人</li></ul></div></div>
+<div class="nested-content">
+<div class="content-inner">
+
+<ul class="circle-list">
+
+<li><b>線下考核場次要求</b></li>
+<li>限時錦標賽：20 場</li>
+<li>限時積分賽：75 小時</li>
+
+<li style="margin-top:10px;"><b>考核場館</b></li>
+<li>高雄－亞特蘭提斯</li>
+<li>高雄－EPIC</li>
+<li>高雄－華人德州撲克協會</li>
+
+<li style="margin-top:10px;"><b>評選標準</b></li>
+<li>盈虧成績（直觀數據）</li>
+<li>基地活動參與度與積極度</li>
+<li>對周遭夥伴的影響力</li>
+<li>品格評估</li>
+<li>完成並通過指定考核場次</li>
+<li>隨機抽查報考之帳號手牌</li>
+
+</ul>
+
+<p style="color:#facc15; margin-top:10px;">
+⚠️ 需綁定基地代理線下場館方可參與考核
+</p>
+
+</div>
+</div>
                     <button class="nested-btn">🤝 配合店家</button>
-                    <div class="nested-content"><div class="content-inner"><ul><li>台北: A8,Dream Room,三重ABC</li><li>新竹: Eagle</li><li>台中: UT,IPC,Elite,CityPoker,CheckRaise</li><li>高雄: 亞特蘭提斯,Eagle</li></ul></div></div>
+                    <div class="nested-content"><div class="content-inner"><ul><li>台北: A8,Dream Room,三重ABC</li><li>新竹: Eagle</li><li>台中: UT,IPC,Elite,CityPoker,CheckRaise</li><li>高雄: 亞特蘭提斯,EPIC,高雄華人德州撲克協會</li></ul></div></div>
                 </div>
             </div>
         </div>
