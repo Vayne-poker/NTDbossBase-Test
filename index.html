@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.5-1 </title>
+<title>牌手基地公告 | v38.0 </title>
 
 <style>
     /* 變數與基礎設定 */
@@ -69,7 +69,8 @@
     .poker-list li:nth-child(4n+2)::before { content: "♥"; color: #ff4d4d; }
     .poker-list li:nth-child(4n+3)::before { content: "♣"; color: #fff; }
     .poker-list li:nth-child(4n+4)::before { content: "♦"; color: #ff4d4d; }
-
+    .circle-list {list-style-type: decimal !important; /* 強制顯示數字 */padding-left: 25px !important;}
+    .circle-list li::before {content: none !important; /* 移除原本擋住數字的撲克符號 */}
     /* 按鈕類通用樣式 */
     .collapsible, .sub-btn, .nested-btn {
         background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon);
@@ -81,41 +82,28 @@
     .active:after { transform: rotate(180deg); }
 
     /* 內容區塊 */
-    .content, .sub-content, .nested-content {
-        max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
-        background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; margin-top: -5px;
-    }
+    .content, .sub-content, .nested-content {max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; margin-top: -5px; }
     .content-inner { padding: 20px; }
 
     /* 連結高亮 */
-    a { 
-        color: var(--neon) !important; text-decoration: underline !important; 
-        text-shadow: 0 0 8px rgba(0, 255, 136, 0.5); transition: 0.3s; 
-    }
+    a { color: var(--neon) !important; text-decoration: underline !important; text-shadow: 0 0 8px rgba(0, 255, 136, 0.5); transition: 0.3s; }
     a:hover { filter: brightness(1.2); text-shadow: 0 0 12px var(--neon); }
 
     /* 店家與卡片排版 */
     .shop-group { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25); border-radius: 10px; padding: 14px; margin: 12px 0; }
     .shop-city { color: var(--gold); font-weight: bold; border-left: 3px solid var(--gold); padding-left: 10px; margin: 10px 0; }
 
-    .platform-item { 
-        display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); 
-        padding: 20px; border-radius: 16px; border: 1px solid rgba(0, 255, 136, 0.15); 
-        margin-top: 15px; flex-wrap: wrap; transition: 0.3s; 
-    }
-    .platform-logo { 
-        width: 65px; height: 65px; border-radius: 50%; object-fit: cover; 
-        border: 2px solid rgba(255, 255, 255, 0.05); transition: 0.4s; 
-    }
+    .platform-item { display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 16px; border: 1px solid rgba(0, 255, 136, 0.15); margin-top: 15px; flex-wrap: wrap; transition: 0.3s; }
+    .platform-logo { width: 65px; height: 65px; border-radius: 50%; object-fit: cover;border: 2px solid rgba(255, 255, 255, 0.05); transition: 0.4s; }
     .platform-item:hover { border-color: var(--gold); background: rgba(245, 197, 66, 0.03); }
     .platform-item:hover .platform-logo { transform: scale(1.08); border-color: var(--gold); box-shadow: 0 0 20px rgba(245, 197, 66, 0.5); }
 
-    .platform-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px; }
+    /* 下載連結稍微離開標題 */
+    .platform-header {margin-bottom: 12px; /* 增加間距 */}
     .platform-title { font-weight: 800; color: var(--neon); font-size: 1.1rem; }
     .platform-link-btn { 
         border: 1.5px solid var(--gold); color: var(--gold) !important; padding: 6px 18px; 
-        border-radius: 20px; font-size: 13px; font-weight: 800; text-decoration: none !important; transition: 0.3s; 
-    }
+        border-radius: 20px; font-size: 13px; font-weight: 800; text-decoration: none !important; transition: 0.3s; }
     .platform-link-btn:hover { background: var(--gold); color: #0b0f14 !important; box-shadow: 0 0 15px var(--gold); }
 
     .club-grid { display: grid; gap: 12px; margin-top: 15px; width: 100%; }
@@ -139,7 +127,13 @@
     .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
     .store-tag { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); padding: 15px; border-radius: 10px; text-align: center; }
     .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); }
-
+     /* 基地最終解釋權 */
+    .footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 40px 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
     /* 手機版適配 */
     @media (max-width: 768px) {
         .store-grid, .club-grid.four, .club-grid.three { grid-template-columns: 1fr !important; }
