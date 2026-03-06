@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v32.13 </title>
+<title>牌手基地公告 | v32.14 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -61,39 +61,32 @@
     }
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
-    .platform-item{ display:flex; align-items:center; gap:15px; background:rgba(255,255,255,0.03); padding:15px; border-radius:10px; border:1px solid rgba(245,197,66,0.25); margin-top:15px; }
-    .platform-logo{ width:55px; height:55px; border-radius:10px; object-fit:cover; }
-    .platform-title{ font-weight:700; color:var(--neon-green); }
-    .platform-link{ color:var(--gold); text-decoration:none; font-size:14px; }
+/* --- 📱 平台與俱樂部樣式 --- */
+    .platform-item { display:flex; align-items:center; gap:15px; background:rgba(255,255,255,0.03); padding:15px; border-radius:10px; border:1px solid rgba(245,197,66,0.25); margin-top:15px; }
+    .platform-logo { width:55px; height:55px; border-radius:10px; object-fit:cover; }
+    .platform-title { font-weight:700; color:var(--neon-green); }
+    .platform-link { color:var(--gold); text-decoration:none; font-size:14px; }
     
-    .club-grid{ display:grid; gap:15px; margin-top:15px; }
-    .club-grid.four{ grid-template-columns:repeat(2,1fr); }
-    .club-grid.three{ grid-template-columns:repeat(3,1fr); }
+    .club-grid { display:grid; gap:15px; margin-top:15px; }
+    .club-grid.four { grid-template-columns:repeat(2,1fr); }
+    .club-grid.three { grid-template-columns:repeat(3,1fr); }
     .club-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 14px; border-radius: 10px; }
     .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; }
 
-    /* 🏪 店家排版優化 */
-    .store-grid {display: grid; grid-template-columns: repeat(3, 1fr); /* 嚴格設定一列三個 */gap: 15px; margin-top: 15px;}
-    .store-tag {background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); padding: 15px; border-radius: 10px; text-align: center;}
-    .store-city-label {color: var(--gold); font-size: 18px; /* 城市名字體放大 */font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px;}
-    .store-names {font-size: 16px; /* 店家名字體放大 */color: #e5e7eb; line-height: 1.6;}
+    /* --- 🏪 店家排版樣式 --- */
+    .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+    .store-tag { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); padding: 15px; border-radius: 10px; text-align: center; }
+    .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px; }
+    .store-names { font-size: 16px; color: #e5e7eb; line-height: 1.6; }
 
-    /* 手機版自動改為一列一個，避免擠壓 */
-    @media (max-width: 768px) {
-    .store-grid { grid-template-columns: 1fr; }}
-    
-    .region-box{ margin-top:10px; background:#020617; padding:12px; border-radius:8px; }
-    /* 電腦版保持三欄，比例優化 */
-    .region-row {display: grid;grid-template-columns: 80px 100px 1fr; /* 縮小前兩欄寬度，把空間留給 ID */padding: 8px 0;align-items: center;border-bottom: 1px solid rgba(255, 255, 255, 0.05);}
-    /* 📱 手機版 (寬度小於 600px) 自動變兩層 */
-    @media (max-width: 600px) {
-    .region-row {grid-template-columns: 80px 1fr; /* 地區跟名字一列 */gap: 5px;padding: 12px 0;}
-    .region-line { grid-column: 1 / -1; /* Line ID 自己佔據下面整行 */color: var(--neon-green);background: rgba(0, 255, 136, 0.05);padding: 4px 8px;border-radius: 4px;font-size: 14px;margin-top: 4px;}
-    }    
-    .region-area{ color:#9ca3af; }
-    .region-name{ color:#e5e7eb; font-weight:600; }
-    .region-line{ color:#93c5fd; }
+    /* --- 👥 區域負責人樣式 --- */
+    .region-box { margin-top: 10px; background: #020617; padding: 12px; border-radius: 8px; }
+    .region-row { display: grid; grid-template-columns: 85px 105px 1fr; padding: 10px 0; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .region-area { color: #9ca3af; }
+    .region-name { color: #e5e7eb; font-weight: 600; }
+    .region-line { color: #93c5fd; }
 
+    /* --- ❓ FAQ、警告與頁尾 --- */
     .faq-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
     .faq-header { width: 100%; background: none; border: none; padding: 15px 18px; color: var(--gold); font-size: 16px; font-weight: bold; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
     .faq-header:after { content: '▾'; transition: 0.3s; color: var(--neon-green); }
@@ -101,14 +94,38 @@
     .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
     .faq-body-inner { padding: 0 18px 15px 18px; color: #d1d5db; }
     
-    .warning-card{ background:rgba(255,58,58,0.05); border:1px solid rgba(255,58,58,0.3); border-left:4px solid var(--poker-red); padding:18px; border-radius:10px; }
-    .circle-list{ list-style:none; padding-left:0; counter-reset:item; }
-    .circle-list li{ counter-increment:item; margin-bottom:6px; }
-    .circle-list li::before{ content: counter(item) "️⃣ "; font-weight:600; margin-right:4px; }
+    .warning-card { background: rgba(255, 58, 58, 0.05); border: 1px solid rgba(255, 58, 58, 0.3); border-left: 4px solid var(--poker-red); padding: 18px; border-radius: 10px; }
+    .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
+    .circle-list li { counter-increment: item; margin-bottom: 6px; }
+    .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 4px; }
+    .footer { text-align: center; margin-top: 40px; }
 
-    .footer { text-align:center; margin-top:40px; }
+    /* 📱📱📱 手機版 RWD 終極優化 (螢幕小於 768px) 📱📱📱 */
+    @media (max-width: 768px) {
+        /* 所有網格與卡片全部垂直一列，防止切到字 */
+        .store-grid, .club-grid.four, .club-grid.three { grid-template-columns: 1fr !important; gap: 10px; }
+        
+        /* 負責人排版優化 */
+        .region-row { grid-template-columns: 80px 1fr !important; gap: 5px; padding: 12px 0; }
+        .region-line { 
+            grid-column: 1 / -1; 
+            background: rgba(147, 197, 253, 0.1); 
+            padding: 6px 10px; 
+            border-radius: 6px; 
+            margin-top: 6px; 
+            font-size: 14px;
+            color: var(--neon-green);
+            word-break: break-all;
+        }
 
-    @media (max-width:768px){ .club-grid.four, .club-grid.three{ grid-template-columns:1fr; } .region-row{ grid-template-columns:1fr; gap:2px; } }
+        /* 合作平台垂直排列 */
+        .platform-item { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px; }
+        .platform-logo { width: 45px; height: 45px; }
+
+        /* 內邊距優化 */
+        .content-inner { padding: 15px 12px; }
+        .collapsible { font-size: 16px; padding: 14px 15px; }
+    }
 </style>
 </head>
 <body>
