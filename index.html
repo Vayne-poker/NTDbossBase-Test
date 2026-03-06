@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.2 </title>
+<title>牌手基地公告 | v37.3 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -180,18 +180,19 @@
     .platform-logo { 
         width: 65px; 
         height: 65px; 
-        border-radius: 12px; 
+        border-radius: 50%; /* 改為圓形 Logo 質感更好 */
         object-fit: cover; 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.4s ease;
+        border: 2px solid rgba(255, 255, 255, 0.05); /* 預設淡色邊框 */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        transition: all 0.4s ease; /* 增加過渡動畫 */
+        display: block;
     }
     
-    /* 關鍵：移動到區塊時 Logo 亮起來 */
+    /* 關鍵：移動到區塊時 Logo 微微發金光 */
     .platform-item:hover .platform-logo {
-        transform: scale(1.08);
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.6); /* 霓虹綠光 */
-        border-color: var(--neon-green);
+        transform: scale(1.05); /* 微微放大 */
+        border-color: rgba(245, 197, 66, 0.4); /* 微微變金邊 */
+        box-shadow: 0 0 20px rgba(245, 197, 66, 0.3); /* 霓虹金光 */
     }
     
     .platform-info { 
@@ -217,31 +218,37 @@
     
     /* 質感下載按鈕 */
     .platform-link-btn {
-        background: linear-gradient(135deg, #f5c542 0%, #d4a017 100%); /* 奢華金漸層 */
-        border: none;
-        color: #0b0f14 !important; /* 金底黑字 */
+        background: transparent;
+        border: 1.5px solid var(--gold); /* 膠囊金屬按鈕 */
+        color: var(--gold) !important;
         text-decoration: none !important;
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 900;
+        padding: 6px 18px;
+        border-radius: 20px; /* 改為膠囊型按鈕 */
+        font-size: 13px;
+        font-weight: 800;
         text-transform: uppercase;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(245, 197, 66, 0.3);
+        text-shadow: none !important;
     }
     
     .platform-link-btn:hover {
-        background: #fff; /* 懸停變白發光 */
-        box-shadow: 0 0 15px #f5c542;
-        transform: translateY(-2px);
+        background: var(--gold);
+        color: #0b0f14 !important; /* 變成背景深色 */
+        box-shadow: 0 0 15px rgba(245, 197, 66, 0.6);
     }
     
     /* 推薦碼樣式稍微縮小，不搶戲 */
     /* 找到 .promo-text 覆蓋 */
     .promo-text {
-        font-size: 14px;
-        color: #94a3b8; /* 換成冷灰色，視覺更舒服 */
-        font-family: 'Courier New', monospace;
+        font-size: 13px;
+        color: #cbd5e1; /* 換成冷白灰色，视觉更高级 */
+        font-weight: 500;
+    }
+    
+    /* 如果要讓 ID 數字發冷光，增加層次 */
+    .club-card strong {
+        color: #fff; /* ID 號碼變白色更清楚 */
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     }
     /* 核心修復：強制 Grid 撐滿 100% 寬度 */
     .club-grid { 
