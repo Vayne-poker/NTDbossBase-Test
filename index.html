@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v35.9 </title>
+<title>牌手基地公告 | v36.0 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -189,6 +189,81 @@
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
 /* --- 📱 平台樣式優化：連結移至左邊不換行 --- */
+    /* --- A. 合作平台排版大改造 (下載連結移至左邊) --- */
+    .platform-header { 
+        display: flex !important; 
+        align-items: center !important; 
+        justify-content: flex-start !important; /* 靠左排列 */
+        gap: 10px !important; 
+        width: 100% !important;
+    }
+    
+    /* 調整下載連結變成小按鈕排在左邊 */
+    .platform-link { 
+        order: -1 !important; /* 強制排在標題和推薦碼前面 */
+        background: rgba(0, 255, 136, 0.15) !important;
+        border: 1px solid var(--neon-green) !important;
+        color: var(--neon-green) !important;
+        padding: 4px 8px !important;
+        border-radius: 6px !important;
+        text-decoration: none !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+        text-shadow: none !important;
+    }
+
+    .platform-info div { display: contents !important; } /* 解除 platform-info 內的垂直排列 */
+
+    /* --- B. XPoker/ClubGG 容器與卡片變大修正 --- */
+    .platform-item > div { width: 100% !important; } /* 確保容器撐滿 */
+
+    .club-grid { 
+        display: grid !important; 
+        gap: 10px !important; 
+        margin-top: 10px !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* 強制 2*2 塞滿 */
+    }
+
+    /* 如果你是三個卡片，自動改為 3*1 */
+    .club-grid:has(.club-card:nth-child(3)):not(:has(.club-card:nth-child(4))) {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .club-card { 
+        font-size: 15px !important; /* 調大字體 */
+        background: rgba(0, 0, 0, 0.3) !important; 
+        padding: 12px !important;
+    }
+
+    /* --- C. 出入金 FAQ 黑點消失 & 清單高亮 --- */
+    .faq-body-inner ul { list-style: none !important; padding-left: 0 !important; }
+    .faq-body-inner li { position: relative !important; padding-left: 25px !important; color: #e5e7eb !important; }
+    
+    /* 替換為撲克點 */
+    .faq-body-inner li::before { 
+        position: absolute !important; left: 0 !important; 
+        content: "♠" !important; color: var(--neon-green) !important; 
+    }
+    .faq-body-inner li:nth-child(2n)::before { content: "♥" !important; color: var(--poker-red) !important; }
+    .faq-body-inner li:nth-child(3n)::before { content: "♦" !important; color: var(--poker-red) !important; }
+    .faq-body-inner li:nth-child(4n)::before { content: "♣" !important; color: var(--neon-green) !important; }
+
+    /* FAQ 內連結高亮 */
+    .faq-body-inner a { color: var(--neon-green) !important; font-weight: bold !important; text-shadow: 0 0 5px rgba(0,255,136,0.3) !important; }
+
+    /* --- D. 負責人 Line ID 靠左與優化 --- */
+    .region-row { grid-template-columns: 125px 105px 1fr !important; }
+    .region-line { color: var(--neon-green) !important; text-align: left !important; font-family: monospace; font-size: 15px; }
+
+    /* --- E. Emoji 特調濾鏡 (洗掉雜色，只留螢光綠) --- */
+    h2 .emoji-icon, .status-panel li:nth-child(4n)::before {
+        filter: grayscale(1) sepia(1) hue-rotate(70deg) saturate(8) brightness(0.8) drop-shadow(0 0 3px var(--neon-green)) !important;
+        color: transparent !important; /* 拔除原本顏色 */
+    }
+
+    /* --- F. 考核標準六個數字回歸 --- */
+    .circle-list li::before { content: counter(item) "️⃣ " !important; position: static !important; color: #fff !important; }
+    .circle-list li { padding-left: 0 !important; }
     .platform-item { 
         display: flex; 
         align-items: center; 
@@ -285,6 +360,125 @@
     }
     a {color: var(--neon-green) !important;text-decoration: underline !important;text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);transition: 0.3s;}
     a:hover {filter: brightness(1.2);text-shadow: 0 0 12px var(--neon-green);}
+    .platform-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.platform-card:hover {
+    transform: translateY(-5px) !important;
+    border-color: rgba(255, 215, 0, 0.6) !important; /* 金色邊框 */
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), 
+                inset 0 0 15px rgba(255, 215, 0, 0.1) !important;
+}
+
+/* 金光流動動畫 */
+.platform-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg, 
+        transparent 45%, 
+        rgba(255, 215, 0, 0.1) 50%, 
+        transparent 55%
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    opacity: 0;
+}
+
+.platform-card:hover::after {
+    opacity: 1;
+    left: 100%;
+    top: 100%;
+}
+
+/* 2. 下載連結移至左邊 (不換行) */
+.platform-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.platform-link {
+    order: -1 !important; /* 強制排在標題前面 */
+    padding: 2px 8px !important;
+    font-size: 12px !important;
+    border: 1px solid var(--neon-green) !important;
+    background: rgba(0, 255, 136, 0.1) !important;
+    border-radius: 4px !important;
+    white-space: nowrap !important;
+}
+
+/* 3. XPoker / ClubGG 變大並塞滿框 */
+.club-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* 強制 2*2 */
+    gap: 12px !important;
+    width: 100% !important;
+}
+
+.club-card {
+    padding: 15px !important; /* 增加內距感 */
+    min-height: 80px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* 4. 負責人 Line ID 靠左修正 */
+.region-row {
+    grid-template-columns: 120px 100px 1fr !important;
+    align-items: center !important;
+}
+
+.region-line {
+    text-align: left !important;
+    color: var(--neon-green) !important;
+    padding-left: 5px !important;
+}
+
+/* 5. 考核標準數字與 Emoji 修正 */
+.circle-list {
+    counter-reset: item;
+    list-style: none !important;
+    padding-left: 0 !important;
+}
+
+.circle-list li {
+    counter-increment: item;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 8px !important;
+}
+
+/* 讓數字 1-6 回來 */
+.circle-list li::before {
+    content: counter(item) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 22px !important;
+    height: 22px !important;
+    background: var(--neon-green) !important;
+    color: #000 !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+/* 移除 Emoji 的詭異發光，改為純色陰影 */
+.status-panel li::before {
+    text-shadow: 0 0 5px var(--neon-green) !important;
+    filter: none !important;
+}
 </style>
 </head>
 <body>
