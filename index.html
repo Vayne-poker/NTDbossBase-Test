@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v33.1 </title>
+<title>牌手基地公告 | v33.2 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -25,14 +25,40 @@
 
 
     /* 1. 優化呼吸效果與模糊感 */
-    .suit-bg { position: fixed; font-size: 22vw; /* 統一調整大小 */opacity: 0.06;   /* 略微提升基礎透明度 */z-index: -1; pointer-events: none;}
-
-    /* 四角對稱平衡，並針對綠/紅/白光感優化 */
-    .s-tl { top: 5%; left: 5%; color: #ffffff; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); animation: breathe 6s infinite ease-in-out; }
-    .s-tr { top: 5%; right: 5%; color: var(--poker-red); filter: drop-shadow(0 0 15px var(--poker-red)); animation: breathe 6s infinite ease-in-out 1.5s; }
-    .s-bl { bottom: 5%; left: 5%; color: var(--poker-red); filter: drop-shadow(0 0 15px var(--poker-red)); animation: breathe 6s infinite ease-in-out 3s; }
-    .s-br { bottom: 5%; right: 5%; color: var(--neon-green); filter: drop-shadow(0 0 15px var(--neon-green)); animation: breathe 6s infinite ease-in-out 4.5s; }
-
+/* 💎 ✨ V18-Refined：四角平衡 & 黑桃霓虹線條 --- */
+    .suit-bg { 
+        position: fixed; 
+        font-size: 26vw; /* 統一放大，大小一致 */
+        opacity: 0.12;   /* 提升顯眼度 */
+        z-index: -1; 
+        pointer-events: none; 
+    }
+    
+    /* 四角精準平衡，全霓虹綠發光 --- */
+    .s-tl { 
+        top: 15px; left: 15px; /* 精準位置，不歪斜 */
+        color: var(--neon-green); /* 黑桃換綠色 */
+        filter: drop-shadow(0 0 20px var(--neon-green)); 
+        animation: breathe 8s infinite ease-in-out; 
+    }
+    .s-tr { 
+        top: 15px; right: 15px; /* 精準位置 */
+        color: var(--neon-green); /* ♥️ 紅心也換綠色線條 */
+        filter: drop-shadow(0 0 20px var(--neon-green)); 
+        animation: breathe 8s infinite ease-in-out 2s; 
+    }
+    .s-bl { 
+        bottom: 15px; left: 15px; /* 精準位置 */
+        color: var(--neon-green); /* ♦️ 紅磚也換綠色線條 */
+        filter: drop-shadow(0 0 20px var(--neon-green)); 
+        animation: breathe 8s infinite ease-in-out 4s; 
+    }
+    .s-br { 
+        bottom: 15px; right: 15px; /* 精準位置 */
+        color: var(--neon-green); /* ♣梅花(手動改成🍀)也換綠色線條 */
+        filter: drop-shadow(0 0 20px var(--neon-green)); 
+        animation: breathe 8s infinite ease-in-out 6s; 
+    }
     /* 移除旋轉的呼吸動畫 */
     @keyframes breathe { 
         0%, 100% { opacity: 0.04; transform: scale(1); } 
