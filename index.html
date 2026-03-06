@@ -3,446 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.5 </title>
+<title>牌手基地公告 | v37.5-1 </title>
 
 <style>
-    @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
-
+    /* 變數與基礎設定 */
     :root { 
-        --neon-green: #00ff88; 
-        --poker-red: #ff3a3a; 
-        --gold: #f5c542; 
-        --bg-dark: #0b0f14;
+        --neon: #00ff88; --red: #ff3a3a; --gold: #f5c542; --bg: #0b0f14; 
     }
+    @keyframes breathe { 0%, 100% { opacity: 0.05; transform: scale(1); } 50% { opacity: 0.12; transform: scale(1.08); } }
+    @keyframes sheen { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
+
     body {
-        background: radial-gradient(circle at center, #161d26 0%, #0b0f14 100%);
-        color: #e5e7eb;
-        margin: 0;
-        padding: 40px 20px;
-        min-height: 100vh;
+        background: radial-gradient(circle at center, #161d26 0%, var(--bg) 100%);
+        color: #e5e7eb; margin: 0; padding: 40px 20px; min-height: 100vh;
         font-family: -apple-system, system-ui, sans-serif;
     }
 
-    /* 確保所有背景符號基準點一致 */
+    /* 背景撲克符號 */
     .suit-bg {
-        position: fixed;
-        font-size: 25vw;
-        opacity: 0.08; /* 調低透明度，讓背景更有層次不搶戲 */
-        z-index: -1;
-        pointer-events: none;
-        line-height: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 25vw;
-        height: 25vw;
+        position: fixed; font-size: 25vw; opacity: 0.08; z-index: -1; 
+        pointer-events: none; line-height: 1; display: flex; align-items: center; 
+        justify-content: center; width: 25vw; height: 25vw; animation: breathe 8s infinite ease-in-out;
     }
-    /* --- 四角定位：往中間提，解決擁擠問題 --- */
-    .s-tl { top: 8vh; left: 0; color: var(--neon-green); filter: drop-shadow(0 0 30px var(--neon-green)); animation: breathe 8s infinite ease-in-out; }
-    .s-tr { top: 8vh; right: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 2s; }
-    .s-bl { bottom: 15vh; left: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 4s; }
-    
-    /* 幸運草：取消原本的偏移量，讓它跟左邊方塊對齊在同高度 */
-    .s-br { 
-        bottom: 15vh; right: 0; 
-        color: var(--neon-green); 
-        filter: drop-shadow(0 0 35px var(--neon-green)); 
-        animation: breathe 8s infinite ease-in-out 6s; 
-    }
-    @keyframes breathe { 
-        0%, 100% { opacity: 0.05; transform: scale(1); } 
-        50% { opacity: 0.12; transform: scale(1.08); } 
-    }
+    .s-tl { top: 8vh; left: 0; color: var(--neon); filter: drop-shadow(0 0 30px var(--neon)); }
+    .s-tr { top: 8vh; right: 0; color: var(--red); filter: drop-shadow(0 0 30px var(--red)); animation-delay: 2s; }
+    .s-bl { bottom: 15vh; left: 0; color: var(--red); filter: drop-shadow(0 0 30px var(--red)); animation-delay: 4s; }
+    .s-br { bottom: 15vh; right: 0; color: var(--neon); filter: drop-shadow(0 0 35px var(--neon)); animation-delay: 6s; }
+
     .main-wrapper { max-width: 900px; margin: 0 auto; }
 
+    /* 頂部面板 */
     .status-panel {
-        background: rgba(0, 255, 136, 0.02);
-        border: 1px solid rgba(0, 255, 136, 0.3); /* 降低原本邊框亮度 */
-        position: relative;
-        overflow: hidden;
-        /* 新增：外發光氛圍 */
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);
+        background: rgba(0, 255, 136, 0.02); border: 1px solid rgba(0, 255, 136, 0.3);
+        position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);
     }
-
-    /* 增加一個微妙的流光掃過效果 */
     .status-panel::after {
-        content: "";
-        position: absolute;
-        top: -50%; left: -50%;
-        width: 200%; height: 200%;
+        content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
         background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
-        transform: rotate(45deg);
-        animation: sheen 6s infinite;
+        transform: rotate(45deg); animation: sheen 6s infinite;
     }
 
-    @keyframes sheen {
-        0% { transform: translateX(-100%) rotate(45deg); }
-        100% { transform: translateX(100%) rotate(45deg); }
-    }
     h1 {
-        text-align: center;
-        background: linear-gradient(to bottom, #fff 20%, var(--neon-green) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
-        font-size: 2.2rem;
-        letter-spacing: 2px;
-    }
-    .status-panel h2 { 
-        color: var(--neon-green); 
-        margin-top: 0; 
-        text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); /* 新增：標題發光 */
-    }
-    .status-panel ul { list-style: none; padding-left: 0; }
-    /* --- 撲克符號精確循環版 --- */
-.status-panel li { 
-        margin-bottom: 8px; 
-        display: flex; 
-        align-items: flex-start; 
-        color: #e5e7eb;
-        position: relative;
-        padding-left: 25px; /* 增加左邊距給符號 */
+        text-align: center; background: linear-gradient(to bottom, #fff 20%, var(--neon) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5)); font-size: 2.2rem; letter-spacing: 2px;
     }
 
-    .status-panel li::before { 
-        position: absolute;
-        left: 0;
-        font-size: 14px;
-        font-weight: normal;
+    .status-panel h2 { color: var(--neon); margin-top: 0; text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); }
+    
+    /* 列表與符號循環 */
+    .status-panel ul, .poker-list { list-style: none; padding-left: 0; }
+    .status-panel li, .poker-list li { 
+        margin-bottom: 8px; display: flex; align-items: flex-start; 
+        position: relative; padding-left: 25px; 
     }
+    .status-panel li::before, .poker-list li::before { position: absolute; left: 0; font-size: 14px; font-weight: bold; }
 
-    /* 4行一輪：黑桃 -> 紅心 -> 方塊 -> 幸運草 */
-    .status-panel li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); }
-    .status-panel li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); }
-    .status-panel li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); }
-    .status-panel li:nth-child(4n+4)::before { content: "☘"; color: var(--neon-green); }
+    /* 4行一輪符號 */
+    .status-panel li:nth-child(4n+1)::before { content: "♠"; color: var(--neon); }
+    .status-panel li:nth-child(4n+2)::before { content: "♥"; color: var(--red); }
+    .status-panel li:nth-child(4n+3)::before { content: "♣"; color: var(--neon); }
+    .status-panel li:nth-child(4n+4)::before { content: "♦"; color: var(--red); }
 
-    /* 新增：讓 li 裡面的重點數字/文字發光 */
-    .status-panel li b, .status-panel li strong {
-        color: var(--neon-green);
-        text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
-        font-weight: bold;
-    }
+    .poker-list li:nth-child(4n+1)::before { content: "♠"; color: #fff; }
+    .poker-list li:nth-child(4n+2)::before { content: "♥"; color: #ff4d4d; }
+    .poker-list li:nth-child(4n+3)::before { content: "♣"; color: #fff; }
+    .poker-list li:nth-child(4n+4)::before { content: "♦"; color: #ff4d4d; }
 
+    /* 按鈕類通用樣式 */
     .collapsible, .sub-btn, .nested-btn {
-        background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green);
+        background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon);
         cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937;
         border-radius: 10px; text-align: left; font-size: 17px; font-weight: bold;
-        margin-top: 12px; display: flex; justify-content: space-between; align-items: center;
-        transition: 0.3s;}
-    /* 將符號換成箭頭，並設定過渡動畫 */
-    .collapsible:after, .sub-btn:after, .nested-btn:after {content: '▼'; font-size: 14px;transition: transform 0.3s ease; /* 針對旋轉設定動畫 */}
+        margin-top: 12px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
+    }
+    .collapsible:after, .sub-btn:after, .nested-btn:after { content: '▼'; font-size: 14px; transition: transform 0.3s ease; }
+    .active:after { transform: rotate(180deg); }
 
-    /* 當按鈕變為 active 時，不改內容而是旋轉 180 度 */
-    .active:after { content: '▼' !important; transform: rotate(180deg); }
-
+    /* 內容區塊 */
     .content, .sub-content, .nested-content {
         max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
         background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; margin-top: -5px;
     }
-    /* --- 3. 出入金連結高亮 (解決 image_2/5 隱形問題) --- */
-    .content-inner a {
-        color: var(--neon-green) !important;
-        text-decoration: underline;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .content-inner a:hover { filter: brightness(1.2) drop-shadow(0 0 5px var(--neon-green)); }
+    .content-inner { padding: 20px; }
 
-    .shop-group {
-        background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25);
-        border-radius: 10px; padding: 14px; margin: 12px 0;
+    /* 連結高亮 */
+    a { 
+        color: var(--neon) !important; text-decoration: underline !important; 
+        text-shadow: 0 0 8px rgba(0, 255, 136, 0.5); transition: 0.3s; 
     }
-    .shop-city {
-        color: #f5c542;
-        font-weight: bold;
-        border-left: 3px solid #f5c542;
-        padding-left: 10px;
-        margin: 10px 0;
-    }
-    
-    /* --- 1. 撲克花色列表 (精確指定版) --- */
-    .poker-list {
-        list-style: none !important;
-        padding-left: 0 !important;
-    }
-    
-    .poker-list li {
-        position: relative;
-        padding-left: 25px;
-        margin-bottom: 10px;
-        color: #d1d5db;
-}
+    a:hover { filter: brightness(1.2); text-shadow: 0 0 12px var(--neon); }
 
-/* ♠️ ♥️ ♣️ ♦️ 循環邏輯 */
-.poker-list li:nth-child(4n+1)::before { content: "♠"; color: #ffffff; position: absolute; left: 0; font-weight: bold; }
-.poker-list li:nth-child(4n+2)::before { content: "♥"; color: #ff4d4d; position: absolute; left: 0; font-weight: bold; }
-.poker-list li:nth-child(4n+3)::before { content: "♣"; color: #ffffff; position: absolute; left: 0; font-weight: bold; }
-.poker-list li:nth-child(4n+4)::before { content: "♦"; color: #ff4d4d; position:
-/* --- 📱 平台與俱樂部樣式 (質感修復版) --- */
-/* 找到 .platform-item 覆蓋 */
+    /* 店家與卡片排版 */
+    .shop-group { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25); border-radius: 10px; padding: 14px; margin: 12px 0; }
+    .shop-city { color: var(--gold); font-weight: bold; border-left: 3px solid var(--gold); padding-left: 10px; margin: 10px 0; }
+
     .platform-item { 
-        display: flex; 
-        align-items: center; 
-        gap: 20px; 
-        background: rgba(255, 255, 255, 0.03); 
-        padding: 20px; 
-        border-radius: 16px; 
-        border: 1px solid rgba(0, 255, 136, 0.15); 
-        margin-top: 15px;
-        flex-wrap: wrap;
-        transition: all 0.3s ease;
+        display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); 
+        padding: 20px; border-radius: 16px; border: 1px solid rgba(0, 255, 136, 0.15); 
+        margin-top: 15px; flex-wrap: wrap; transition: 0.3s; 
     }
-    
-    /* 懸停時容器微亮 */
-    .platform-item:hover .platform-logo {
-        transform: scale(1.08);
-        border-color: #f5c542;
-        box-shadow: 0 0 20px rgba(245, 197, 66, 0.6);
-    }
-    
-    /* 找到 .platform-logo 覆蓋：讓 Logo 預設有邊框，懸停發光 */
     .platform-logo { 
-        width: 65px; 
-        height: 65px; 
-        border-radius: 50%; /* 改為圓形 Logo 質感更好 */
-        object-fit: cover; 
-        border: 2px solid rgba(255, 255, 255, 0.05); /* 預設淡色邊框 */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        transition: all 0.4s ease; /* 增加過渡動畫 */
-        display: block;
+        width: 65px; height: 65px; border-radius: 50%; object-fit: cover; 
+        border: 2px solid rgba(255, 255, 255, 0.05); transition: 0.4s; 
     }
-    
-    /* 關鍵：移動到區塊時 Logo 微微發金光 */
-    .platform-item:hover .platform-logo {
-        transform: scale(1.08);
-        border-color: #f5c542;
-        box-shadow: 0 0 20px rgba(245, 197, 66, 0.5); /* 核心訴求：金色霓虹 */
+    .platform-item:hover { border-color: var(--gold); background: rgba(245, 197, 66, 0.03); }
+    .platform-item:hover .platform-logo { transform: scale(1.08); border-color: var(--gold); box-shadow: 0 0 20px rgba(245, 197, 66, 0.5); }
+
+    .platform-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px; }
+    .platform-title { font-weight: 800; color: var(--neon); font-size: 1.1rem; }
+    .platform-link-btn { 
+        border: 1.5px solid var(--gold); color: var(--gold) !important; padding: 6px 18px; 
+        border-radius: 20px; font-size: 13px; font-weight: 800; text-decoration: none !important; transition: 0.3s; 
     }
-    
-    /* 推薦碼文字改為淡色，不要搶走金色的戲 */
-    .promo-text {
-        color: rgba(255, 255, 255, 0.5) !important;
-        font-size: 12px;
-    }
-    
-    .platform-info { 
-        flex: 1; /* 讓文字部分佔據剩餘空間 */
-        min-width: 200px; 
-    }
-    
-    /* --- 平台標題與下載按鈕優化 --- */
-    .platform-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 8px;
-    }
-    
-    .platform-title { 
-        font-weight: 800; 
-        color: var(--neon-green); 
-        font-size: 1.1rem;
-        margin: 0;
-    }
-    
-    /* 質感下載按鈕 */
-    .platform-link-btn {
-        background: transparent;
-        border: 1.5px solid var(--gold); /* 膠囊金屬按鈕 */
-        color: var(--gold) !important;
-        text-decoration: none !important;
-        padding: 6px 18px;
-        border-radius: 20px; /* 改為膠囊型按鈕 */
-        font-size: 13px;
-        font-weight: 800;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-        text-shadow: none !important;
-    }
-    
-    .platform-link-btn:hover {
-        background: var(--gold);
-        color: #0b0f14 !important; /* 變成背景深色 */
-        box-shadow: 0 0 15px rgba(245, 197, 66, 0.6);
-    }
-    
-    /* 推薦碼樣式稍微縮小，不搶戲 */
-    
-    /* 如果要讓 ID 數字發冷光，增加層次 */
-    .club-card strong {
-        color: #fff; /* ID 號碼變白色更清楚 */
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-    }
-    /* 核心修復：強制 Grid 撐滿 100% 寬度 */
-    .club-grid { 
-        display: grid; 
-        gap: 12px; 
-        margin-top: 15px; 
-        width: 100%; /* 關鍵：確保他不縮在左邊 */
-    }
-    
-    /* 電腦版：XP 2+2 對齊, ClubGG 3 欄平分 */
+    .platform-link-btn:hover { background: var(--gold); color: #0b0f14 !important; box-shadow: 0 0 15px var(--gold); }
+
+    .club-grid { display: grid; gap: 12px; margin-top: 15px; width: 100%; }
     .club-grid.four { grid-template-columns: repeat(2, 1fr); }
     .club-grid.three { grid-template-columns: repeat(3, 1fr); }
-    
-    .club-card { 
-        background: rgba(255, 255, 255, 0.05); 
-        border: 1px solid rgba(255, 255, 255, 0.1); 
-        padding: 14px; 
-        border-radius: 10px; 
-        transition: 0.3s;
-    }
-    
-    .club-card:hover {
-        border-color: var(--gold);
-        background: rgba(245, 197, 66, 0.05);
-    }
-    
-    .club-card strong { 
-        color: var(--gold); 
-        display: block; 
-        margin-bottom: 4px; 
-        font-size: 15px;
-    }
-    
-    /* 📱 手機版 RWD：防止擠壓，改為單一長條 */
-    @media (max-width: 768px) {
-        .club-grid.four, .club-grid.three { 
-            grid-template-columns: 1fr !important; 
-        }
-        .platform-item { 
-            flex-direction: column; 
-            align-items: flex-start; 
-        }
-    }
+    .club-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 10px; transition: 0.3s; }
+    .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 15px; }
 
-    /* --- 🏪 店家排版樣式 --- */
+    /* 區域負責人列表 */
+    .region-box { background: rgba(31, 41, 55, 0.7); padding: 15px; border-radius: 10px; }
+    .region-row { display: grid; grid-template-columns: 125px 105px 1fr; padding: 12px 0; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .region-line { color: var(--neon); text-align: left; font-family: 'Courier New', monospace; font-size: 15px; }
+
+    /* FAQ 樣式 */
+    .faq-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    .faq-header { color: var(--gold); font-weight: 800; background: none; border: none; width: 100%; text-align: left; padding: 15px; cursor: pointer; }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: rgba(0, 0, 0, 0.15); }
+    .faq-body-inner { padding: 18px; line-height: 1.7; color: #d1d5db; font-size: 15px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+    /* 店家 Grid */
     .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
     .store-tag { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); padding: 15px; border-radius: 10px; text-align: center; }
-    .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px; }
-    .store-names { font-size: 16px; color: #e5e7eb; line-height: 1.6; }
+    .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); }
 
-/* 3. 負責人 Line ID 優化：美觀、靠左、不暗沉 (解決 image_3 問題) */
-    .region-row { 
-        display: grid; 
-        grid-template-columns: 125px 105px 1fr; /* 寬度給足 */
-        padding: 12px 0; 
-        align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-    }
-    .region-line { 
-        color: var(--neon-green); /* 調亮 ID */
-        text-align: left !important; /* 強制靠左 */
-        font-family: 'Courier New', monospace; /* 等寬字體更專業 */
-        font-size: 15px;
-    }
-
-    /* 4. [美觀] 負責人底色調亮一點，看起來不暗沉 */
-    .region-box { background: rgba(31, 41, 55, 0.7) !important; padding: 15px; }
-    /* --- ❓ FAQ、警告與頁尾 --- */
-.faq-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    margin-bottom: 12px; /* 增加卡片間距 */
-    overflow: hidden;
-}
-
-.faq-header {
-    color: #f5c542;
-    font-weight: 800;
-    transition: all 0.3s;
-}
-.faq-header::before { content: none !important; } /* 確保沒花色 */
-.faq-header:hover {
-    text-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
-    background: rgba(255, 255, 255, 0.03);
-}
-
-/* 確保移除所有在 FAQ 標題前的自動花色 */
-.faq-header::before {
-    content: none !important;
-}
-
-.faq-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 更絲滑的動畫 */
-    background: rgba(0, 0, 0, 0.15); /* 稍微深色區隔 */
-}
-
-/* 這裡是解決擠壓的關鍵：確保內容有 padding 且不被壓縮 */
-.faq-body-inner {
-    padding: 18px; 
-    line-height: 1.7;
-    color: #d1d5db;
-    font-size: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-    .warning-card {
-        background: rgba(255, 77, 77, 0.05);
-        border: 1px dashed rgba(255, 77, 77, 0.3);
-        padding: 15px;
-        border-radius: 12px;
-    }
-    .warning-card b {
-        color: #ff4d4d;
-        display: block;
-        margin-bottom: 10px;
-        font-size: 15px;
-    }
-    .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
-    .circle-list li { counter-increment: item; margin-bottom: 6px; }
-    .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 4px; }
-    .footer { text-align: center; margin-top: 40px; }
-
-/* 📱 手機版 RWD 優化 (請覆蓋原本 @media 內相關部分) */
+    /* 手機版適配 */
     @media (max-width: 768px) {
-        /* 1. 防止切到字，維持一列 */
-        .store-grid, .club-grid.four, .club-grid.three { 
-            grid-template-columns: 1fr !important; 
-            gap: 10px; 
-        }
-        
-        /* 2. 負責人排版優化：手機版也讓它橫向排開，不強迫換行 */
-        .region-row { 
-            grid-template-columns: 100px 70px 1fr !important; /* 手機版寬度微調 */
-            gap: 5px; 
-            padding: 10px 0; 
-            align-items: center;
-        }
-    
-        .region-area { 
-            font-size: 13px;    /* 手機版字體縮小一點點 */
-            white-space: nowrap !important; /* 絕對不准換行 */
-        }
-    
-        .region-name { 
-            font-size: 14px; 
-        }
-    
-        /* 3. 重置 LINE ID 樣式：不再強制佔據整行 */
-        .region-line { 
-            grid-column: auto !important; /* 取消 1 / -1，讓它乖乖待在第三欄 */
-            background: transparent !important; 
-            padding: 0 !important; 
-            margin-top: 0 !important; 
-            font-size: 12px;
-            text-align: right; /* 靠右對齊會讓介面看起來更寬敞 */
-        }
-    }
-        /* 合作平台垂直排列 */
-        .platform-item { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px; }
+        .store-grid, .club-grid.four, .club-grid.three { grid-template-columns: 1fr !important; }
+        .region-row { grid-template-columns: 100px 70px 1fr !important; gap: 5px; }
+        .region-line { text-align: right; font-size: 12px; }
+        .platform-item { flex-direction: column; align-items: flex-start; padding: 12px; }
         .platform-logo { width: 45px; height: 45px; }
-
-        /* 內邊距優化 */
-        .content-inner { padding: 15px 12px; }
-        .collapsible { font-size: 16px; padding: 14px 15px; }
+        .collapsible { font-size: 16px; }
     }
-    a {color: var(--neon-green) !important;text-decoration: underline !important;text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);transition: 0.3s;}
-    a:hover {filter: brightness(1.2);text-shadow: 0 0 12px var(--neon-green);}
 </style>
 </head>
 <body>
