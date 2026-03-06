@@ -14,13 +14,15 @@
         --gold: #f5c542; 
         --bg-dark: #0b0f14;
     }
-
     body { 
         font-family: Arial, sans-serif; 
         margin: 0; padding: 20px; 
-        background: radial-gradient(circle at top, #111827, #0b0f14); 
+        /* 修改這裡：改為固定背景，並確保最小高度撐開 */
+        background: radial-gradient(circle at top, #111827, #0b0f14) fixed; 
+        min-height: 100vh;
         color: #d1d5db; line-height: 1.6;
     }
+
 
     .suit-bg { position: fixed; font-size: 20vw; opacity: 0.05; z-index: -1; pointer-events: none; }
     .s-tl { top: 5%; left: 5%; color: var(--neon-green); animation: breathe 6s infinite ease-in-out; }
