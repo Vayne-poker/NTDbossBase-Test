@@ -77,14 +77,26 @@
         display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
     }
     .club-card {
-        background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 12px; border-radius: 10px; 
-        flex: 1 1 calc(33.333% - 10px); /* PC 三橫排關鍵 */
-        min-width: 200px; /* 手機寬度不足時自動換行 */
-        box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px; /* 稍微縮小內距 */
+    border-radius: 8px;
+    flex: 1 1 calc(33.333% - 10px); /* ClubGG 用這個 */
+    box-sizing: border-box;
     }
-    .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 0.95rem; }
-    .club-card div { font-size: 0.85rem; color: #9ca3af; }
+
+    .club-card strong {
+    color: var(--gold);
+    display: block;
+    font-size: 0.9rem; /* 標題稍微縮小 */
+    margin-bottom: 2px;
+    }
+
+    .club-card div {
+    font-size: 0.75rem; /* ID資訊縮小，確保併行 */
+    color: #9ca3af;
+    white-space: nowrap; /* 強制不換行 */
+    }
 
     pre { background: #0b0f14; padding: 12px; border-radius: 8px; color: #9ca3af; overflow-x: auto; font-size: 14px; line-height: 1.5; border: 1px solid #1f2937; }
     ul, ol { padding-left: 20px; }
@@ -190,22 +202,21 @@
                                 </div>
                             </div>
 
-                            <div class="platform-item" style="display:block;">
-                                <div style="display:flex; align-items:center; gap:15px; margin-bottom:10px;">
-                                    <img src="images/Xpoker.jpg" class="platform-logo">
-                                    <div>
-                                        <div class="platform-title">♠ XPoker</div>
-                                        <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a>
-                                    </div>
-                                </div>
-                                <div class="club-container">
-                                    <div class="club-card"><strong>天祥雙子 (1:8)</strong><div>俱樂部ID：999306</div><div>推薦人ID：3496108</div></div>
-                                    <div class="club-card"><strong>泰好贏 TwXThai (1:1)</strong><div>俱樂部ID：2421367</div><div>推薦人ID：3583536</div></div>
-                                    <div class="club-card"><strong>亞特馬來 (1:1)</strong><div>俱樂部ID：686175</div><div>推薦人ID：3496108</div></div>
-                                    <div class="club-card"><strong>花順 (1:1)</strong><div>俱樂部ID：277186</div><div>推薦人ID：3032889</div></div>
+                        <div class="platform-item" style="display:block;">
+                            <div style="display:flex; align-items:center; gap:15px; margin-bottom:10px;">
+                                <img src="images/Xpoker.jpg" class="platform-logo">
+                                <div>
+                                    <div class="platform-title">♠ XPoker</div>
+                                    <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a>
                                 </div>
                             </div>
-
+                            <div class="club-container" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                <div class="club-card" style="flex: 1 1 calc(50% - 10px); min-width: 150px;"><strong>天祥雙子 (1:8)</strong><div>ID: 999306 / 推薦: 3496108</div></div>
+                                <div class="club-card" style="flex: 1 1 calc(50% - 10px); min-width: 150px;"><strong>泰好贏 (1:1)</strong><div>ID: 2421367 / 推薦: 3583536</div></div>
+                                <div class="club-card" style="flex: 1 1 calc(50% - 10px); min-width: 150px;"><strong>亞特馬來 (1:1)</strong><div>ID: 686175 / 推薦: 3496108</div></div>
+                                <div class="club-card" style="flex: 1 1 calc(50% - 10px); min-width: 150px;"><strong>花順 (1:1)</strong><div>ID: 277186 / 推薦: 3032889</div></div>
+                            </div>
+                        </div>
                             <div class="platform-item" style="display:block;">
                                 <div style="display:flex; align-items:center; gap:15px; margin-bottom:10px;">
                                     <img src="images/ClubGG.png" class="platform-logo">
@@ -215,9 +226,9 @@
                                     </div>
                                 </div>
                                 <div class="club-container">
-                                    <div class="club-card"><strong>TiNY POKER「快樂呱Tiny」(1:1)</strong><div>俱樂部ID：954109</div><div>推薦人ID：4005-6868</div></div>
-                                    <div class="club-card"><strong>Massiv「快樂呱Massiv」(1:26)</strong><div>俱樂部ID：619975</div><div>推薦人ID：4005-6868</div></div>
-                                    <div class="club-card"><strong>美國TMT「時光雞Time」(1:27)</strong><div>俱樂部ID：970779</div><div>推薦人ID：4005-6868</div></div>
+                                    <div class="club-card"><strong>快樂呱Tiny (1:1)</strong><div>ID: 954109 / 推薦: 4005-6868</div></div>
+                                    <div class="club-card"><strong>快樂呱Massiv (1:26)</strong><div>ID: 619975 / 推薦: 4005-6868</div></div>
+                                    <div class="club-card"><strong>時光雞Time (1:27)</strong><div>ID: 970779 / 推薦: 4005-6868</div></div>
                                 </div>
                             </div>
                         </div>
