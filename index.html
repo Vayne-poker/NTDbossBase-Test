@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v35.6 </title>
+<title>牌手基地公告 | v35.7 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -88,53 +88,85 @@
         font-size: 2.2rem;
         letter-spacing: 2px;
     }
+/* --- 1. 標題與四葉草優化 (解決 image_6) --- */
     .status-panel h2 { 
         color: var(--neon-green); 
         margin-top: 0; 
-        text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); /* 新增：標題發光 */
+        text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); 
+        display: flex;
+        align-items: center;
     }
-    .status-panel ul { list-style: none; padding-left: 0; }
-    /* --- 撲克符號精確循環版 --- */
-.status-panel li { 
+    /* 讓標題內的四葉草 emoji 強制發綠光 */
+    .clover-icon {
+        filter: drop-shadow(0 0 5px var(--neon-green)) saturate(1.5);
+        margin-right: 8px;
+    }
+
+    /* --- 2. 全站通用清單：撲克符號循環 (解決出入金黑點問題) --- */
+    /* 我們把 .status-panel li 改成通用 li，這樣出入金那邊也會跟著變帥 */
+    .content-inner li, .status-panel li { 
         margin-bottom: 8px; 
         display: flex; 
         align-items: flex-start; 
         color: #e5e7eb;
         position: relative;
-        padding-left: 25px; /* 增加左邊距給符號 */
+        padding-left: 25px; 
+        list-style: none; /* 徹底拔除原本的黑點 */
     }
 
-    .status-panel li::before { 
+    .content-inner li::before, .status-panel li::before { 
         position: absolute;
         left: 0;
         font-size: 14px;
         font-weight: normal;
     }
 
-    /* 4行一輪：黑桃 -> 紅心 -> 方塊 -> 幸運草 */
-    .status-panel li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); }
-    .status-panel li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); }
-    .status-panel li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); }
-    .status-panel li:nth-child(4n+4)::before { content: "☘"; color: var(--neon-green); }
-
-    /* 新增：讓 li 裡面的重點數字/文字發光 */
-    .status-panel li b, .status-panel li strong {
-        color: var(--neon-green);
-        text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
-        font-weight: bold;
+    /* 4行一輪：黑桃 -> 紅心 -> 方塊 -> 幸運草 (全站通用) */
+    li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); }
+    li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); }
+    li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); }
+    /* 這裡改成你要的四葉草 🍀 並強制點亮它 */
+    li:nth-child(4n+4)::before { 
+        content: "🍀"; 
+        font-size: 12px; /* Emoji 通常較大，縮小一點點視覺較平衡 */
+        filter: brightness(1.2) sepia(1) hue-rotate(70deg) saturate(5) drop-shadow(0 0 2px var(--neon-green));
+        /* 上面這行濾鏡是為了讓原本彩色的 Emoji 看起來更接近螢光綠 */
     }
 
+    /* --- 3. 出入金連結高亮 (解決 image_2/5 隱形問題) --- */
+    .content-inner a {
+        color: var(--neon-green) !important;
+        text-decoration: underline;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .content-inner a:hover { filter: brightness(1.2) drop-shadow(0 0 5px var(--neon-green)); }
+
+    /* --- 4. 區域負責人 ID 靠左與美化 (解決 image_3/4) --- */
+    .region-row { 
+        display: grid; 
+        grid-template-columns: 125px 105px 1fr; /* 寬度給足 */
+        padding: 12px 0; 
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    }
+    .region-line { 
+        color: var(--neon-green); /* 調亮 ID */
+        text-align: left !important; /* 強制靠左 */
+        font-family: 'Courier New', monospace; /* 等寬字體更專業 */
+        font-size: 15px;
+    }
+
+    /* --- 5. 按鈕與折疊邏輯 (維持原本內容) --- */
     .collapsible, .sub-btn, .nested-btn {
         background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green);
         cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937;
         border-radius: 10px; text-align: left; font-size: 17px; font-weight: bold;
         margin-top: 12px; display: flex; justify-content: space-between; align-items: center;
-        transition: 0.3s;}
-    /* 將符號換成箭頭，並設定過渡動畫 */
-    .collapsible:after, .sub-btn:after, .nested-btn:after {content: '▼'; font-size: 14px;transition: transform 0.3s ease; /* 針對旋轉設定動畫 */}
-
-    /* 當按鈕變為 active 時，不改內容而是旋轉 180 度 */
-    .active:after { content: '▼' !important; transform: rotate(180deg); }
+        transition: 0.3s;
+    }
+    .collapsible:after, .sub-btn:after, .nested-btn:after { content: '▼'; font-size: 14px; transition: transform 0.3s ease; }
+    .active:after { transform: rotate(180deg); }
 
     .content, .sub-content, .nested-content {
         max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
