@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v35.4 </title>
+<title>牌手基地公告 | v35.5 </title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -95,13 +95,13 @@
     }
     .status-panel ul { list-style: none; padding-left: 0; }
     /* --- 撲克符號精確循環版 --- */
-    .status-panel li { 
+.status-panel li { 
         margin-bottom: 8px; 
         display: flex; 
         align-items: flex-start; 
         color: #e5e7eb;
         position: relative;
-        padding-left: 25px; /* 給符號留固定空間 */
+        padding-left: 25px; /* 增加左邊距給符號 */
     }
 
     .status-panel li::before { 
@@ -111,14 +111,11 @@
         font-weight: normal;
     }
 
-    /* 1, 5, 9... 行 */
+    /* 4行一輪：黑桃 -> 紅心 -> 方塊 -> 幸運草 */
     .status-panel li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); }
-    /* 2, 6, 10... 行 */
     .status-panel li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); }
-    /* 3, 7, 11... 行 */
     .status-panel li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); }
-    /* 4, 8, 12... 行 */
-    .status-panel li:nth-child(4n+4)::before { content: "♣"; color: var(--neon-green); }
+    .status-panel li:nth-child(4n+4)::before { content: "☘"; color: var(--neon-green); }
 
     /* 新增：讓 li 裡面的重點數字/文字發光 */
     .status-panel li b, .status-panel li strong {
