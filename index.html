@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v32.3版</title>
+<title>牌手基地公告 | v32.3 穩定版</title>
 
 <style>
     @keyframes glow{ 0%{ filter:drop-shadow(0 0 6px #22c55e); } 50%{ filter:drop-shadow(0 0 16px #22c55e); } 100%{ filter:drop-shadow(0 0 6px #22c55e); } }
-    @keyframes fadeUp{ 0%{ opacity:0; transform:translateY(20px); } 100%{ opacity:1; transform:translateY(0); } }
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
 
     :root { 
@@ -24,7 +23,7 @@
         color: #d1d5db; line-height: 1.6;
     }
 
-    /* --- ✨ 四花色呼吸燈背景 --- */
+    /* --- ✨ 背景裝飾 --- */
     .suit-bg { position: fixed; font-size: 20vw; opacity: 0.05; z-index: -1; pointer-events: none; }
     .s-tl { top: 5%; left: 5%; color: var(--neon-green); animation: breathe 6s infinite ease-in-out; }
     .s-tr { top: 5%; right: 5%; color: var(--poker-red); animation: breathe 6s infinite ease-in-out 1.5s; }
@@ -43,6 +42,7 @@
     .status-panel li { margin-bottom: 8px; font-size: 1.1em; display: flex; align-items: flex-start; }
     .status-panel li::before { content: "•"; color: var(--neon-green); margin-right: 12px; }
 
+    /* --- 🖱️ 摺疊控制系統 --- */
     .collapsible, .sub-btn, .nested-btn {
         background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green);
         cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937;
@@ -60,23 +60,21 @@
     }
     .content-inner { padding: 20px; }
 
-    /* --- 💎 考核標準框樣式 (v32優化點) --- */
+    /* --- 💎 容器樣式 --- */
     .shop-group {
         background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25);
         border-radius: 10px; padding: 14px; margin: 12px 0;
     }
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
-    /* --- 其餘 29.6 原始樣式 --- */
-    .platform-item{ display:flex; align-items:center; gap:15px; background:rgba(255,255,255,0.03); padding:15px; border-radius:10px; border:1px solid rgba(245,197,66,0.25); margin-top:15px; transition:all .25s ease;}
-    .platform-item:hover{ background:#0f172a; transform:translateY(-3px); }
+    .platform-item{ display:flex; align-items:center; gap:15px; background:rgba(255,255,255,0.03); padding:15px; border-radius:10px; border:1px solid rgba(245,197,66,0.25); margin-top:15px; }
     .platform-logo{ width:55px; height:55px; border-radius:10px; object-fit:cover; }
-    .platform-title{ font-weight:700; margin-bottom:4px; color:#22c55e; letter-spacing:0.5px; }
+    .platform-title{ font-weight:700; color:#22c55e; }
     .platform-link{ color:#facc15; text-decoration:none; font-size:14px; }
     .club-grid{ display:grid; gap:15px; margin-top:15px; }
     .club-grid.four{ grid-template-columns:repeat(2,1fr); }
     .club-grid.three{ grid-template-columns:repeat(3,1fr); }
-    .club-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 14px; border-radius: 10px; margin-bottom: 12px; }
+    .club-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 14px; border-radius: 10px; }
     .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; }
     
     .region-box{ margin-top:10px; background:#020617; padding:12px; border-radius:8px; }
@@ -90,7 +88,7 @@
     .faq-header:after { content: '▾'; transition: 0.3s; color: var(--neon-green); }
     .faq-header.faq-active:after { transform: rotate(180deg); }
     .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    .faq-body-inner { padding: 0 18px 15px 18px; color: #d1d5db; font-size: 15px; }
+    .faq-body-inner { padding: 0 18px 15px 18px; color: #d1d5db; }
     
     .warning-card{ background:rgba(255,58,58,0.05); border:1px solid rgba(255,58,58,0.3); border-left:4px solid var(--poker-red); padding:18px; border-radius:10px; }
     .circle-list{ list-style:none; padding-left:0; counter-reset:item; }
@@ -126,6 +124,7 @@
     <button class="collapsible">⚔️ 考核中心</button>
     <div class="content">
         <div class="content-inner">
+            
             <button class="sub-btn">📝 考核步驟</button>
             <div class="sub-content">
                 <div class="content-inner">
@@ -167,16 +166,19 @@
                                     <li>常規桌：25000 手</li>
                                 </ul>
                             </div>
-                            <div class="shop-group">
-                                <div class="shop-city">考核平台</div>
-                                <ul>
-                                    <li>Natural8</li>
-                                    <li>WPT Global</li>
-                                    <li>QQ Poker</li>
-                                    <li>X-Poker</li>
-                                    <li>ClubGG</li>
-                                </ul>
+                            
+                            <button class="nested-btn">📱 目前合作平台</button>
+                            <div class="nested-content">
+                                <div class="content-inner">
+                                    <div class="platform-item"><img src="images/ipoker.jpg" class="platform-logo"><div><div class="platform-title">♣ iPoker ♣</div><a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
+                                    <div class="platform-item"><img src="images/WPT.jpg" class="platform-logo"><div><div class="platform-title">♦ WPT Global ♦</div><a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a><br>推薦碼：A0A697</div></div>
+                                    <div class="platform-item"><img src="images/N8.jpg" class="platform-logo"><div><div class="platform-title">♠ Natural8 ♠</div><a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
+                                    <div class="platform-item"><img src="images/QQ.jpg" class="platform-logo"><div><div class="platform-title">♠ QQ Poker ♠</div><a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>推薦碼：MGA852</div></div>
+                                    <div class="platform-item"><img src="images/Xpoker.jpg" class="platform-logo"><div style="flex:1;"><div class="platform-title">♠ XPoker</div><a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a><div class="club-grid four"><div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div><div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div><div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div><div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div></div></div></div>
+                                    <div class="platform-item"><img src="images/ClubGG.png" class="platform-logo"><div style="flex:1;"><div class="platform-title">♠️ ClubGG ♠️</div><a href="https://www.clubgg.com/" target="_blank" class="platform-link">下載連結</a><div class="club-grid three"><div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div><div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div><div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div></div></div></div>
+                                </div>
                             </div>
+
                             <div class="shop-group">
                                 <div class="shop-city">評選標準</div>
                                 <ul class="circle-list">
@@ -188,42 +190,7 @@
                                     <li>隨機抽查報考帳號之手牌</li>
                                 </ul>
                             </div>
-                            <p style="color:#facc15; margin-top:10px;">⚠️ 需綁定基地代理平台帳號方可參與考核</p>
-                        </div>
-                    </div>
-
-                    <button class="nested-btn">📱 目前合作平台</button>
-                    <div class="nested-content">
-                        <div class="content-inner">
-                            <div class="platform-item"><img src="images/ipoker.jpg" class="platform-logo"><div><div class="platform-title">♣ iPoker ♣</div><a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
-                            <div class="platform-item"><img src="images/WPT.jpg" class="platform-logo"><div><div class="platform-title">♦ WPT Global ♦</div><a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link">下載連結</a><br>推薦碼：A0A697</div></div>
-                            <div class="platform-item"><img src="images/N8.jpg" class="platform-logo"><div><div class="platform-title">♠ Natural8 ♠</div><a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link">下載連結</a><br>推薦碼：NTDboss</div></div>
-                            <div class="platform-item"><img src="images/QQ.jpg" class="platform-logo"><div><div class="platform-title">♠ QQ Poker ♠</div><a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link">下載連結</a><br>推薦碼：MGA852</div></div>
-                            <div class="platform-item">
-                                <img src="images/Xpoker.jpg" class="platform-logo">
-                                <div style="flex:1;">
-                                    <div class="platform-title">♠ XPoker</div>
-                                    <a href="https://x-poker.net/#/" target="_blank" class="platform-link">下載連結</a>
-                                    <div class="club-grid four">
-                                        <div class="club-card"><strong>天祥雙子 (1:8)</strong>ID: 999306<br>推薦人: 3496108</div>
-                                        <div class="club-card"><strong>泰好贏 (1:1)</strong>ID: 2421367<br>推薦人: 3583536</div>
-                                        <div class="club-card"><strong>亞特馬來 (1:1)</strong>ID: 686175<br>推薦人: 3496108</div>
-                                        <div class="club-card"><strong>花順 (1:1)</strong>ID: 277186<br>推薦人: 3032889</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="platform-item">
-                                <img src="images/ClubGG.png" class="platform-logo">
-                                <div style="flex:1;">
-                                    <div class="platform-title">♠️ ClubGG ♠️</div>
-                                    <a href="https://www.clubgg.com/" target="_blank" class="platform-link">下載連結</a>
-                                    <div class="club-grid three">
-                                        <div class="club-card"><strong>快樂呱Tiny (1:1)</strong>ID: 954109<br>推薦人: 4005-6868</div>
-                                        <div class="club-card"><strong>快樂呱Massiv (1:26)</strong>ID: 619975<br>推薦人: 4005-6868</div>
-                                        <div class="club-card"><strong>時光雞Time (1:27)</strong>ID: 970779<br>推薦人: 4005-6868</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p style="color:#facc15;">⚠️ 需綁定基地代理平台帳號方可參與考核</p>
                         </div>
                     </div>
 
@@ -273,14 +240,19 @@
                                     <li>限時積分賽：75 小時</li>
                                 </ul>
                             </div>
-                            <div class="shop-group">
-                                <div class="shop-city">考核場館</div>
-                                <ul>
-                                    <li>高雄－亞特蘭提斯</li>
-                                    <li>高雄－EPIC</li>
-                                    <li>高雄－華人德州撲克協會</li>
-                                </ul>
+                            
+                            <button class="nested-btn">🤝 配合店家</button>
+                            <div class="nested-content">
+                                <div class="content-inner">
+                                    <ul>
+                                        <li>台北: A8,Dream Room,三重ABC</li>
+                                        <li>新竹: Eagle</li>
+                                        <li>台中: UT,IPC,Elite,CityPoker,CheckRaise</li>
+                                        <li>高雄: 亞特蘭提斯,EPIC,高雄華人德州撲克協會</li>
+                                    </ul>
+                                </div>
                             </div>
+
                             <div class="shop-group">
                                 <div class="shop-city">評選標準</div>
                                 <ul class="circle-list">
@@ -292,19 +264,18 @@
                                     <li>隨機抽查報考之帳號手牌</li>
                                 </ul>
                             </div>
-                            <p style="color:#facc15; margin-top:10px;">⚠️ 需綁定基地代理線下場館方可參與考核</p>
+                            <p style="color:#facc15;">⚠️ 需綁定基地代理線下場館方可參與考核</p>
                         </div>
                     </div>
-                    <button class="nested-btn">🤝 配合店家</button>
-                    <div class="nested-content"><div class="content-inner"><ul><li>台北: A8,Dream Room,三重ABC</li><li>新竹: Eagle</li><li>台中: UT,IPC,Elite,CityPoker,CheckRaise</li><li>高雄: 亞特蘭提斯,EPIC,高雄華人德州撲克協會</li></ul></div></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <button class="sub-btn">✨ 正式牌手福利</button>
+    <button class="sub-btn">💎 牌手權益與規範總覽</button>
     <div class="sub-content">
         <div class="content-inner">
+            <h3 style="color:var(--gold);">✨ 正式牌手福利</h3>
             <img src="images/福利.webp" style="width:100%; border-radius:12px; margin-bottom:15px;">
             <ul>
                 <li>提供資金支援與系統化教學資源</li>
@@ -314,12 +285,10 @@
                 <li>高 CP 值比賽贊助（由基地挑選並提供全額贊助）</li>
                 <li>『基地 Pro 金色布標』：正式牌手資格象徵</li>
             </ul>
-        </div>
-    </div>
 
-    <button class="sub-btn">♠️ 社群牌手福利</button>
-    <div class="sub-content">
-        <div class="content-inner">
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
+
+            <h3 style="color:var(--gold);">♠️ 社群牌手福利</h3>
             <p style="color:#9ca3af; margin-bottom:12px;">加入基地牌手社群，享有以下交流資源：</p>
             <ul>
                 <li>HRC 翻前 Spot 協助（每人每日 2 個上限）</li>
@@ -327,12 +296,10 @@
                 <li>不定期策略分享</li>
                 <li>HRC 申請表：<a href="https://forms.gle/LYLK7r77LePm38C8A" target="_blank" style="color:var(--neon-green)">申請連結</a></li>
             </ul>
-        </div>
-    </div>
 
-    <button class="sub-btn">⚠️ 正式牌手資格維持</button>
-    <div class="sub-content">
-        <div class="content-inner">
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
+
+            <h3 style="color:var(--poker-red);">⚠️ 正式牌手資格維持</h3>
             <div class="warning-card">
                 <p><b>正式牌手通過後，仍需維持基本活躍與社群規範。</b></p>
                 <ul>
