@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v29.2版</title>
+<title>牌手基地公告 | v29.4版</title>
 
 <style>
     @keyframes glow{
@@ -699,43 +699,60 @@ ID: 277186<br>
 </div>
 
 <script>
-    document.addEventListener('click', function(e) {
-        // 處理主選單摺疊
-        const btn = e.target.closest('.collapsible, .sub-btn, .nested-btn');
-        if (btn) {
-            btn.classList.toggle('active');
-            const panel = btn.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-                let parent = panel.parentElement.closest('.content, .sub-content');
-                while (parent) {
-                    parent.style.maxHeight = (parent.scrollHeight + panel.scrollHeight) + "px";
-                    parent = parent.parentElement.closest('.content, .sub-content');
-                }
+document.addEventListener('click', function(e) {
+
+    // 主 / 子 / nested 摺疊
+    const btn = e.target.closest('.collapsible, .sub-btn, .nested-btn');
+    if (btn) {
+
+        btn.classList.toggle('active');
+
+        const panel = btn.nextElementSibling;
+
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+
+            panel.style.maxHeight = panel.scrollHeight + "px";
+
+            // 修正父層高度
+            let parent = panel.parentElement.closest('.content, .sub-content, .nested-content');
+
+            while (parent) {
+                parent.style.maxHeight = parent.scrollHeight + panel.scrollHeight + "px";
+                parent = parent.parentElement.closest('.content, .sub-content, .nested-content');
             }
-            return;
+
         }
 
-        // 處理 FAQ 內部小摺疊
-        const faqHeader = e.target.closest('.faq-header');
-        if (faqHeader) {
-            faqHeader.classList.toggle('faq-active');
-            const body = faqHeader.nextElementSibling;
-            if (body.style.maxHeight) {
-                body.style.maxHeight = null;
-            } else {
-                body.style.maxHeight = body.scrollHeight + "px";
-                // 更新父層高度避免截斷
-                let p = faqHeader.parentElement.closest('.content, .sub-content, .nested-content');
-                while (p) {
-                    p.style.maxHeight = (p.scrollHeight + body.scrollHeight) + "px";
-                    p = p.parentElement.closest('.content, .sub-content, .nested-content');
-                }
+        return;
+    }
+
+    // FAQ 摺疊
+    const faqHeader = e.target.closest('.faq-header');
+    if (faqHeader) {
+
+        faqHeader.classList.toggle('faq-active');
+
+        const body = faqHeader.nextElementSibling;
+
+        if (body.style.maxHeight) {
+            body.style.maxHeight = null;
+        } else {
+
+            body.style.maxHeight = body.scrollHeight + "px";
+
+            let p = faqHeader.parentElement.closest('.content, .sub-content, .nested-content');
+
+            while (p) {
+                p.style.maxHeight = p.scrollHeight + body.scrollHeight + "px";
+                p = p.parentElement.closest('.content, .sub-content, .nested-content');
             }
+
         }
-    });
+    }
+
+});
 </script>
 </body>
 </html>
