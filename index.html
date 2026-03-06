@@ -51,13 +51,13 @@
 
     .status-panel h2 { color: var(--neon); margin-top: 0; text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); }
     
-    /* 列表與符號循環 */
-    .status-panel ul, .poker-list { list-style: none; padding-left: 0; }
-    .status-panel li, .poker-list li { 
+    /* 列表符號循環 (不影響常見問題) */
+    .status-panel ul { list-style: none; padding-left: 0; }
+    .status-panel li { 
         margin-bottom: 8px; display: flex; align-items: flex-start; 
         position: relative; padding-left: 25px; 
     }
-    .status-panel li::before, .poker-list li::before { position: absolute; left: 0; font-size: 14px; font-weight: bold; }
+    .status-panel li::before { position: absolute; left: 0; font-size: 14px; font-weight: bold; }
 
     /* 4行一輪符號 */
     .status-panel li:nth-child(4n+1)::before { content: "♠"; color: var(--neon); }
@@ -65,19 +65,16 @@
     .status-panel li:nth-child(4n+3)::before { content: "♦"; color: var(--red); }
     .status-panel li:nth-child(4n+4)::before { content: "🍀"; color: var(--neon); }
 
-    .poker-list li:nth-child(4n+1)::before { content: "♠"; color: #fff; }
-    .poker-list li:nth-child(4n+2)::before { content: "♥"; color: #ff4d4d; }
-    .poker-list li:nth-child(4n+3)::before { content: "♣"; color: #fff; }
-    .poker-list li:nth-child(4n+4)::before { content: "♦"; color: #ff4d4d; }
-
-    /* 按鈕類通用樣式 */
+    /* --- v37.1 核心美術樣式 (保證綠油油質感) --- */
     .collapsible, .sub-btn, .nested-btn {
         background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon);
         cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937;
         border-radius: 10px; text-align: left; font-size: 17px; font-weight: bold;
         margin-top: 12px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
     }
+    /* 將符號換成箭頭，並設定過渡動畫 */
     .collapsible:after, .sub-btn:after, .nested-btn:after { content: '▼'; font-size: 14px; transition: transform 0.3s ease; }
+    /* 當按鈕變為 active 時，不改內容而是旋轉 180 度 */
     .active:after { transform: rotate(180deg); }
 
     /* 內容區塊 */
@@ -98,6 +95,7 @@
     .shop-group { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25); border-radius: 10px; padding: 14px; margin: 12px 0; }
     .shop-city { color: var(--gold); font-weight: bold; border-left: 3px solid var(--gold); padding-left: 10px; margin: 10px 0; }
 
+    /* 平台 Logo 質感 (核心修復) */
     .platform-item { 
         display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); 
         padding: 20px; border-radius: 16px; border: 1px solid rgba(0, 255, 136, 0.15); 
@@ -107,11 +105,12 @@
         width: 65px; height: 65px; border-radius: 50%; object-fit: cover; 
         border: 2px solid rgba(255, 255, 255, 0.05); transition: 0.4s; 
     }
+    /* 滑鼠移上去時 Logo 發金光暈 (核心訴求) */
     .platform-item:hover { border-color: var(--gold); background: rgba(245, 197, 66, 0.03); }
-    .platform-item:hover .platform-logo { transform: scale(1.08); border-color: var(--gold); box-shadow: 0 0 20px rgba(245, 197, 66, 0.5); }
+    .platform-item:hover .platform-logo { transform: scale(1.08); border-color: var(--gold); box-shadow: 0 0 20px rgba(245, 197, 66, 0.6); }
 
     .platform-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px; }
-    .platform-title { font-weight: 800; color: var(--neon); font-size: 1.1rem; }
+    .platform-title { font-weight: 800; color: var(--neon); font-size: 1.1rem; margin: 0; }
     .platform-link-btn { 
         border: 1.5px solid var(--gold); color: var(--gold) !important; padding: 6px 18px; 
         border-radius: 20px; font-size: 13px; font-weight: 800; text-decoration: none !important; transition: 0.3s; 
@@ -124,21 +123,50 @@
     .club-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 10px; transition: 0.3s; }
     .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 15px; }
 
-    /* 區域負責人列表 */
+    /* 區域負責人表格 */
     .region-box { background: rgba(31, 41, 55, 0.7); padding: 15px; border-radius: 10px; }
     .region-row { display: grid; grid-template-columns: 125px 105px 1fr; padding: 12px 0; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
     .region-line { color: var(--neon); text-align: left; font-family: 'Courier New', monospace; font-size: 15px; }
 
-    /* FAQ 樣式 */
-    .faq-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
-    .faq-header { color: var(--gold); font-weight: 800; background: none; border: none; width: 100%; text-align: left; padding: 15px; cursor: pointer; }
-    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: rgba(0, 0, 0, 0.15); }
+    /* --- 精確修正：常見問題恢復原本質感 --- */
+    .faq-card {
+        background: none !important; /* 移除額外的背景 */
+        border: none !important; /* 移除額外的邊框 */
+        margin-bottom: 5px; /* 恢復預設子按鈕間距 */
+        overflow: visible;
+    }
+    .faq-header {
+        /* 回歸 v37.1 子按鈕質感 */
+        background: linear-gradient(90deg, #111827, #1f2937) !important;
+        color: var(--neon) !important; /* 恢復清爽霓虹綠 */
+        border: 1px solid #1f2937 !important;
+        border-radius: 10px !important;
+        cursor: pointer; padding: 16px 20px; width: 100%; text-align: left;
+        font-size: 17px; font-weight: bold; margin-top: 12px;
+        display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
+    }
+    /* 核心修復：強制禁用所有花色符號 */
+    .faq-header::before, .faq-header::after {
+        content: none !important;
+    }
+    /* 如果你的 HTML 裡 FAQ 標題需要▼符號，在 JS 裡控制。CSS 強制清空 content */
+
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0, 0, 0, 0.15); border-radius: 0 0 10px 10px; margin-top: -5px; }
     .faq-body-inner { padding: 18px; line-height: 1.7; color: #d1d5db; font-size: 15px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
     /* 店家 Grid */
     .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
     .store-tag { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); padding: 15px; border-radius: 10px; text-align: center; }
-    .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); }
+    .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px; }
+    .store-names { font-size: 16px; color: #e5e7eb; line-height: 1.6; }
+
+    /* 頁尾與警告 */
+    .warning-card { background: rgba(255, 77, 77, 0.05); border: 1px dashed rgba(255, 77, 77, 0.3); padding: 15px; border-radius: 12px; }
+    .warning-card b { color: #ff4d4d; display: block; margin-bottom: 10px; font-size: 15px; }
+    .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
+    .circle-list li { counter-increment: item; margin-bottom: 6px; }
+    .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 4px; }
+    .footer { text-align: center; margin-top: 40px; }
 
     /* 手機版適配 */
     @media (max-width: 768px) {
