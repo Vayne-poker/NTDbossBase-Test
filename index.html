@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.8</title>
+<title>牌手基地公告 | v37.9</title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -19,7 +19,7 @@
     .s-br { bottom: 15vh; right: 0; color: var(--neon-green); filter: drop-shadow(0 0 35px var(--neon-green)); animation: breathe 8s infinite ease-in-out 6s; }
     @keyframes breathe {0%, 100% { opacity: 0.05; transform: scale(1); } 50% { opacity: 0.12; transform: scale(1.08); } }
     .main-wrapper { max-width: 900px; margin: 0 auto; }
-    .status-panel {background: rgba(0, 255, 136, 0.02);border: 1px solid rgba(0, 255, 136, 0.3); /* 降低原本邊框亮度 */position: relative;overflow: hidden;/* 新增：外發光氛圍 */box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);}
+    .status-panel {background: rgba(0, 255, 136, 0.02);border: 1px solid rgba(0,255,136,0.15);box-shadow:0 0 20px rgba(0,255,136,0.05),inset 0 0 10px rgba(0,255,136,0.05); /* 降低原本邊框亮度 */position: relative;overflow: hidden;/* 新增：外發光氛圍 */box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);}
 
     /* 增加一個微妙的流光掃過效果 */
     .status-panel::after {content: "";position: absolute;top: -50%; left: -50%;width: 200%; height: 200%;background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);transform: rotate(45deg);animation: sheen 6s infinite;}
@@ -52,7 +52,7 @@
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
 /* --- 📱 平台與俱樂部樣式 (質感修復版) --- */
-    .platform-item { display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 15px;flex-wrap: wrap; /* 讓內部的 Grid 可以換行並撐開寬度 */}
+    .platform-item { display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 15px;flex-wrap: wrap; /* 讓內部的 Grid 可以換行並撐開寬度 */backdrop-filter: blur(6px);}
     .platform-logo { width: 65px; height: 65px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
     .platform-info { flex: 1; /* 讓文字部分佔據剩餘空間 */min-width: 200px;}
     /* --- 平台標題與下載按鈕優化 --- */
