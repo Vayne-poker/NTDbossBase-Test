@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.10</title>
+<title>牌手基地公告 | v37.11</title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -94,6 +94,8 @@
     /* --- ❓ FAQ、警告與頁尾 --- */
     .faq-card {background: rgba(255, 255, 255, 0.05);border: 1px solid rgba(255, 255, 255, 0.1);border-radius: 8px;margin-bottom: 12px; /* 增加卡片間距 */overflow: hidden;}
     .faq-header {width: 100%;background: none;border: none;padding: 16px 18px; /* 增加點擊區域 */color: var(--gold);font-size: 16px;font-weight: bold;text-align: left;cursor: pointer;display: flex;justify-content: space-between;align-items: center;transition: background 0.3s;}
+    .faq-header::after{content:"▼";font-size:12px;transition:transform .3s;}
+    .faq-header.faq-active::after{transform:rotate(180deg);}
     .faq-header:hover {background: rgba(255, 255, 255, 0.03);}
     .faq-body {max-height: 0;overflow: hidden;transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 更絲滑的動畫 */background: rgba(0, 0, 0, 0.15); /* 稍微深色區隔 */}
 
@@ -103,11 +105,15 @@
     .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
     .circle-list li { counter-increment: item; margin-bottom: 6px; }
     .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 4px; }
-    .footer { text-align: center; margin-top: 40px; }
+    .footer{text-align:center;margin-top:50px;opacity:.85;}
+    .footer-title{color:var(--gold);font-size:20px;font-weight:700;letter-spacing:1px;}
+    .footer-row{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;font-size:14px;}
+    .footer-img{width:60px;border-radius:8px;transition:.3s;}
+    .footer-img:hover{transform:scale(1.05);box-shadow:0 0 10px rgba(255,215,0,0.5);}
 /* 撲克符號標點 */
     .poker-list { list-style: none; padding-left: 0; margin: 0; }
     .poker-list li { margin-bottom: 8px; display: block; line-height:1.6;color: #e5e7eb; position: relative; padding-left: 25px; }
-    .poker-list li::before { position: absolute; left: 0; font-size: 14px; font-weight: normal; }
+    .poker-list li::before { position: absolute; left: 0; font-size: 16px;top:1px; font-weight: normal; }
     .poker-list li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); }
     .poker-list li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); }
     .poker-list li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); }
@@ -472,11 +478,12 @@
     </div>
 
     <div class="footer">
-        <h2 style="color:var(--gold);">牌手基地保有最終解釋權</h2>
-        <div style="display:flex; justify-content:center; align-items:center; gap:15px; margin-top:20px;">
-            <img src="images/NTDboss.jpg" style="width:60px; border-radius:8px;">
+        <div class="footer-title">牌手基地保有最終解釋權</div>
+    
+        <div class="footer-row">
+            <img src="images/NTDboss.jpg" class="footer-img">
             <span>所有規則與福利，以基地公告為準</span>
-            <img src="images/NTDboss.jpg" style="width:60px; border-radius:8px;">
+            <img src="images/NTDboss.jpg" class="footer-img">
         </div>
     </div>
 </div>
