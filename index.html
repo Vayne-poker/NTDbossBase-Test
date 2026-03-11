@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.7</title>
+<title>牌手基地公告 | v37.8</title>
 
 <style>
     @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
@@ -38,6 +38,7 @@
     /* 新增：讓 li 裡面的重點數字/文字發光 */
     .status-panel li b, .status-panel li strong {color: var(--neon-green);text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);font-weight: bold;}
     .collapsible, .sub-btn, .nested-btn {background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green);cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937;border-radius: 10px; text-align: left; font-size: 17px; font-weight: bold;margin-top: 12px; display: flex; justify-content: space-between; align-items: center;transition: 0.3s;}
+    .collapsible:hover,.sub-btn:hover,.nested-btn:hover{border-color: var(--neon-green);box-shadow: 0 0 10px rgba(0,255,136,0.2);transform: translateY(-1px);}
     /* 將符號換成箭頭，並設定過渡動畫 */
     .collapsible:after, .sub-btn:after, .nested-btn:after {content: '▼'; font-size: 14px;transition: transform 0.3s ease; /* 針對旋轉設定動畫 */}
     /* 當按鈕變為 active 時，不改內容而是旋轉 180 度 */
