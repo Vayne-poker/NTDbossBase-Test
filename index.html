@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.12</title>
+<title>牌手基地公告 | v37.13</title>
 
 <style>
     :root { --neon-green: #00ff88; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #0b0f14;}
@@ -56,10 +56,11 @@
 /* --- 📱 平台與俱樂部樣式 (質感修復版) --- */
     .platform-item { display: flex; align-items: center; gap: 18px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 15px;flex-wrap: wrap;border-bottom:1px solid rgba(255,255,255,0.05); /* 讓內部的 Grid 可以換行並撐開寬度 */backdrop-filter: blur(6px);transition:.25s;}
     .platform-item:hover{border-color:var(--gold);box-shadow:0 0 18px rgba(245,197,66,.35);transform:translateY(-2px);}
-    .platform-logo { width: 65px; height: 65px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+    .platform-logo { width: 65px; height: 65px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.3);flex-shrink:0;transition:.3s;}
+    .platform-item:hover .platform-logo{transform:scale(1.05);box-shadow:0 0 15px var(--neon-green);}
     .platform-info {.platform-info{flex:1;min-width:200px;display:flex;flex-direction:column;justify-content:center;}
     /* --- 平台標題與下載按鈕優化 --- */
-    .platform-header {display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 8px;}
+    .platform-header {display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 8px;gap:10px;}
     .platform-title { font-weight: 800; color: var(--neon-green); font-size: 1.25rem;margin: 0;letter-spacing: .5px;}
     /* 質感下載按鈕 */
     .platform-link-btn {background: rgba(0, 255, 136, 0.1);border: 1px solid var(--neon-green);color: var(--neon-green) !important;text-decoration: none !important;padding: 6px 14px;border-radius: 6px;font-size: 12px;font-weight: bold;text-transform: uppercase;transition: all 0.3s ease;text-shadow: none !important;}
