@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v38.4</title>
+<title>牌手基地公告 | v38.5</title>
 <style>
     :root { --neon-green: #00ff88; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #0b0f14;}
    body {background:
@@ -143,18 +143,16 @@
         /* 3. 重置 LINE ID 樣式：不再強制佔據整行 */
         .region-line { grid-column: auto !important; /* 取消 1 / -1，讓它乖乖待在第三欄 */background: transparent !important; padding: 0 !important; margin-top: 0 !important; font-size: 12px;text-align: right; /* 靠右對齊會讓介面看起來更寬敞 */}
         /* 合作平台垂直排列 */
-        .platform-item { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px; }
+        .platform-item { flex-direction: row; align-items: flex-start; gap: 10px; padding: 12px; }
         .platform-logo { width: 45px; height: 45px; }
         /* 內邊距優化 */
         .content-inner { padding: 15px 12px; }
         .collapsible { font-size: 16px; padding: 14px 15px; }
     a {color: var(--neon-green) !important;text-decoration: underline !important;text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);transition: 0.3s;}
-    a:hover {filter: brightness(1.2);text-shadow: 0 0 12px var(--neon-green);}}
-    @media (max-width: 600px){
-    .platform-header{flex-direction:column;align-items:flex-start;gap:8px;}
-    .platform-link-btn{align-self:flex-start;}}
-    @media (max-width:600px){
-    .platform-link-btn{padding:8px 16px;font-size:13px;}}
+    a:hover {filter: brightness(1.2);text-shadow: 0 0 12px var(--neon-green);}
+    .platform-link-btn { margin-left: auto;/* 按鈕靠右 */ padding: 8px 16px; font-size: 13px; }
+    .platform-header { display: flex; flex-direction: row; align-items: center; gap: 10px; }
+    .platform-title{flex:1;   /* 讓標題吃掉空間 */}}
     @media (min-width: 1200px){
     body{font-size:19px;}}
 </style>
