@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v38.1</title>
+<title>牌手基地公告 | v38.2</title>
 <style>
     :root { --neon-green: #00ff88; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #0b0f14;}
    body {background:
@@ -66,18 +66,18 @@
     .platform-item:hover{border-color:var(--gold);box-shadow:0 0 18px rgba(245,197,66,.35);transform:translateY(-2px);}
     .platform-logo { width: 65px; height: 65px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.3);flex-shrink:0;transition:.3s;}
     .platform-item:hover .platform-logo{transform:scale(1.05);box-shadow:0 0 15px var(--neon-green);}
-    .platform-info {.platform-info{flex:1;min-width:200px;display:flex;flex-direction:column;justify-content:center;}
+    .platform-info{flex:1;min-width:200px;display:flex;flex-direction:column;justify-content:center;}
     /* --- 平台標題與下載按鈕優化 --- */
-    .platform-header {display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 8px;gap:10px;}
+    .platform-header{display:flex;align-items:center;justify-content:space-between;gap:10px;}
     .platform-title { font-weight: 800; color: var(--neon-green); font-size: 1.25rem;margin: 0;letter-spacing: .5px;}
     /* 質感下載按鈕 */
     .platform-link-btn {background: rgba(0, 255, 136, 0.1);border: 1px solid var(--neon-green);color: var(--neon-green) !important;text-decoration: none !important;padding: 6px 14px;border-radius: 6px;font-size: 12px;font-weight: bold;text-transform: uppercase;transition: all 0.3s ease;text-shadow: none !important;}
     .platform-link-btn:hover {background: var(--neon-green);color: #000 !important;box-shadow: 0 0 10px var(--neon-green);}
     /* 推薦碼樣式稍微縮小，不搶戲 */
-    .promo-text {font-size: 17px;color: #cbd5e1;;letter-spacing:.5px;font-weight:500;margin-top:2px;}
+    .promo-text{font-size:15px;color:#d1d5db;line-height:1.6;margin-top:4px;}
     .promo-text b{color:var(--gold);}
     /* 核心修復：強制 Grid 撐滿 100% 寬度 */
-    .club-grid { display: grid; gap: 12px; margin-top: 15px; width: 100%; /* 關鍵：確保他不縮在左邊 */}
+    .club-grid { display: grid; gap: 12px; margin-top: 15px; width: 100%;flex-basis:100%; /* 關鍵：確保他不縮在左邊 */}
     /* 電腦版：XP 2+2 對齊, ClubGG 3 欄平分 */
     .club-grid.four { grid-template-columns: repeat(2, 1fr); }
     .club-grid.three { grid-template-columns: repeat(3, 1fr); }
@@ -115,10 +115,10 @@
     .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
     .circle-list li { counter-increment: item; margin-bottom: 6px; }
     .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 4px; }
-    .footer{text-align:center;margin-top:50px;opacity:.85;}
-    .footer-title{color:var(--gold);font-size:20px;font-weight:700;letter-spacing:1px;}
-    .footer-row{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;font-size:14px;}
-    .footer-img{width:60px;border-radius:8px;transition:.3s;}
+    .footer{text-align:center;margin-top:40px;}
+    .footer-title{color:var(--gold);font-size:20px;font-weight:700;margin-bottom:15px;}
+    .footer-row{display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;}
+    .footer-img{width:60px;height:60px;object-fit:cover;border-radius:10px;box-shadow:0 0 10px rgba(245,197,66,.4);}
     .footer-img:hover{transform:scale(1.05);box-shadow:0 0 10px rgba(255,215,0,0.5);}
 /* 撲克符號標點 */
     .poker-list { list-style: none; padding-left: 0; margin: 0; }
