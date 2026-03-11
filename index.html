@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v38.3</title>
+<title>牌手基地公告 | v38.4</title>
 <style>
     :root { --neon-green: #00ff88; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #0b0f14;}
    body {background:
@@ -15,7 +15,9 @@
     margin: 0;
     padding: 50px 20px;
     min-height: 100vh;
-    font-family: -apple-system, system-ui, sans-serif;} 
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.7;} 
     /* 確保所有背景符號基準點一致 */
     .suit-bg {position: fixed;font-size: 25vw;opacity: 0.08; /* 調低透明度，讓背景更有層次不搶戲 */z-index: -1;pointer-events: none;line-height: 1;display: flex;align-items: center;justify-content: center;width: 25vw;height: 25vw;}
     /* --- 四角定位：往中間提，解決擁擠問題 --- */
@@ -34,7 +36,7 @@
     /* 增加一個微妙的流光掃過效果 */
     .status-panel::after {content: "";position: absolute;top: -50%; left: -50%;width: 200%; height: 200%;background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);transform: rotate(45deg);animation: sheen 6s infinite;}
     @keyframes sheen {0% { transform: translateX(-100%) rotate(45deg); }100% { transform: translateX(100%) rotate(45deg); }}
-    h1 {text-align: center;background: linear-gradient(to bottom, #fff 20%, var(--neon-green) 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));font-size: 2.2rem;letter-spacing: 2px;}
+    h1 {text-align: center;background: linear-gradient(to bottom, #fff 20%, var(--neon-green) 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));font-size: 2.6rem;letter-spacing: 2px;}
     .status-panel h2 {color: var(--neon-green); margin-top: 0; text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); /* 新增：標題發光 */}
     .status-panel ul {list-style: none; padding-left: 0; }
     /* --- 撲克符號精確循環版 --- */
@@ -148,6 +150,13 @@
         .collapsible { font-size: 16px; padding: 14px 15px; }
     a {color: var(--neon-green) !important;text-decoration: underline !important;text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);transition: 0.3s;}
     a:hover {filter: brightness(1.2);text-shadow: 0 0 12px var(--neon-green);}}
+    @media (max-width: 600px){
+    .platform-header{flex-direction:column;align-items:flex-start;gap:8px;}
+    .platform-link-btn{align-self:flex-start;}}
+    @media (max-width:600px){
+    .platform-link-btn{padding:8px 16px;font-size:13px;}}
+    @media (min-width: 1200px){
+    body{font-size:19px;}}
 </style>
 </head>
 <body>
