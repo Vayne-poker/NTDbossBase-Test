@@ -7,7 +7,7 @@
 
 <style>
     :root { --neon-green: #00ff88; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #0b0f14;}
-    body {background: radial-gradient(circle at center, #161d26 0%, #0b0f14 100%);color: #e5e7eb;margin: 0;padding: 50px 20px;min-height: 100vh;font-family: -apple-system, system-ui, sans-serif;}
+    body {background: radial-gradient(circle at center, #161d26 0%, #0b0f14 100%);color: #e5e7eb;margin: 0;padding: 50px 20px;min-height: 100vh;font-family: -apple-system, system-ui, sans-serif;font-size: 17px;}
     /* 確保所有背景符號基準點一致 */
     .suit-bg {position: fixed;font-size: 25vw;opacity: 0.08; /* 調低透明度，讓背景更有層次不搶戲 */z-index: -1;pointer-events: none;line-height: 1;display: flex;align-items: center;justify-content: center;width: 25vw;height: 25vw;}
     /* --- 四角定位：往中間提，解決擁擠問題 --- */
@@ -54,17 +54,19 @@
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
 
 /* --- 📱 平台與俱樂部樣式 (質感修復版) --- */
-    .platform-item { display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 15px;flex-wrap: wrap; /* 讓內部的 Grid 可以換行並撐開寬度 */backdrop-filter: blur(6px);}
+    .platform-item { display: flex; align-items: center; gap: 18px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 15px;flex-wrap: wrap;border-bottom:1px solid rgba(255,255,255,0.05); /* 讓內部的 Grid 可以換行並撐開寬度 */backdrop-filter: blur(6px);transition:.25s;}
+    .platform-item:hover{border-color:var(--gold);box-shadow:0 0 18px rgba(245,197,66,.35);transform:translateY(-2px);}
     .platform-logo { width: 65px; height: 65px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
-    .platform-info { flex: 1; /* 讓文字部分佔據剩餘空間 */min-width: 200px;}
+    .platform-info {.platform-info{flex:1;min-width:200px;display:flex;flex-direction:column;justify-content:center;}
     /* --- 平台標題與下載按鈕優化 --- */
     .platform-header {display: flex;justify-content: space-between;align-items: center;width: 100%;margin-bottom: 8px;}
-    .platform-title { font-weight: 800; color: var(--neon-green); font-size: 1.1rem;margin: 0;}
+    .platform-title { font-weight: 800; color: var(--neon-green); font-size: 1.25rem;margin: 0;letter-spacing: .5px;}
     /* 質感下載按鈕 */
-    .platform-link-btn {background: rgba(0, 255, 136, 0.1);border: 1px solid var(--neon-green);color: var(--neon-green) !important;text-decoration: none !important;padding: 4px 12px;border-radius: 6px;font-size: 12px;font-weight: bold;text-transform: uppercase;transition: all 0.3s ease;text-shadow: none !important;}
+    .platform-link-btn {background: rgba(0, 255, 136, 0.1);border: 1px solid var(--neon-green);color: var(--neon-green) !important;text-decoration: none !important;padding: 6px 14px;border-radius: 6px;font-size: 12px;font-weight: bold;text-transform: uppercase;transition: all 0.3s ease;text-shadow: none !important;}
     .platform-link-btn:hover {background: var(--neon-green);color: #000 !important;box-shadow: 0 0 10px var(--neon-green);}
     /* 推薦碼樣式稍微縮小，不搶戲 */
-    .promo-text {font-size: 14px;color: #9ca3af;}
+    .promo-text {font-size: 17px;color: #cbd5e1;;letter-spacing:.5px;font-weight:500;margin-top:2px;}
+    .promo-text b{color:var(--gold);}
     /* 核心修復：強制 Grid 撐滿 100% 寬度 */
     .club-grid { display: grid; gap: 12px; margin-top: 15px; width: 100%; /* 關鍵：確保他不縮在左邊 */}
     /* 電腦版：XP 2+2 對齊, ClubGG 3 欄平分 */
@@ -231,7 +233,7 @@
                                     <div class="platform-title">♠ iPoker</div>
                                     <a href="https://www.ipoker.app/official_new/register/?rid=TlREYm9zcw%3D%3D" target="_blank" class="platform-link-btn">下載連結</a>
                                 </div>
-                                <div class="promo-text">推薦碼：NTDboss</div>
+                                <div class="promo-text">推薦碼：<b>NTDboss</b></div>
                             </div>
                         </div>
                     
@@ -242,7 +244,7 @@
                                     <div class="platform-title">♥ WPT Global</div>
                                     <a href="https://wptglobal.com/poker-download?referralCode=A0A697" target="_blank" class="platform-link-btn">下載連結</a>
                                 </div>
-                                <div class="promo-text">推薦碼：A0A697</div>
+                                <div class="promo-text">推薦碼：<b>A0A697</b></div>
                             </div>
                         </div>
                     
@@ -253,7 +255,7 @@
                                     <div class="platform-title">♦ Natural8</div>
                                     <a href="https://www.natural8.com/sign-up?ref=NTDboss" target="_blank" class="platform-link-btn">下載連結</a>
                                 </div>
-                                <div class="promo-text">推薦碼：NTDboss</div>
+                                <div class="promo-text">推薦碼：<b>NTDboss</b></div>
                             </div>
                         </div>
                     
@@ -264,7 +266,7 @@
                                     <div class="platform-title">♣ QQ Poker</div>
                                     <a href="https://qqpk8.app:51999?shareCode=MGA852" target="_blank" class="platform-link-btn">下載連結</a>
                                 </div>
-                                <div class="promo-text">推薦碼：MGA852</div>
+                                <div class="promo-text">推薦碼：<b>MGA852</b></div>
                             </div>
                         </div>
                     
