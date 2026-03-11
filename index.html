@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v38.5</title>
+<title>牌手基地公告 | v38.6</title>
 <style>
     :root { --neon-green: #00ff88; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #0b0f14;}
    body {background:
@@ -148,6 +148,9 @@
         /* 內邊距優化 */
         .content-inner { padding: 15px 12px; }
         .collapsible { font-size: 16px; padding: 14px 15px; }
+        .footer-row {flex-wrap: nowrap; /* 禁止換行 */overflow-x: auto;  /* 超出寬度可以左右滑動 */justify-content: space-between; /* 保持兩邊貼齊 */padding: 0 10px;}
+    .footer-img { width: 50px; height: 50px; flex-shrink: 0; }
+    .footer-title { font-size: 18px; margin: 0 10px; white-space: nowrap; }
     a {color: var(--neon-green) !important;text-decoration: underline !important;text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);transition: 0.3s;}
     a:hover {filter: brightness(1.2);text-shadow: 0 0 12px var(--neon-green);}
     .platform-link-btn { margin-left: auto;/* 按鈕靠右 */ padding: 8px 16px; font-size: 13px; }
