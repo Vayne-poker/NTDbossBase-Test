@@ -3,387 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>牌手基地公告 | v37.1 </title>
+<title>牌手基地公告 | v37.1-2 </title>
 
 <style>
-    @keyframes breathe { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.08; transform: scale(1.1); } }
-
-    :root { 
-        --neon-green: #00ff88; 
-        --poker-red: #ff3a3a; 
-        --gold: #f5c542; 
-        --bg-dark: #0b0f14;
-    }
-    body {
-        background: radial-gradient(circle at center, #161d26 0%, #0b0f14 100%);
-        color: #e5e7eb;
-        margin: 0;
-        padding: 40px 20px;
-        min-height: 100vh;
-        font-family: -apple-system, system-ui, sans-serif;
-    }
-
-    /* 確保所有背景符號基準點一致 */
-    .suit-bg {
-        position: fixed;
-        font-size: 25vw;
-        opacity: 0.08; /* 調低透明度，讓背景更有層次不搶戲 */
-        z-index: -1;
-        pointer-events: none;
-        line-height: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 25vw;
-        height: 25vw;
-    }
-    /* --- 四角定位：往中間提，解決擁擠問題 --- */
+    @keyframes breathe { 0%, 100% { opacity: 0.05; transform: scale(1); } 50% { opacity: 0.12; transform: scale(1.08); } }
+    @keyframes sheen { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
+    :root { --neon-green: #00ff88; --poker-red: #ff3a3a; --gold: #f5c542; --bg-dark: #0b0f14; }
+    body { background: radial-gradient(circle at center, #161d26 0%, #0b0f14 100%); color: #e5e7eb; margin: 0; padding: 40px 20px; min-height: 100vh; font-family: -apple-system, system-ui, sans-serif; }
+    .suit-bg { position: fixed; font-size: 25vw; opacity: 0.08; z-index: -1; pointer-events: none; line-height: 1; display: flex; align-items: center; justify-content: center; width: 25vw; height: 25vw; }
     .s-tl { top: 8vh; left: 0; color: var(--neon-green); filter: drop-shadow(0 0 30px var(--neon-green)); animation: breathe 8s infinite ease-in-out; }
     .s-tr { top: 8vh; right: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 2s; }
     .s-bl { bottom: 15vh; left: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 4s; }
-    
-    /* 幸運草：取消原本的偏移量，讓它跟左邊方塊對齊在同高度 */
-    .s-br { 
-        bottom: 15vh; right: 0; 
-        color: var(--neon-green); 
-        filter: drop-shadow(0 0 35px var(--neon-green)); 
-        animation: breathe 8s infinite ease-in-out 6s; 
-    }
-    @keyframes breathe { 
-        0%, 100% { opacity: 0.05; transform: scale(1); } 
-        50% { opacity: 0.12; transform: scale(1.08); } 
-    }
+    .s-br { bottom: 15vh; right: 0; color: var(--neon-green); filter: drop-shadow(0 0 35px var(--neon-green)); animation: breathe 8s infinite ease-in-out 6s; }
     .main-wrapper { max-width: 900px; margin: 0 auto; }
-
-    .status-panel {
-        background: rgba(0, 255, 136, 0.02);
-        border: 1px solid rgba(0, 255, 136, 0.3); /* 降低原本邊框亮度 */
-        position: relative;
-        overflow: hidden;
-        /* 新增：外發光氛圍 */
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);
-    }
-
-    /* 增加一個微妙的流光掃過效果 */
-    .status-panel::after {
-        content: "";
-        position: absolute;
-        top: -50%; left: -50%;
-        width: 200%; height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
-        transform: rotate(45deg);
-        animation: sheen 6s infinite;
-    }
-
-    @keyframes sheen {
-        0% { transform: translateX(-100%) rotate(45deg); }
-        100% { transform: translateX(100%) rotate(45deg); }
-    }
-    h1 {
-        text-align: center;
-        background: linear-gradient(to bottom, #fff 20%, var(--neon-green) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
-        font-size: 2.2rem;
-        letter-spacing: 2px;
-    }
-    .status-panel h2 { 
-        color: var(--neon-green); 
-        margin-top: 0; 
-        text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); /* 新增：標題發光 */
-    }
+    .status-panel { background: rgba(0, 255, 136, 0.02); border: 1px solid rgba(0, 255, 136, 0.3); position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(0, 255, 136, 0.05); }
+    .status-panel::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent); transform: rotate(45deg); animation: sheen 6s infinite; }
+    h1 { text-align: center; background: linear-gradient(to bottom, #fff 20%, var(--neon-green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5)); font-size: 2.2rem; letter-spacing: 2px; }
+    .status-panel h2 { color: var(--neon-green); margin-top: 0; text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); }
     .status-panel ul { list-style: none; padding-left: 0; }
-    /* --- 撲克符號精確循環版 --- */
-.status-panel li { 
-        margin-bottom: 8px; 
-        display: flex; 
-        align-items: flex-start; 
-        color: #e5e7eb;
-        position: relative;
-        padding-left: 25px; /* 增加左邊距給符號 */
-    }
-
-    .status-panel li::before { 
-        position: absolute;
-        left: 0;
-        font-size: 14px;
-        font-weight: normal;
-    }
-
-    /* 4行一輪：黑桃 -> 紅心 -> 方塊 -> 幸運草 */
+    .status-panel li { margin-bottom: 8px; display: flex; align-items: flex-start; color: #e5e7eb; position: relative; padding-left: 25px; }
+    .status-panel li::before { position: absolute; left: 0; font-size: 14px; font-weight: normal; }
     .status-panel li:nth-child(4n+1)::before { content: "♠"; color: var(--neon-green); }
     .status-panel li:nth-child(4n+2)::before { content: "♥"; color: var(--poker-red); }
     .status-panel li:nth-child(4n+3)::before { content: "♦"; color: var(--poker-red); }
-    .status-panel li:nth-child(4n+4)::before { content: "☘"; color: var(--neon-green); }
-
-    /* 新增：讓 li 裡面的重點數字/文字發光 */
-    .status-panel li b, .status-panel li strong {
-        color: var(--neon-green);
-        text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
-        font-weight: bold;
-    }
-
-    .collapsible, .sub-btn, .nested-btn {
-        background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green);
-        cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937;
-        border-radius: 10px; text-align: left; font-size: 17px; font-weight: bold;
-        margin-top: 12px; display: flex; justify-content: space-between; align-items: center;
-        transition: 0.3s;}
-    /* 將符號換成箭頭，並設定過渡動畫 */
-    .collapsible:after, .sub-btn:after, .nested-btn:after {content: '▼'; font-size: 14px;transition: transform 0.3s ease; /* 針對旋轉設定動畫 */}
-
-    /* 當按鈕變為 active 時，不改內容而是旋轉 180 度 */
-    .active:after { content: '▼' !important; transform: rotate(180deg); }
-
-    .content, .sub-content, .nested-content {
-        max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
-        background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; margin-top: -5px;
-    }
-    /* --- 3. 出入金連結高亮 (解決 image_2/5 隱形問題) --- */
-    .content-inner a {
-        color: var(--neon-green) !important;
-        text-decoration: underline;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .content-inner a:hover { filter: brightness(1.2) drop-shadow(0 0 5px var(--neon-green)); }
-
-    .shop-group {
-        background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25);
-        border-radius: 10px; padding: 14px; margin: 12px 0;
-    }
+    .status-panel li:nth-child(4n+4)::before { content: "🍀"; color: var(--neon-green); }
+    .status-panel li b, .status-panel li strong { color: var(--neon-green); text-shadow: 0 0 8px rgba(0, 255, 136, 0.6); font-weight: bold; }
+    .collapsible, .sub-btn, .nested-btn { background: linear-gradient(90deg, #111827, #1f2937); color: var(--neon-green); cursor: pointer; padding: 16px 20px; width: 100%; border: 1px solid #1f2937; border-radius: 10px; text-align: left; font-size: 17px; font-weight: bold; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;}
+    .collapsible:after, .sub-btn:after, .nested-btn:after { content: '▼'; font-size: 14px; transition: transform 0.3s ease; }
+    .active:after { transform: rotate(180deg); }
+    .content, .sub-content, .nested-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(21, 25, 34, 0.8); border-radius: 0 0 10px 10px; margin-top: -5px; }
+    .content-inner { padding: 20px; }
+    a { color: var(--neon-green) !important; text-decoration: underline !important; text-shadow: 0 0 8px rgba(0, 255, 136, 0.5); transition: 0.3s; }
+    a:hover { filter: brightness(1.2); text-shadow: 0 0 12px var(--neon-green); }
+    .shop-group { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 66, 0.25); border-radius: 10px; padding: 14px; margin: 12px 0; }
     .shop-city { color: var(--neon-green); font-weight: 700; margin-bottom: 6px; }
-
-/* --- 📱 平台與俱樂部樣式 (質感修復版) --- */
-    .platform-item { 
-        display: flex; 
-        align-items: center; 
-        gap: 20px; 
-        background: rgba(255, 255, 255, 0.03); 
-        padding: 20px; 
-        border-radius: 12px; 
-        border: 1px solid rgba(0, 255, 136, 0.2); 
-        margin-top: 15px;
-        flex-wrap: wrap; /* 讓內部的 Grid 可以換行並撐開寬度 */
-    }
-    
-    .platform-logo { 
-        width: 65px; 
-        height: 65px; 
-        border-radius: 12px; 
-        object-fit: cover; 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    
-    .platform-info { 
-        flex: 1; /* 讓文字部分佔據剩餘空間 */
-        min-width: 200px; 
-    }
-    
-    /* --- 平台標題與下載按鈕優化 --- */
-    .platform-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 8px;
-    }
-    
-    .platform-title { 
-        font-weight: 800; 
-        color: var(--neon-green); 
-        font-size: 1.1rem;
-        margin: 0;
-    }
-    
-    /* 質感下載按鈕 */
-    .platform-link-btn {
-        background: rgba(0, 255, 136, 0.1);
-        border: 1px solid var(--neon-green);
-        color: var(--neon-green) !important;
-        text-decoration: none !important;
-        padding: 4px 12px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: bold;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-        text-shadow: none !important;
-    }
-    
-    .platform-link-btn:hover {
-        background: var(--neon-green);
-        color: #000 !important;
-        box-shadow: 0 0 10px var(--neon-green);
-    }
-    
-    /* 推薦碼樣式稍微縮小，不搶戲 */
-    .promo-text {
-        font-size: 14px;
-        color: #9ca3af;
-    }
-    /* 核心修復：強制 Grid 撐滿 100% 寬度 */
-    .club-grid { 
-        display: grid; 
-        gap: 12px; 
-        margin-top: 15px; 
-        width: 100%; /* 關鍵：確保他不縮在左邊 */
-    }
-    
-    /* 電腦版：XP 2+2 對齊, ClubGG 3 欄平分 */
+    .platform-item { display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 15px; flex-wrap: wrap; }
+    .platform-logo { width: 65px; height: 65px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .platform-info { flex: 1; min-width: 200px; }
+    .platform-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px; }
+    .platform-title { font-weight: 800; color: var(--neon-green); font-size: 1.1rem; margin: 0; }
+    .platform-link-btn { background: rgba(0, 255, 136, 0.1); border: 1px solid var(--neon-green); color: var(--neon-green) !important; text-decoration: none !important; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase; transition: all 0.3s ease; }
+    .platform-link-btn:hover { background: var(--neon-green); color: #000 !important; box-shadow: 0 0 10px var(--neon-green); }
+    .promo-text { font-size: 14px; color: #9ca3af; }
+    .club-grid { display: grid; gap: 12px; margin-top: 15px; width: 100%; }
     .club-grid.four { grid-template-columns: repeat(2, 1fr); }
     .club-grid.three { grid-template-columns: repeat(3, 1fr); }
-    
-    .club-card { 
-        background: rgba(255, 255, 255, 0.05); 
-        border: 1px solid rgba(255, 255, 255, 0.1); 
-        padding: 14px; 
-        border-radius: 10px; 
-        transition: 0.3s;
-    }
-    
-    .club-card:hover {
-        border-color: var(--gold);
-        background: rgba(245, 197, 66, 0.05);
-    }
-    
-    .club-card strong { 
-        color: var(--gold); 
-        display: block; 
-        margin-bottom: 4px; 
-        font-size: 15px;
-    }
-    
-    /* 📱 手機版 RWD：防止擠壓，改為單一長條 */
-    @media (max-width: 768px) {
-        .club-grid.four, .club-grid.three { 
-            grid-template-columns: 1fr !important; 
-        }
-        .platform-item { 
-            flex-direction: column; 
-            align-items: flex-start; 
-        }
-    }
-
-    /* --- 🏪 店家排版樣式 --- */
+    .club-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 10px; transition: 0.3s; }
+    .club-card:hover { border-color: var(--gold); background: rgba(245, 197, 66, 0.05); }
+    .club-card strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 15px; }
     .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
     .store-tag { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); padding: 15px; border-radius: 10px; text-align: center; }
     .store-city-label { color: var(--gold); font-size: 18px; font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid rgba(245, 197, 66, 0.3); padding-bottom: 5px; }
     .store-names { font-size: 16px; color: #e5e7eb; line-height: 1.6; }
-
-/* 3. 負責人 Line ID 優化：美觀、靠左、不暗沉 (解決 image_3 問題) */
-    .region-row { 
-        display: grid; 
-        grid-template-columns: 125px 105px 1fr; /* 寬度給足 */
-        padding: 12px 0; 
-        align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-    }
-    .region-line { 
-        color: var(--neon-green); /* 調亮 ID */
-        text-align: left !important; /* 強制靠左 */
-        font-family: 'Courier New', monospace; /* 等寬字體更專業 */
-        font-size: 15px;
-    }
-
-    /* 4. [美觀] 負責人底色調亮一點，看起來不暗沉 */
-    .region-box { background: rgba(31, 41, 55, 0.7) !important; padding: 15px; }
-    /* --- ❓ FAQ、警告與頁尾 --- */
-.faq-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    margin-bottom: 12px; /* 增加卡片間距 */
-    overflow: hidden;
-}
-
-.faq-header {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 16px 18px; /* 增加點擊區域 */
-    color: var(--gold);
-    font-size: 16px;
-    font-weight: bold;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background 0.3s;
-}
-
-.faq-header:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.faq-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 更絲滑的動畫 */
-    background: rgba(0, 0, 0, 0.15); /* 稍微深色區隔 */
-}
-
-/* 這裡是解決擠壓的關鍵：確保內容有 padding 且不被壓縮 */
-.faq-body-inner {
-    padding: 18px; 
-    line-height: 1.7;
-    color: #d1d5db;
-    font-size: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
+    .region-box { background: rgba(31, 41, 55, 0.7); padding: 15px; border-radius: 8px; }
+    .region-row { display: grid; grid-template-columns: 125px 105px 1fr; padding: 12px 0; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .region-line { color: var(--neon-green); text-align: left; font-family: monospace; font-size: 15px; }
+    .faq-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    .faq-header { width: 100%; background: none; border: none; padding: 16px 18px; color: var(--gold); font-size: 16px; font-weight: bold; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0, 0, 0, 0.15); }
+    .faq-body-inner { padding: 18px; line-height: 1.7; color: #d1d5db; font-size: 15px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
     .warning-card { background: rgba(255, 58, 58, 0.05); border: 1px solid rgba(255, 58, 58, 0.3); border-left: 4px solid var(--poker-red); padding: 18px; border-radius: 10px; }
     .circle-list { list-style: none; padding-left: 0; counter-reset: item; }
-    .circle-list li { counter-increment: item; margin-bottom: 6px; }
-    .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 4px; }
+    .circle-list li { counter-increment: item; margin-bottom: 6px; display: flex; align-items: center; }
+    .circle-list li::before { content: counter(item) "️⃣ "; font-weight: 600; margin-right: 8px; }
     .footer { text-align: center; margin-top: 40px; }
-
-/* 📱 手機版 RWD 優化 (請覆蓋原本 @media 內相關部分) */
     @media (max-width: 768px) {
-        /* 1. 防止切到字，維持一列 */
-        .store-grid, .club-grid.four, .club-grid.three { 
-            grid-template-columns: 1fr !important; 
-            gap: 10px; 
-        }
-        
-        /* 2. 負責人排版優化：手機版也讓它橫向排開，不強迫換行 */
-        .region-row { 
-            grid-template-columns: 100px 70px 1fr !important; /* 手機版寬度微調 */
-            gap: 5px; 
-            padding: 10px 0; 
-            align-items: center;
-        }
-    
-        .region-area { 
-            font-size: 13px;    /* 手機版字體縮小一點點 */
-            white-space: nowrap !important; /* 絕對不准換行 */
-        }
-    
-        .region-name { 
-            font-size: 14px; 
-        }
-    
-        /* 3. 重置 LINE ID 樣式：不再強制佔據整行 */
-        .region-line { 
-            grid-column: auto !important; /* 取消 1 / -1，讓它乖乖待在第三欄 */
-            background: transparent !important; 
-            padding: 0 !important; 
-            margin-top: 0 !important; 
-            font-size: 12px;
-            text-align: right; /* 靠右對齊會讓介面看起來更寬敞 */
-        }
-    }
-        /* 合作平台垂直排列 */
-        .platform-item { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px; }
+        .store-grid, .club-grid.four, .club-grid.three { grid-template-columns: 1fr !important; gap: 10px; }
+        .region-row { grid-template-columns: 100px 70px 1fr !important; gap: 5px; font-size: 13px; }
+        .region-line { font-size: 12px; text-align: right; }
+        .platform-item { flex-direction: column; align-items: flex-start; padding: 12px; }
         .platform-logo { width: 45px; height: 45px; }
-
-        /* 內邊距優化 */
-        .content-inner { padding: 15px 12px; }
-        .collapsible { font-size: 16px; padding: 14px 15px; }
+        h1 { font-size: 1.6rem; }
     }
-    a {color: var(--neon-green) !important;text-decoration: underline !important;text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);transition: 0.3s;}
-    a:hover {filter: brightness(1.2);text-shadow: 0 0 12px var(--neon-green);}
 </style>
 </head>
 <body>
