@@ -19,13 +19,12 @@
     font-size: 18px;
     line-height: 1.7;} 
     /* 確保所有背景符號基準點一致 */
-    .suit-bg {position: fixed;font-size: 25vw;opacity: 0.08; /* 調低透明度，讓背景更有層次不搶戲 */z-index: -1;pointer-events: none;line-height: 1;display: flex;align-items: center;justify-content: center;width: 25vw;height: 25vw;}
-    /* --- 四角定位：往中間提，解決擁擠問題 --- */
-    .s-tl { top: 8vh; left: 0; color: var(--neon-green); filter: drop-shadow(0 0 30px var(--neon-green)); animation: breathe 8s infinite ease-in-out; }
-    .s-tr { top: 8vh; right: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 2s; }
-    .s-bl { bottom: 15vh; left: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 4s; }
+    .suit-bg {position: fixed;font-size: clamp(120px, 18vw, 280px); /* 關鍵 */opacity: 0.08; z-index: -1;pointer-events: none;display: flex;align-items: center;justify-content: center;width: clamp(120px, 18vw, 280px);height: clamp(120px, 18vw, 280px);}
+    .s-tl { top: 8%; left: 0; color: var(--neon-green); filter: drop-shadow(0 0 30px var(--neon-green)); animation: breathe 8s infinite ease-in-out; }
+    .s-tr { top: 8%; right: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 2s; }
+    .s-bl { bottom: 15%; left: 0; color: var(--poker-red); filter: drop-shadow(0 0 30px var(--poker-red)); animation: breathe 8s infinite ease-in-out 4s; }
     /* 幸運草：取消原本的偏移量，讓它跟左邊方塊對齊在同高度 */
-    .s-br { bottom: 15vh; right: 0; color: var(--neon-green); filter: drop-shadow(0 0 35px var(--neon-green)); animation: breathe 8s infinite ease-in-out 6s; }
+    .s-br { bottom: 15%; right: 0; color: var(--neon-green); filter: drop-shadow(0 0 35px var(--neon-green)); animation: breathe 8s infinite ease-in-out 6s;transform: scale(0.85); }
     @keyframes breathe {0%, 100% { opacity: 0.05; transform: scale(1); } 50% { opacity: 0.12; transform: scale(1.08); } }
     .main-wrapper { max-width: 900px; margin: 0 auto; }
     .status-panel {background: rgba(0, 255, 136, 0.02);border: 1px solid rgba(0,255,136,0.15);position: relative;overflow: hidden;
